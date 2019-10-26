@@ -1,0 +1,134 @@
+.nav-link-active {
+  display: inline-block;
+	position: relative;
+  font-size: 1rem;
+  font-family: var(--navFont);
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.55rem 0rem;
+  text-decoration: none;
+  margin-top: 0.4375rem;
+  
+  --link-color: var(--darkGrey);
+}
+
+.nav-link-active:hover {
+  --link-color: var(--darkGrey);
+  padding: 0.55rem 0rem;
+  cursor: pointer;
+}
+
+.nav-link-active:before {  
+  content: '';
+	display: block;
+	margin: 0 0 0.3125rem 0rem;
+	height: 0.1875rem;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  width: 100%;
+  background: var(--primary);
+
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link-active:after {  
+  content: '';
+	display: block;
+	margin: 0.3125rem 0rem 0 0;
+  height: 0.1875rem;
+  
+	width: 100%;
+  background: var(--primary);
+
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link {
+  display: inline-block;
+	position: relative;
+  text-decoration: none;
+
+  font-family: var(--navFont);
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.55rem 0;
+  margin-top: 0.4375rem;
+
+  --link-color: var(--grey);
+}
+
+.nav-link:hover {
+  --link-color: var(--darkGrey);
+  padding: 0.55rem 0rem;
+  cursor: pointer;
+}
+
+.nav-link:hover:before,
+.nav-link:hover:after {
+	width: 100%;
+  background-color: var(--dark);
+  animation: 0.2s ease lineIn;
+}
+
+.nav-link:before {
+	content: '';
+	display: block;
+	margin: 0 0 0.3125rem 0rem;
+	height: 0.1875rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  width: 0rem;
+  background: transparent;
+  
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link:after {
+	content: '';
+	display: block;
+	margin: 0.3125rem 0rem 0 0;
+  height: 0.1875rem;
+
+	width: 0rem;
+  background: transparent;
+
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.line-in {
+  animation: 0.2s ease lineOut;
+}
+
+.line-out {
+  animation: 0.2s ease lineOut;
+}
+
+
+@keyframes lineOut {
+  from {
+    width: 100%;
+    background-color: var(--dark);
+  }
+  to {
+    width: 0%;
+    background-color: transparent;
+  }
+}
+
+@keyframes lineIn {
+  from {
+    width: 0%;
+    background-color: transparent;
+  }
+  to {
+    width: 100%;
+    background-color: var(--dark);
+  }
+}

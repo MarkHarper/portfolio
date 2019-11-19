@@ -1,0 +1,11 @@
+[context.production]
+  command = "npm run build"
+  environment ={ APP_ENV = "production" }
+
+[context.deploy-preview]
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

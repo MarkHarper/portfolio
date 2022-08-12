@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
 import mobile from "is-mobile";
-import {
-  Main
-} from './views';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
-import { SizingContext } from './contexts.js';
+import { Main } from "./views";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { SizingContext } from "./contexts.js";
 
 export class App extends Component {
   state = {
@@ -17,8 +10,8 @@ export class App extends Component {
     sizing: {
       width: window.innerWidth,
       height: window.innerHeight,
-      mobile: mobile()
-    }
+      mobile: mobile(),
+    },
   };
 
   componentDidCatch(error: any, info: any) {
@@ -29,7 +22,7 @@ export class App extends Component {
     return (
       <SizingContext.Provider value={this.state.sizing}>
         <Router>
-          <Route path="/" component={Main}/>
+          <Route path="/" component={Main} />
         </Router>
       </SizingContext.Provider>
     );

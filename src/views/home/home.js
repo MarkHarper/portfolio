@@ -46,13 +46,6 @@ export class Home extends Component {
               <img className="icon" src={"/images/github.png"} alt="github" />
             </a>
             <a
-              href="https://twitter.com/IAmMarkHarper"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img className="icon" src={"/images/twitter.svg"} alt="twitter" />
-            </a>
-            <a
               href="https://www.linkedin.com/in/mark-harper-06763174/"
               target="_blank"
               rel="noopener noreferrer"

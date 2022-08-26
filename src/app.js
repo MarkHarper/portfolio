@@ -14,7 +14,7 @@ export class App extends Component {
     },
   };
 
-  componentDidCatch(error: any, info: any) {
+  componentDidCatch(error, info) {
     console.log(error, info);
   }
 

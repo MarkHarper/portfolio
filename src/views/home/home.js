@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { background } from "../../utilities/homeViz.js";
+import visualize from "../../visualization";
 import "./home.css";
 
 export class Home extends Component {
@@ -14,7 +14,7 @@ export class Home extends Component {
 
   componentDidMount() {
     const canvas = document.getElementById("viz-home");
-    background(this.state.width, this.state.height, canvas);
+    visualize(this.state.width, this.state.height, canvas);
 
     window.addEventListener("resize", () => {
       this.setState((prev, props) => {
@@ -28,7 +28,7 @@ export class Home extends Component {
 
   componentDidUpdate() {
     const canvas = document.getElementById("viz-home");
-    background(this.state.width, this.state.height, canvas);
+    visualize(this.state.width, this.state.height, canvas);
   }
 
   render() {

@@ -1,6 +1,6 @@
 import { clear } from "../canvas";
 import { alphaRGB, rgba } from "../canvas/color";
-import { checkCollision } from "../canvas/physics/checkCollision";
+import { checkCollision, handleCollision } from "../canvas/physics/collision";
 import { clamp } from "../canvas/physics/clamp";
 import { distance } from "../canvas/physics/distance";
 import { spring } from "../canvas/physics/spring";
@@ -77,9 +77,8 @@ export class Field implements Field {
         if (ind1 === ind2) return;
 
         const { dx, dy, direct: dist } = distance(p1, p2);
-
-        if (dist <= p2.radius + p1.radius) {
-          const { p1: nextP1, p2: nextP2 } = checkCollision(p1, p2, dx, dy);
+        if (checkCollision(p1, p2, dist)) {
+          const { p1: nextP1, p2: nextP2 } = handleCollision(p1, p2, dx, dy);
 
           p1.setX(nextP1.x);
           p1.setY(nextP1.y);

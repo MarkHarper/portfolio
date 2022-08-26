@@ -1,6 +1,19 @@
-import { DataMovingCircleObject, DataMovingPoint, DataPoint } from "../types";
+import {
+  DataCircle,
+  DataMovingCircleObject,
+  DataMovingPoint,
+  DataPoint,
+} from "../types";
 
 export function checkCollision(
+  p1: DataCircle,
+  p2: DataCircle,
+  distance: number
+): boolean {
+  return distance <= p2.radius + p1.radius;
+}
+
+export function handleCollision(
   p1: DataMovingCircleObject,
   p2: DataMovingCircleObject,
   dx: number,
@@ -22,15 +35,14 @@ export function checkCollision(
   const vel2 = rotate(p2.vx, p2.vy, sine, cosine, true);
   const vxTotal = vel1.x - vel2.x;
   vel1.x =
-    ((p1.mass - p2.mass) * vel1.x + 2 * p2.mass * vel2.x) /
-    (p1.mass + p2.mass);
+    ((p1.mass - p2.mass) * vel1.x + 2 * p2.mass * vel2.x) / (p1.mass + p2.mass);
   vel2.x = vxTotal + vel1.x;
 
   const absV = Math.abs(vel1.x) + Math.abs(vel2.x);
   const overlap = p1.radius + p2.radius - Math.abs(pos1.x - pos2.x);
 
-  pos1.x += vel1.x / absV * overlap;
-  pos2.x += vel2.x / absV * overlap;
+  pos1.x += (vel1.x / absV) * overlap;
+  pos2.x += (vel2.x / absV) * overlap;
 
   const pos1F = rotate(pos1.x, pos1.y, sine, cosine, false);
   const pos2F = rotate(pos2.x, pos2.y, sine, cosine, false);
@@ -50,8 +62,8 @@ export function checkCollision(
       vx: vel2F.x,
       vy: vel2F.y,
     },
-  }
-};
+  };
+}
 
 function rotate(
   x: number,

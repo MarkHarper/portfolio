@@ -6,7 +6,13 @@ import { distanceSquared } from "../canvas/physics/distance";
 import { spring } from "../canvas/physics/spring";
 import { Renderer } from "../canvas/runner";
 import { renderLine } from "../canvas/shapes/line";
-import { DEFAULT_MIN_DISTANCE_SQUARED } from "./constants";
+import {
+  DEFAULT_MIN_DISTANCE_SQUARED,
+  LARGE_MASS,
+  LARGE_RADIUS,
+  SMALL_MASS,
+  SMALL_RADIUS,
+} from "./constants";
 import { Particle } from "./particle";
 
 const DEFAULT_PARTICLE_COUNT = 45;
@@ -34,8 +40,8 @@ export class Field implements Field {
       .map(() => {
         if (Math.random() > 0.66) {
           return new Particle({
-            radius: 5,
-            mass: 3,
+            radius: LARGE_RADIUS,
+            mass: LARGE_MASS,
             fillStyle: "#26A69A",
             x: Math.random() * width,
             y: Math.random() * height,
@@ -45,8 +51,8 @@ export class Field implements Field {
         }
 
         return new Particle({
-          radius: 3,
-          mass: 2,
+          radius: SMALL_RADIUS,
+          mass: SMALL_MASS,
           fillStyle: "#8BE5DC",
           x: Math.random() * width,
           y: Math.random() * height,
@@ -67,8 +73,7 @@ export class Field implements Field {
       const possibleY = particle.y + particle.vy;
       const y = clamp(possibleY, 0, height);
 
-      particle.setX(x);
-      particle.setY(y);
+      particle.setPosition(x, y);
       particle.render(ctx);
     });
 
@@ -80,27 +85,18 @@ export class Field implements Field {
         if (checkCollision(p1, p2, directSquared)) {
           const { p1: nextP1, p2: nextP2 } = handleCollision(p1, p2, dx, dy);
 
-          p1.setX(nextP1.x);
-          p1.setY(nextP1.y);
-          p1.setVx(nextP1.vx);
-          p1.setVy(nextP1.vy);
+          p1.setPosition(nextP1.x, nextP1.y);
+          p1.setVelocity(nextP1.vx, nextP1.vy);
 
-          p2.setX(nextP2.x);
-          p2.setY(nextP2.y);
-          p2.setVx(nextP2.vx);
-          p2.setVy(nextP2.vy);
+          p2.setPosition(nextP2.x, nextP2.y);
+          p2.setVelocity(nextP2.vx, nextP2.vy);
         } else if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
           const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
           renderLine(p1, p2, rgba(38, 166, 154, alpha), ctx);
 
-          const {
-            p1: nextP1,
-            p2: nextP2,
-          } = spring(p1, p2, dx, dy);
-          p1.setVx(nextP1.vx);
-          p1.setVy(nextP1.vy);
-          p2.setVx(nextP2.vx);
-          p2.setVy(nextP2.vy);
+          const { p1: nextP1, p2: nextP2 } = spring(p1, p2, dx, dy);
+          p1.setVelocity(nextP1.vx, nextP1.vy);
+          p2.setVelocity(nextP2.vx, nextP2.vy);
         }
       });
     });

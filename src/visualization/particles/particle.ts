@@ -10,8 +10,9 @@ export interface Particle extends MovingCircleObject {
   yScale: number;
   fillStyle: string;
 
-  render: (ctx: CanvasRenderingContext2D) => void;
-  setFillStyle: (a: string) => void;
+  render(ctx: CanvasRenderingContext2D): void;
+  setFillStyle(a: string): void;
+  setVelocity(vx: number, vy: number): void;
 }
 
 export class Particle implements Particle {
@@ -60,6 +61,16 @@ export class Particle implements Particle {
       ctx,
     );
   };
+
+  setVelocity = (vx: number, vy: number) => {
+    this.setVx(vx);
+    this.setVy(vy);
+  }
+
+  setPosition = (x: number, y: number) => {
+    this.setX(x);
+    this.setY(y);
+  }
 
   setMass = (mass: number) => {
     this.mass = mass;

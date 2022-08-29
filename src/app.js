@@ -1,30 +1,34 @@
-import React, { Component } from "react";
-import mobile from "is-mobile";
-import { Main } from "./views";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { SizingContext } from "./contexts.js";
+import mobile from "is-mobile";
 
-export class App extends Component {
-  state = {
-    route: "",
-    sizing: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      mobile: mobile(),
-    },
-  };
+import { SizingContext } from "./services/contexts";
+import Main from "./scenes/Main";
 
-  componentDidCatch(error, info) {
-    console.log(error, info);
-  }
+const App = () => {
+  const [sizingState, setSizingState] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    mobile: mobile(),
+  });
 
-  render() {
-    return (
-      <SizingContext.Provider value={this.state.sizing}>
-        <Router>
-          <Route path="/" component={Main} />
-        </Router>
-      </SizingContext.Provider>
-    );
-  }
-}
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setSizingState({
+        mobile: mobile(),
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    });
+  }, []);
+
+  return (
+    <SizingContext.Provider value={sizingState}>
+      <Router>
+        <Route path="/" component={Main} />
+      </Router>
+    </SizingContext.Provider>
+  );
+};
+
+export default App;

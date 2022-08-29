@@ -1,4 +1,4 @@
-import { Point } from "../../canvas/types";
+import { Point } from "../types";
 
 export function renderLine(
   p1: Point,

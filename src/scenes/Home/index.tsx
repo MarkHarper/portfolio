@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import { SizingContext } from "../../../../services/contexts";
-import visualize from "../../../../services/visualization";
+import { SizingContext } from "../../services/contexts";
+import visualize from "../../services/visualization";
 import "./styles.css";
 
 const Home = () => {
   const { width, height } = useContext(SizingContext);
 
   useEffect(() => {
-    const canvas = document.getElementById("viz-home");
+    const canvas = document.getElementById("viz-home") as HTMLCanvasElement;
+    if (width == null || height == null || canvas == null) return;
+
     visualize(width, height, canvas);
   }, [width, height]);
 
@@ -33,7 +35,11 @@ const Home = () => {
           </a>
         </div>
       </div>
-      <canvas id="viz-home" height={height} width={width}></canvas>
+      <canvas
+        id="viz-home"
+        height={height?.toString()}
+        width={width?.toString()}
+      ></canvas>
     </div>
   );
 };

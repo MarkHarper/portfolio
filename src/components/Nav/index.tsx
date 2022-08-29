@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SizingContext } from "../../../../services/contexts";
+import { SizingContext } from "../../services/contexts";
 
 import "./styles.css";
 
 const Nav = () => {
-  const { mobile } = useContext(SizingContext);
+  const { isMobile } = useContext(SizingContext);
 
   return (
     <header className="nav-main">
       <div className="nav-content-left">
         <div>
-          {!mobile ? <span className="nav-hide-cafe"></span> : null}
+          {!isMobile ? <span className="nav-hide-cafe"></span> : null}
           <Link to="/">
             <img
               className="nav-icon-cafe"

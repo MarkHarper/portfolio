@@ -7,9 +7,23 @@
     "@types/node": "^18.7.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "@vitejs/plugin-react": "^2.0.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "prettier": "^2.6.2",
+    "stylelint": "^14.11.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^28.0.0",
     "typescript": "^4.6.4",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "vitest": "^0.22.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -24,7 +38,18 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:production": "npm run lint && npm run prettier && npm run test:run && npm run build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "coverage": "vitest run --coverage",
+    "lint": "npx eslint src && npm run lint:css",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:css": "npx stylelint '**/*.css'",
+    "lint:css:fix": "npx stylelint '**/*.css' --fix",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "eslintConfig": {
     "extends": "react-app"

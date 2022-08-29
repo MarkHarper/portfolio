@@ -1,4 +1,4 @@
-import { MovingCircleObject, DataVector2d } from "../types";
+import { MovingCircleObject, DataVector2d } from '../types';
 
 const DEFAULT_SPRING_STRENGTH = 0.0008;
 
@@ -6,7 +6,7 @@ export function spring(
   p1: MovingCircleObject,
   p2: MovingCircleObject,
   dx: number,
-  dy: number
+  dy: number,
 ): {
   p1: DataVector2d;
   p2: DataVector2d;
@@ -22,6 +22,6 @@ export function spring(
     p2: {
       vx: p2.vx - ax,
       vy: p2.vy - ay,
-    }
-  }
+    },
+  };
 }

@@ -1,58 +1,52 @@
 .nav-link-active {
   display: inline-block;
-	position: relative;
-  font-size: 1rem;
-  font-family: var(--navFont);
+  position: relative;
+  font-family: var(--nav-font);
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 500;
-  padding: 0.55rem 0rem;
+  padding: 0.55rem 0;
   text-decoration: none;
   margin-top: 0.4375rem;
-  
-  --link-color: var(--darkGrey);
+
+  --link-color: var(--dark-grey);
 }
 
 .nav-link-active:hover {
-  --link-color: var(--darkGrey);
-  padding: 0.55rem 0rem;
+  --link-color: var(--dark-grey);
+
+  padding: 0.55rem 0;
   cursor: pointer;
 }
 
-.nav-link-active:before {  
+.nav-link-active::before {
   content: '';
-	display: block;
-	margin: 0 0 0.3125rem 0rem;
-	height: 0.1875rem;
-
+  display: block;
+  margin: 0 0 0.3125rem;
+  height: 0.1875rem;
   position: absolute;
   right: 0;
   top: 0;
-
   width: 100%;
   background: var(--primary);
-
   transition: width 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-link-active:after {  
+.nav-link-active::after {
   content: '';
-	display: block;
-	margin: 0.3125rem 0rem 0 0;
+  display: block;
+  margin: 0.3125rem 0 0;
   height: 0.1875rem;
-  
-	width: 100%;
+  width: 100%;
   background: var(--primary);
-
   transition: width 0.2s ease, background-color 0.2s ease;
 }
 
 .nav-link {
   display: inline-block;
-	position: relative;
+  position: relative;
   text-decoration: none;
-
-  font-family: var(--navFont);
+  font-family: var(--nav-font);
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 500;
@@ -63,70 +57,68 @@
 }
 
 .nav-link:hover {
-  --link-color: var(--darkGrey);
-  padding: 0.55rem 0rem;
+  --link-color: var(--dark-grey);
+
+  padding: 0.55rem 0;
   cursor: pointer;
 }
 
-.nav-link:hover:before,
-.nav-link:hover:after {
-	width: 100%;
-  background-color: var(--dark);
-  animation: 0.2s ease lineIn;
-}
-
-.nav-link:before {
-	content: '';
-	display: block;
-	margin: 0 0 0.3125rem 0rem;
-	height: 0.1875rem;
+.nav-link::before {
+  content: '';
+  display: block;
+  margin: 0 0 0.3125rem;
+  height: 0.1875rem;
   position: absolute;
   right: 0;
   top: 0;
-
-  width: 0rem;
+  width: 0;
   background: transparent;
-  
   transition: width 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-link:after {
-	content: '';
-	display: block;
-	margin: 0.3125rem 0rem 0 0;
+.nav-link::after {
+  content: '';
+  display: block;
+  margin: 0.3125rem 0 0;
   height: 0.1875rem;
-
-	width: 0rem;
+  width: 0;
   background: transparent;
-
   transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  width: 100%;
+  background-color: var(--dark);
+  animation: 0.2s ease line-in;
 }
 
 .line-in {
-  animation: 0.2s ease lineOut;
+  animation: 0.2s ease line-out;
 }
 
 .line-out {
-  animation: 0.2s ease lineOut;
+  animation: 0.2s ease line-out;
 }
 
-
-@keyframes lineOut {
+@keyframes line-out {
   from {
     width: 100%;
     background-color: var(--dark);
   }
+
   to {
     width: 0%;
     background-color: transparent;
   }
 }
 
-@keyframes lineIn {
+@keyframes line-in {
   from {
     width: 0%;
     background-color: transparent;
   }
+
   to {
     width: 100%;
     background-color: var(--dark);

@@ -1,7 +1,7 @@
-import { renderCircle } from "../canvas/shapes/circle";
+import { renderCircle } from '../canvas/shapes/circle';
 import { MovingCircleObject } from '../canvas/types';
 
-const DEFAULT_FILL_COLOR = "#FFFFFF";
+const DEFAULT_FILL_COLOR = '#FFFFFF';
 const DEFAULT_SCALE_X = 1.0;
 const DEFAULT_SCALE_Y = 1.0;
 
@@ -65,12 +65,12 @@ export class Particle implements Particle {
   setVelocity = (vx: number, vy: number) => {
     this.setVx(vx);
     this.setVy(vy);
-  }
+  };
 
   setPosition = (x: number, y: number) => {
     this.setX(x);
     this.setY(y);
-  }
+  };
 
   setMass = (mass: number) => {
     this.mass = mass;

@@ -1,19 +1,10 @@
-import {
-  DataCircle,
-  DataMovingCircleObject,
-  DataMovingPoint,
-  DataPoint,
-} from "../types";
-import { distance } from "./distance";
-import { impulse } from "./impulse";
-import { speed } from "./speed";
-import { relativeVelocity } from "./velocity";
+import { DataCircle, DataMovingCircleObject, DataMovingPoint, DataPoint } from '../types';
+import { distance } from './distance';
+import { impulse } from './impulse';
+import { speed } from './speed';
+import { relativeVelocity } from './velocity';
 
-export function checkCollision(
-  p1: DataCircle,
-  p2: DataCircle,
-  distanceSquared: number
-): boolean {
+export function checkCollision(p1: DataCircle, p2: DataCircle, distanceSquared: number): boolean {
   const combinedRadius = p2.radius + p1.radius;
 
   return distanceSquared <= combinedRadius * combinedRadius;
@@ -25,7 +16,7 @@ export function handleCollision(
   p1: DataMovingCircleObject,
   p2: DataMovingCircleObject,
   dx: number,
-  dy: number
+  dy: number,
 ): {
   p1: DataMovingPoint;
   p2: DataMovingPoint;
@@ -47,7 +38,7 @@ export function handleCollision(
   const p1Vy = p1.vy - imp * p2.mass * ncv.y;
   const p2Vx = p2.vx + imp * p1.mass * ncv.x;
   const p2Vy = p2.vy + imp * p1.mass * ncv.y;
-  
+
   return {
     p1: {
       x: p1.x + p1Vx,

@@ -1,4 +1,4 @@
-import { DataPoint, Vector2dDifference } from "../types";
+import { DataPoint, Vector2dDifference } from '../types';
 
 // rv: relative velocity
 // ncv: normalized collision vector

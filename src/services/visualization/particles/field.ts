@@ -1,19 +1,19 @@
-import { clear } from "../canvas";
-import { alphaRGB, rgba } from "../canvas/color";
-import { checkCollision, handleCollision } from "../canvas/physics/collision";
-import { clamp } from "../canvas/physics/clamp";
-import { distanceSquared } from "../canvas/physics/distance";
-import { spring } from "../canvas/physics/spring";
-import { Renderer } from "../canvas/runner";
-import { renderLine } from "../canvas/shapes/line";
+import { clear } from '../canvas';
+import { alphaRGB, rgba } from '../canvas/color';
+import { checkCollision, handleCollision } from '../canvas/physics/collision';
+import { clamp } from '../canvas/physics/clamp';
+import { distanceSquared } from '../canvas/physics/distance';
+import { spring } from '../canvas/physics/spring';
+import { Renderer } from '../canvas/runner';
+import { renderLine } from '../canvas/shapes/line';
 import {
   DEFAULT_MIN_DISTANCE_SQUARED,
   LARGE_MASS,
   LARGE_RADIUS,
   SMALL_MASS,
   SMALL_RADIUS,
-} from "./constants";
-import { Particle } from "./particle";
+} from './constants';
+import { Particle } from './particle';
 
 const DEFAULT_PARTICLE_COUNT = 45;
 
@@ -23,12 +23,7 @@ export interface Field extends Renderer {
   contents: Particle[];
   checkCollision: (p1: Particle, p2: Particle, dx: number, dy: number) => void;
   spring: (p1: Particle, p2: Particle, dx: number, dy: number) => void;
-  renderSpring: (
-    p1: Particle,
-    p2: Particle,
-    dist: number,
-    ctx: CanvasRenderingContext2D
-  ) => void;
+  renderSpring: (p1: Particle, p2: Particle, dist: number, ctx: CanvasRenderingContext2D) => void;
 }
 
 export class Field implements Field {
@@ -42,7 +37,7 @@ export class Field implements Field {
           return new Particle({
             radius: LARGE_RADIUS,
             mass: LARGE_MASS,
-            fillStyle: "#26A69A",
+            fillStyle: '#26A69A',
             x: Math.random() * width,
             y: Math.random() * height,
             vx: Math.random() * 2 - 1,
@@ -53,7 +48,7 @@ export class Field implements Field {
         return new Particle({
           radius: SMALL_RADIUS,
           mass: SMALL_MASS,
-          fillStyle: "#8BE5DC",
+          fillStyle: '#8BE5DC',
           x: Math.random() * width,
           y: Math.random() * height,
           vx: Math.random() * 4 - 2,

@@ -1,5 +1,7 @@
-import { handleCollision } from "./collision";
-import { dimensionDistance } from "./distance";
+import { describe, expect, test } from 'vitest';
+
+import { handleCollision } from './collision';
+import { dimensionDistance } from './distance';
 
 const testDataA = {
   p1: {
@@ -35,8 +37,8 @@ const expectedA = {
   },
 };
 
-describe("Collision Detection", () => {
-  it("calculates the result of a collision", () => {
+describe('Collision Detection', () => {
+  test('calculates the result of a collision', () => {
     const { p1, p2 } = testDataA;
     const { dx, dy } = dimensionDistance(p1, p2);
     const res = handleCollision(p1, p2, dx, dy);

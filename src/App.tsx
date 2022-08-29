@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import mobile from "is-mobile";
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import mobile from 'is-mobile';
 
-import { SizingContext } from "./services/contexts";
-import Nav from "./components/Nav";
-import Home from "./scenes/Home";
-import NoMatch from "./scenes/NoMatch";
+import { SizingContext } from './services/contexts';
+import Nav from './components/Nav';
+import Home from './scenes/Home';
+import NoMatch from './scenes/NoMatch';
 
-import "./App.css";
+import './App.css';
 
 const App = () => {
   const [sizingState, setSizingState] = useState({
@@ -17,7 +17,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       setSizingState({
         isMobile: mobile(),
         width: window.innerWidth,
@@ -31,7 +31,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <>
                 <Nav />

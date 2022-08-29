@@ -3,22 +3,22 @@
 :root {
   /***** COLORS *****/
 
-  --primary: #26A69A;
-  --dark: #0B322E;
-  --lightDark: #5C706E;
-  --lightGrey: #B8B8B8;
-  --lightPrimary: #E3FFFC;
-  --primaryWhite: #F7FAFA;
-  --darkGrey: #333333;
-  --grey: #777777;
-  --white: #FFFFFF;
-  --red: rgb(166, 38, 38);
+  --primary: #26a69a;
+  --dark: #0b322e;
+  --light-dark: #5c706e;
+  --light-grey: #b8b8b8;
+  --light-primary: #e3fffc;
+  --primary-hite: #f7fafa;
+  --dark-grey: #333;
+  --grey: #777;
+  --white: #fff;
+  --red: rgb(166 38 38);
 
   /***** Fonts *****/
 
-  --accentFont: 'Stalemate', cursive;
-  --navFont: Palatino, sans-serif;
-  --bodyFont: Helvetica Neue, sans-serif;
+  --accent-font: 'Stalemate', cursive;
+  --nav-font: palatino, sans-serif;
+  --body-font: helvetica neue, sans-serif;
 }
 
 /***** Main *****/
@@ -29,7 +29,6 @@
 }
 
 /***** Animations *****/
-
 
 .fade-enter {
   opacity: 0.01;
@@ -48,4 +47,3 @@
   opacity: 0.01;
   transition: opacity 500ms ease-in;
 }
-

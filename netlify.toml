@@ -1,8 +1,8 @@
 [context.production]
-  command = "npm run build"
+  command = "npm run build:production"
 
 [context.deploy-preview]
-  command = "npm run build"
+  command = "npm run build:production"
 
 [[redirects]]
   from = "/*"

@@ -2,7 +2,6 @@
   position: relative;
   width: calc(100%);
   height: calc(100% - 5.125rem);
-  position: relative;
   top: 5.125rem;
 }
 
@@ -13,7 +12,6 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,17 +25,17 @@
 
 .viz-home-text > div:first-of-type {
   font-size: 3.2rem;
-  margin: 0 0 0.2rem 0;
+  margin: 0 0 0.2rem;
   font-weight: normal;
-  font-family: var(--bodyFont);
+  font-family: var(--body-font);
   letter-spacing: 0.1rem;
 }
 
 .viz-home-text > div:nth-of-type(2) {
-  margin: 1rem 1.6rem 1rem;
-  padding: 0rem 0rem 0.5rem 0;
+  margin: 1rem 1.6rem;
+  padding: 0 0 0.5rem;
   font-size: 1.3rem;
-  font-family: var(--bodyFont);
+  font-family: var(--body-font);
   letter-spacing: 0.1rem;
   line-height: 1.4rem;
 }
@@ -45,20 +43,20 @@
 #viz-home {
   width: calc(100%);
   height: calc(100%);
-  background-color: rgb(11, 50, 46);
+  background-color: rgb(11 50 46);
   display: block;
 }
 
 .icon {
   width: 3.125rem;
-  height: 3.125rem; 
+  height: 3.125rem;
   display: inline-block;
   margin: 0 1rem;
 }
 
 @media screen and (max-width: 83.125rem) {
   .viz-home-container {
-    height: calc(100% - 3.78125rem);
-    top: 3.78125rem;
+    height: calc(100% - 3.7813rem);
+    top: 3.7813rem;
   }
 }

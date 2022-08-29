@@ -4,15 +4,23 @@ import {
   DataMovingPoint,
   DataPoint,
 } from "../types";
+import { distance } from "./distance";
+import { impulse } from "./impulse";
+import { speed } from "./speed";
+import { relativeVelocity } from "./velocity";
 
 export function checkCollision(
   p1: DataCircle,
   p2: DataCircle,
-  distance: number
+  distanceSquared: number
 ): boolean {
-  return distance <= p2.radius + p1.radius;
+  const combinedRadius = p2.radius + p1.radius;
+
+  return distanceSquared <= combinedRadius * combinedRadius;
 }
 
+// Alters position and velocity of two colliding objects
+// taking mass into account, but not rotation
 export function handleCollision(
   p1: DataMovingCircleObject,
   p2: DataMovingCircleObject,
@@ -22,65 +30,36 @@ export function handleCollision(
   p1: DataMovingPoint;
   p2: DataMovingPoint;
 } {
-  const angle = Math.atan2(dy, dx);
-  const sine = Math.sin(angle);
-  const cosine = Math.cos(angle);
+  const dist = distance(dx, dy);
 
-  const pos1: DataPoint = {
-    x: 0,
-    y: 0,
+  // normalized collisiion vector
+  const ncv: DataPoint = {
+    x: dx / dist,
+    y: dy / dist,
   };
-  const pos2 = rotate(dx, dy, sine, cosine, true);
-  const vel1 = rotate(p1.vx, p1.vy, sine, cosine, true);
-  const vel2 = rotate(p2.vx, p2.vy, sine, cosine, true);
-  const vxTotal = vel1.x - vel2.x;
-  vel1.x =
-    ((p1.mass - p2.mass) * vel1.x + 2 * p2.mass * vel2.x) / (p1.mass + p2.mass);
-  vel2.x = vxTotal + vel1.x;
 
-  const absV = Math.abs(vel1.x) + Math.abs(vel2.x);
-  const overlap = p1.radius + p2.radius - Math.abs(pos1.x - pos2.x);
+  // relative velocity of p1 to p2
+  const rv = relativeVelocity(p2, p1);
+  const s = speed(rv, ncv);
+  const imp = impulse(p1, p2, s);
 
-  pos1.x += (vel1.x / absV) * overlap;
-  pos2.x += (vel2.x / absV) * overlap;
-
-  const pos1F = rotate(pos1.x, pos1.y, sine, cosine, false);
-  const pos2F = rotate(pos2.x, pos2.y, sine, cosine, false);
-  const vel1F = rotate(vel1.x, vel1.y, sine, cosine, false);
-  const vel2F = rotate(vel2.x, vel2.y, sine, cosine, false);
-
+  const p1Vx = p1.vx - imp * p2.mass * ncv.x;
+  const p1Vy = p1.vy - imp * p2.mass * ncv.y;
+  const p2Vx = p2.vx + imp * p1.mass * ncv.x;
+  const p2Vy = p2.vy + imp * p1.mass * ncv.y;
+  
   return {
     p1: {
-      x: p1.x + pos1F.x,
-      y: p1.y + pos1F.y,
-      vx: vel1F.x,
-      vy: vel1F.y,
+      x: p1.x + p1Vx,
+      y: p1.y + p1Vy,
+      vx: p1Vx,
+      vy: p1Vy,
     },
     p2: {
-      x: p1.x + pos2F.x,
-      y: p1.y + pos2F.y,
-      vx: vel2F.x,
-      vy: vel2F.y,
+      x: p2.x + p2Vx,
+      y: p2.y + p2Vy,
+      vx: p2Vx,
+      vy: p2Vy,
     },
-  };
-}
-
-function rotate(
-  x: number,
-  y: number,
-  sine: number,
-  cosine: number,
-  reverse: boolean
-): DataPoint {
-  if (reverse) {
-    return {
-      x: x * cosine + y * sine,
-      y: y * cosine - x * sine,
-    };
-  }
-
-  return {
-    x: x * cosine - y * sine,
-    y: y * cosine + x * sine,
   };
 }

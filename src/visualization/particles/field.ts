@@ -2,11 +2,11 @@ import { clear } from "../canvas";
 import { alphaRGB, rgba } from "../canvas/color";
 import { checkCollision, handleCollision } from "../canvas/physics/collision";
 import { clamp } from "../canvas/physics/clamp";
-import { distance } from "../canvas/physics/distance";
+import { distanceSquared } from "../canvas/physics/distance";
 import { spring } from "../canvas/physics/spring";
 import { Renderer } from "../canvas/runner";
 import { renderLine } from "../canvas/shapes/line";
-import { DEFAULT_MIN_DISTANCE } from "./constants";
+import { DEFAULT_MIN_DISTANCE_SQUARED } from "./constants";
 import { Particle } from "./particle";
 
 const DEFAULT_PARTICLE_COUNT = 45;
@@ -76,8 +76,8 @@ export class Field implements Field {
       this.contents.forEach((p2, ind2) => {
         if (ind1 === ind2) return;
 
-        const { dx, dy, direct: dist } = distance(p1, p2);
-        if (checkCollision(p1, p2, dist)) {
+        const { dx, dy, directSquared } = distanceSquared(p1, p2);
+        if (checkCollision(p1, p2, directSquared)) {
           const { p1: nextP1, p2: nextP2 } = handleCollision(p1, p2, dx, dy);
 
           p1.setX(nextP1.x);
@@ -89,8 +89,8 @@ export class Field implements Field {
           p2.setY(nextP2.y);
           p2.setVx(nextP2.vx);
           p2.setVy(nextP2.vy);
-        } else if (dist < DEFAULT_MIN_DISTANCE) {
-          const alpha = alphaRGB(dist / DEFAULT_MIN_DISTANCE);
+        } else if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
+          const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
           renderLine(p1, p2, rgba(38, 166, 154, alpha), ctx);
 
           const {

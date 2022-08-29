@@ -7,6 +7,8 @@ import Nav from "./components/Nav";
 import Home from "./scenes/Home";
 import NoMatch from "./scenes/NoMatch";
 
+import "./App.css";
+
 const App = () => {
   const [sizingState, setSizingState] = useState({
     width: window.innerWidth,

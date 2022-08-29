@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "@types/is-mobile": "^2.1.4",
     "@types/jest": "^28.1.6",
     "@types/node": "^18.7.3",
     "@types/react": "^18.0.17",

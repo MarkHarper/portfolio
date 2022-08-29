@@ -1,9 +1,12 @@
 [context.production]
   command = "npm run build"
-  environment ={ APP_ENV = "production" }
+  NODE_VERSION = "16.16.0"
+  NPM_VERSION = "8.11.0"
 
 [context.deploy-preview]
   command = "npm run build"
+  NODE_VERSION = "16.16.0"
+  NPM_VERSION = "8.11.0"
 
 [[redirects]]
   from = "/*"

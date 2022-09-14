@@ -1,6 +1,6 @@
 import { MovingCircleObject, DataVector2d } from '../types';
 
-const DEFAULT_SPRING_STRENGTH = 0.0008;
+const DEFAULT_SPRING_STRENGTH = 0.0002;
 
 export function spring(
   p1: MovingCircleObject,

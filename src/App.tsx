@@ -34,8 +34,8 @@ const App = () => {
             path='/'
             element={
               <>
-                <Nav />
                 <Outlet />
+                <Nav />
               </>
             }
           >

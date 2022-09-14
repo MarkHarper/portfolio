@@ -15,7 +15,7 @@ import {
 } from './constants';
 import { Particle } from './particle';
 
-const DEFAULT_PARTICLE_COUNT = 45;
+const DEFAULT_PARTICLE_COUNT = 180;
 
 export interface Field extends Renderer {
   width: number;

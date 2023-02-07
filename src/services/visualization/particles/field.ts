@@ -57,6 +57,19 @@ export class Field implements Field {
       });
   }
 
+  setWidth(width: number) {
+    this.width = width;
+  }
+
+  setHeight(height: number) {
+    this.height = height;
+  }
+
+  setDimensions(width: number, height: number) {
+    this.setWidth(width);
+    this.setHeight(height);
+  }
+
   render = (ctx: CanvasRenderingContext2D): void => {
     const { width, height } = this;
     clear(ctx, width, height);

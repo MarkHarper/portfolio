@@ -10,7 +10,7 @@ import { getThemeFromStorage, setThemeInStorage } from './storage';
 
 const INITIAL_THEME = initTheme();
 
-const getPreferredTheme = () => {
+function getPreferredTheme() {
   const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
   if (prefersDarkScheme.matches) {
@@ -18,7 +18,7 @@ const getPreferredTheme = () => {
   }
 
   return ThemeNames.LIGHT;
-};
+}
 
 function initTheme(): ThemeName {
   const themeInStorage = getThemeFromStorage();

@@ -16,7 +16,7 @@ import {
 } from './constants';
 import { Particle } from './particle';
 
-const DEFAULT_PARTICLE_COUNT = 180;
+const DENSITY = 0.00015;
 
 export interface Field extends Renderer {
   width: number;
@@ -47,7 +47,10 @@ export class Field implements Field {
   }
 
   resetParticles() {
-    this.contents = Array(DEFAULT_PARTICLE_COUNT)
+    const area = this.width * this.height;
+    const particleCount = Math.floor(area * DENSITY);
+
+    this.contents = Array(particleCount)
       .fill(null)
       .map(() => {
         if (Math.random() > 0.66) {

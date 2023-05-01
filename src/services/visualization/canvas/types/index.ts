@@ -36,7 +36,10 @@ export interface Vector2dDifference {
 
 export interface MovingPoint extends Point, Vector2d {}
 
-export type DataMovingPoint = Omit<MovingPoint, 'setX' | 'setY' | 'setVx' | 'setVy'>;
+export type DataMovingPoint = Omit<
+  MovingPoint,
+  'setX' | 'setY' | 'setVx' | 'setVy'
+>;
 
 export interface CircleObject {
   radius: number;

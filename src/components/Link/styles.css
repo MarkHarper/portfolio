@@ -1,0 +1,17 @@
+a.link {
+  font-family: var(--body-font);
+  color: var(--link-text);
+}
+
+a.link:visited {
+  color: var(--visited-text);
+}
+
+a.link:hover,
+a.link:focus {
+  color: var(--highlight-text);
+}
+
+a.link:active {
+  color: var(--active-text);
+}

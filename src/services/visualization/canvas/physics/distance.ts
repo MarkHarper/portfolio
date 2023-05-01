@@ -8,7 +8,10 @@ export const dimensionDistance = (
   dy: p2.y - p1.y,
 });
 
-export function distanceSquared(p1: DataPoint, p2: DataPoint): Omit<PointDifference, 'direct'> {
+export function distanceSquared(
+  p1: DataPoint,
+  p2: DataPoint,
+): Omit<PointDifference, 'direct'> {
   const { dx, dy } = dimensionDistance(p1, p2);
 
   return {
@@ -18,7 +21,10 @@ export function distanceSquared(p1: DataPoint, p2: DataPoint): Omit<PointDiffere
   };
 }
 
-export function distanceSqrt(p1: DataPoint, p2: DataPoint): Omit<PointDifference, 'directSquared'> {
+export function distanceSqrt(
+  p1: DataPoint,
+  p2: DataPoint,
+): Omit<PointDifference, 'directSquared'> {
   const { dx, dy } = dimensionDistance(p1, p2);
 
   return {

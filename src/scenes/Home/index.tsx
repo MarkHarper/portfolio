@@ -1,29 +1,13 @@
-import { useContext, useState } from 'react';
-import { SizingContext } from '../../services/contexts/size';
-import { useVisualization } from '../../services/visualization';
-import Nav from '../../components/Nav';
-import Controls from '../../components/Controls';
-import './styles.css';
+import Canvas from './components/Canvas';
+import Nav from './components/Nav';
+import Controls from './components/Controls';
 
-const Home = () => {
-  const {
-    size: { width, height },
-  } = useContext(SizingContext);
-  const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null);
-  useVisualization(canvasRef);
-
-  return (
-    <>
-      <canvas
-        ref={(canvas) => setCanvasRef(canvas)}
-        id='viz-home'
-        height={height?.toString()}
-        width={width?.toString()}
-      />
-      <Nav />
-      <Controls />
-    </>
-  );
-};
+const Home = () => (
+  <>
+    <Canvas />
+    <Nav />
+    <Controls />
+  </>
+);
 
 export default Home;

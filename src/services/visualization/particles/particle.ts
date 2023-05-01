@@ -1,13 +1,7 @@
 import { renderCircle } from '../canvas/shapes/circle';
 import { MovingCircleObject } from '../canvas/types';
 
-const DEFAULT_FILL_COLOR = '#FFFFFF';
-const DEFAULT_SCALE_X = 1.0;
-const DEFAULT_SCALE_Y = 1.0;
-
 export interface Particle extends MovingCircleObject {
-  xScale: number;
-  yScale: number;
   fillStyle: string;
 
   render(ctx: CanvasRenderingContext2D): void;
@@ -16,9 +10,6 @@ export interface Particle extends MovingCircleObject {
 }
 
 export class Particle implements Particle {
-  xScale = DEFAULT_SCALE_X;
-  yScale = DEFAULT_SCALE_Y;
-
   constructor({
     mass,
     radius,
@@ -34,7 +25,7 @@ export class Particle implements Particle {
     y: number;
     vx: number;
     vy: number;
-    fillStyle?: string;
+    fillStyle: string;
   }) {
     this.mass = mass;
     this.radius = radius;
@@ -43,20 +34,17 @@ export class Particle implements Particle {
     this.vx = vx;
     this.vy = vy;
 
-    this.fillStyle = fillStyle || DEFAULT_FILL_COLOR;
+    this.fillStyle = fillStyle;
   }
 
   render = (ctx: CanvasRenderingContext2D): void => {
-    const { x, y, radius, xScale, yScale, fillStyle } = this;
-
+    const { x, y, radius, fillStyle } = this;
     renderCircle(
       {
         x,
         y,
         radius,
       },
-      xScale,
-      yScale,
       fillStyle,
       ctx,
     );

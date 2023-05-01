@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useState } from 'react';
 import { VizState } from '../visualization';
 
 export type VizRef = {
@@ -7,12 +7,12 @@ export type VizRef = {
 
 export type VizRefContext = {
   viz: VizState | null;
-  setViz: (vizState: VizState) => void;
+  setViz: (vizState: VizState | null) => void;
 };
 
-export const VizContext = createContext<VizRefContext>({
+const VizContext = createContext<VizRefContext>({
   viz: null,
-  setViz: () => {} // eslint-disable-line
+  setViz: () => {}, // eslint-disable-line
 });
 
 export type Props = {
@@ -25,5 +25,41 @@ export const VizContextProvider: FC<Props> = ({ children }) => {
     setViz,
   };
 
-  return <VizContext.Provider value={contextValue}>{children}</VizContext.Provider>;
+  return (
+    <VizContext.Provider value={contextValue}>{children}</VizContext.Provider>
+  );
+};
+
+export const useViz = () => {
+  const { viz, setViz } = useContext(VizContext);
+  const toggle = () => {
+    if (!viz) return;
+    if (viz.runner.running) {
+      viz.runner.stop();
+      setViz({
+        ...viz,
+        isRunning: false,
+      });
+      return;
+    }
+
+    viz.runner.start();
+    setViz({
+      ...viz,
+      isRunning: true,
+    });
+  };
+  const restart = () => {
+    if (!viz) return;
+
+    viz.field.resetParticles();
+    viz.runner.draw();
+  };
+
+  return {
+    viz,
+    setViz,
+    restart,
+    toggle,
+  };
 };

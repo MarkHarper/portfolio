@@ -1,10 +1,24 @@
-import isMobile from 'is-mobile';
-import { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
+const BASE_FONT_SIZE = 16;
+const BREAKPOINT_WIDTH_REM_1 = 29;
+const BREAKPOINT_WIDTH_REM_2 = 26;
+
+export const BREAKPOINT_WIDTH_1 = BASE_FONT_SIZE * BREAKPOINT_WIDTH_REM_1;
+export const BREAKPOINT_WIDTH_2 = BASE_FONT_SIZE * BREAKPOINT_WIDTH_REM_2;
 
 export type SizingState = {
   height: number | null;
   width: number | null;
-  isMobile: boolean | null;
+  isBelowBreakpoint1: boolean | null;
+  isBelowBreakpoint2: boolean | null;
 };
 
 export type SizingContextValue = {
@@ -12,11 +26,12 @@ export type SizingContextValue = {
   setSize: (size: SizingState) => void;
 };
 
-export const SizingContext = createContext<SizingContextValue>({
+const SizingContext = createContext<SizingContextValue>({
   size: {
     height: null,
     width: null,
-    isMobile: isMobile(),
+    isBelowBreakpoint1: null,
+    isBelowBreakpoint2: null,
   },
   setSize: () => {}, // eslint-disable-line
 });
@@ -28,7 +43,8 @@ export const SizingContextProvider: FC<Props> = ({ children }) => {
   const [size, setSize] = useState<SizingState>({
     width: window.innerWidth,
     height: window.innerHeight,
-    isMobile: isMobile(),
+    isBelowBreakpoint1: window.innerWidth < BREAKPOINT_WIDTH_1,
+    isBelowBreakpoint2: window.innerWidth < BREAKPOINT_WIDTH_2,
   });
   const contextValue: SizingContextValue = {
     size,
@@ -38,12 +54,19 @@ export const SizingContextProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     window.addEventListener('resize', () => {
       setSize({
-        isMobile: isMobile(),
         width: window.innerWidth,
         height: window.innerHeight,
+        isBelowBreakpoint1: window.innerWidth < BREAKPOINT_WIDTH_1,
+        isBelowBreakpoint2: window.innerWidth < BREAKPOINT_WIDTH_2,
       });
     });
   }, []);
 
-  return <SizingContext.Provider value={contextValue}>{children}</SizingContext.Provider>;
+  return (
+    <SizingContext.Provider value={contextValue}>
+      {children}
+    </SizingContext.Provider>
+  );
 };
+
+export const useSize = () => useContext(SizingContext);

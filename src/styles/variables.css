@@ -1,0 +1,37 @@
+/***** Constants *****/
+
+:root {
+  /***** Tokens *****/
+  --white: #FFF;
+  --black: #000;
+  --grey: #333;
+  --light-grey: #666;
+  --light-green: #8BE5DC;
+  --green: #26A69A;
+  --dark-green: #0B322E;
+  --light-red: #F4CDD1;
+  --red: #D95965;
+  --dark-red: #741A23;
+  --light-alt-green: #FAF3DD;
+  --alt-green: ##2A9D8F;
+  --dark-alt-green: #F4A261;
+
+  /***** Fonts *****/
+  --fancy-font: 'Stalemate', cursive;
+  --official-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
+    Geneva, Verdana, sans-serif;
+  --nav-font: palatino, sans-serif;
+  --body-font: helvetica neue, sans-serif;
+
+  /****** Fontawesome Icon Sizes *******/
+  --icon-2xs: 0.625rem;
+  --icon-xs: 0.75rem;
+  --icon-sm: 0.875rem;
+  --icon-md: 1rem;
+  --icon-lg: 1.25rem;
+  --icon-xl: 1.5rem;
+  --icon-2xl: 2rem;
+
+  /****** Blending *******/
+  --blend-mode: exclusion;
+}

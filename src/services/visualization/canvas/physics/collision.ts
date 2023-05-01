@@ -1,4 +1,9 @@
-import { DataCircle, DataMovingCircleObject, DataMovingPoint, DataPoint } from '../types';
+import {
+  DataCircle,
+  DataMovingCircleObject,
+  DataMovingPoint,
+  DataPoint,
+} from '../types';
 import { distance } from './distance';
 import { impulse } from './impulse';
 import { speed } from './speed';
@@ -6,7 +11,11 @@ import { relativeVelocity } from './velocity';
 
 const MAX_VELOCITY = 10;
 
-export function checkCollision(p1: DataCircle, p2: DataCircle, distanceSquared: number): boolean {
+export function checkCollision(
+  p1: DataCircle,
+  p2: DataCircle,
+  distanceSquared: number,
+): boolean {
   const combinedRadius = p2.radius + p1.radius;
 
   return distanceSquared <= combinedRadius * combinedRadius;
@@ -34,8 +43,25 @@ export function handleCollision(
   // relative velocity of p1 to p2
   const rv = relativeVelocity(p2, p1);
   const s = speed(rv, ncv);
-  const imp = impulse(p1, p2, s);
 
+  if (s < 0) {
+    return {
+      p1: {
+        x: p1.x,
+        y: p1.y,
+        vx: p1.vx,
+        vy: p1.vy,
+      },
+      p2: {
+        x: p2.x,
+        y: p2.y,
+        vx: p2.vx,
+        vy: p2.vy,
+      },
+    };
+  }
+
+  const imp = impulse(p1, p2, s);
   const p1Vx = p1.vx - imp * p2.mass * ncv.x;
   const p1Vy = p1.vy - imp * p2.mass * ncv.y;
   const p2Vx = p2.vx + imp * p1.mass * ncv.x;

@@ -27,6 +27,7 @@ const ThemeToggle = ({ className = '', iconSize }: Props): JSX.Element => {
       title='Toggle Theme'
       iconSize={iconSize}
       onClick={onClick}
+      aria-label='toggle-theme'
     />
   );
 };

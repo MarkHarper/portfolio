@@ -14,6 +14,7 @@ const SettingsButton = ({ isOpen, toggleIsOpen }: Props): JSX.Element => (
     icon={isOpen ? faX : faCog}
     onClick={() => toggleIsOpen()}
     className='settings-button'
+    aria-label='display-settings'
   />
 );
 

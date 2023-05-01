@@ -14,10 +14,12 @@ const Button = ({
   rounded,
   className = '',
   children,
+  'aria-label': ariaLabel,
   ...props
 }: ButtonProps): JSX.Element => (
   <button
     className={`${variant} ${rounded ? 'rounded' : ''} ${className}`}
+    aria-label={ariaLabel}
     {...props}
   >
     {children}

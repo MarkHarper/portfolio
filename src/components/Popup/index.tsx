@@ -72,6 +72,7 @@ const Popup = ({
             onMouseDown={onMouseDownClose ? onMouseDownClose : noop}
             icon={faXmark}
             iconSize={Sizes.LG}
+            aria-label='close-popup'
           />
         )}
         {Tooltip && <Tooltip />}

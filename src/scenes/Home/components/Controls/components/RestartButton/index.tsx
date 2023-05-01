@@ -25,6 +25,7 @@ const RestartButton = ({
       onClick={restart}
       className={className}
       disabled={!!viz.isRunning}
+      aria-label='restart-visualization'
     />
   );
 };

@@ -26,6 +26,7 @@ const PlayButton = ({
       iconSize={iconSize}
       onClick={toggle}
       className={`${className} ${!isRunning ? 'play-icon' : ''}`}
+      aria-label='play-visualization'
     />
   );
 };

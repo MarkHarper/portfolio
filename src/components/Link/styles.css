@@ -9,7 +9,7 @@ a.link:visited {
 
 a.link:hover,
 a.link:focus {
-  color: var(--highlight-text);
+  text-decoration: none;
 }
 
 a.link:active {

@@ -23,9 +23,9 @@
   --button-text: var(--white);
   --button-border: var(--dark-green);
   --gray-text: var(--grey);
-  --link-text: var(--green);
+  --link-text: var(--dark-green);
   --visited-text: var(--red);
-  --highlight-text: var(--green);
+  --highlight-text: var(--dark-green);
   --active-text: var(--dark-red);
   --canvas: var(--white);
   --canvas-text: var(--red);

@@ -9,7 +9,7 @@ import InfoNav from './components/InfoNav';
 import './styles.css';
 
 const NAV_POPUP_POSITION = {
-  top: 'calc(100% + 0.5rem)',
+  top: 'calc(100% + 1rem)',
 };
 
 const Nav = () => {

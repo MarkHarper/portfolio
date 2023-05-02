@@ -5,10 +5,16 @@
   border-radius: 3px;
 }
 
+@media (max-width: 29rem) {
+  .nav-info-tooltip {
+    width: calc(100vw - 4rem);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 25rem) {
   .nav-info-tooltip {
     width: calc(100vw - 2rem);
-    left: 50%;
-    transform: translateX(-50%);
   }
 }

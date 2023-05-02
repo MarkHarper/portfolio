@@ -4,14 +4,14 @@ import Divider, { Orientations } from '~/components/Divider';
 
 import PlayButton from '../PlayButton';
 import ThemeToggle from '../ThemeToggle';
-import './styles.css';
 import RestartButton from '../RestartButton';
+import './styles.css';
 
 const ControlsList = () => {
   const {
     size: { isBelowBreakpoint1 },
   } = useSize();
-  const iconSize = isBelowBreakpoint1 ? Sizes.LG : Sizes.MD;
+  const iconSize = isBelowBreakpoint1 ? Sizes.XL : Sizes.MD;
   const ControlDivider = (
     <Divider
       className='control-divider'

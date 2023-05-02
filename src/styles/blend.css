@@ -1,0 +1,12 @@
+.blend-white,
+.blend-primary {
+  mix-blend-mode: var(--blend-mode);
+}
+
+.blend-white {
+  -webkit-text-fill-color: var(--accent-color);
+}
+
+.blend-primary {
+  color: var(--inverted-accent-color);
+}

@@ -1,0 +1,31 @@
+button,
+button.primary {
+  border: none;
+  box-shadow: none;
+  padding: 0.7rem 0.8rem;
+  border-radius: 5px;
+  color: var(--button-text);
+}
+
+button.accent {
+  background-color: var(--accent-color);
+  mix-blend-mode: var(--blend-mode);
+}
+
+button.ghost {
+  background-color: transparent;
+  padding: 0;
+}
+
+button.rounded {
+  border-radius: 50%;
+  padding: 0.8rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  color: var(--gray-text) !important;
+}

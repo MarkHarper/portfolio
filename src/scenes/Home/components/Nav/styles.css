@@ -1,0 +1,20 @@
+.nav-info-tooltip {
+  background-color: var(--accent-color);
+  font-size: 1rem;
+  padding: 1.2rem 1rem 1rem;
+  border-radius: 3px;
+}
+
+@media (max-width: 29rem) {
+  .nav-info-tooltip {
+    width: calc(100vw - 4rem);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 25rem) {
+  .nav-info-tooltip {
+    width: calc(100vw - 2rem);
+  }
+}

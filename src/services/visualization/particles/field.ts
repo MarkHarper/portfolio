@@ -1,5 +1,6 @@
+import { ThemeConfig, ThemeName } from '~/services/theme/config';
 import { clear } from '../canvas';
-import { alphaRGB, rgba } from '../canvas/color';
+import { alphaRGB, hexToRGB, RGB, rgba } from '../canvas/color';
 import { checkCollision, handleCollision } from '../canvas/physics/collision';
 import { clamp } from '../canvas/physics/clamp';
 import { distanceSquared } from '../canvas/physics/distance';
@@ -15,31 +16,50 @@ import {
 } from './constants';
 import { Particle } from './particle';
 
-const DEFAULT_PARTICLE_COUNT = 45;
+const DENSITY = 0.00015;
 
 export interface Field extends Renderer {
   width: number;
   height: number;
+  themeName: ThemeName;
+  themeConfig: ThemeConfig;
+  themeMainRGB: RGB;
   contents: Particle[];
-  checkCollision: (p1: Particle, p2: Particle, dx: number, dy: number) => void;
-  spring: (p1: Particle, p2: Particle, dx: number, dy: number) => void;
-  renderSpring: (p1: Particle, p2: Particle, dist: number, ctx: CanvasRenderingContext2D) => void;
+  resetParticles(): void;
+  setWidth(a: number): void;
+  setHeight(a: number): void;
+  setDimensions(a: number, b: number): void;
+  setTheme(a: [ThemeName, ThemeConfig]): void;
+  draw(a: CanvasRenderingContext2D): void;
+  render(a: CanvasRenderingContext2D): void;
 }
 
 export class Field implements Field {
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, theme: [ThemeName, ThemeConfig]) {
+    const [themeName, themeConfig] = theme;
     this.width = width;
     this.height = height;
-    this.contents = Array(DEFAULT_PARTICLE_COUNT)
+    this.themeName = themeName;
+    this.themeConfig = themeConfig;
+    this.themeMainRGB = hexToRGB(themeConfig.CANVAS_TEXT);
+
+    this.resetParticles();
+  }
+
+  resetParticles() {
+    const area = this.width * this.height;
+    const particleCount = Math.floor(area * DENSITY);
+
+    this.contents = Array(particleCount)
       .fill(null)
       .map(() => {
         if (Math.random() > 0.66) {
           return new Particle({
             radius: LARGE_RADIUS,
             mass: LARGE_MASS,
-            fillStyle: '#26A69A',
-            x: Math.random() * width,
-            y: Math.random() * height,
+            fillStyle: this.themeConfig.CANVAS_TEXT,
+            x: Math.random() * this.width,
+            y: Math.random() * this.height,
             vx: Math.random() * 2 - 1,
             vy: Math.random() * 2 - 1,
           });
@@ -48,17 +68,69 @@ export class Field implements Field {
         return new Particle({
           radius: SMALL_RADIUS,
           mass: SMALL_MASS,
-          fillStyle: '#8BE5DC',
-          x: Math.random() * width,
-          y: Math.random() * height,
+          fillStyle: this.themeConfig.CANVAS_TEXT_ALT,
+          x: Math.random() * this.width,
+          y: Math.random() * this.height,
           vx: Math.random() * 4 - 2,
           vy: Math.random() * 4 - 2,
         });
       });
   }
 
+  setWidth(width: number) {
+    this.width = width;
+  }
+
+  setHeight(height: number) {
+    this.height = height;
+  }
+
+  setDimensions(width: number, height: number) {
+    this.setWidth(width);
+    this.setHeight(height);
+  }
+
+  setTheme(theme: [ThemeName, ThemeConfig]) {
+    const [themeName, themeConfig] = theme;
+    this.themeName = themeName;
+    this.themeConfig = themeConfig;
+    this.themeMainRGB = hexToRGB(themeConfig.CANVAS_TEXT);
+
+    this.contents.forEach((particle) => {
+      const nextFillStyle =
+        particle.mass === LARGE_MASS
+          ? themeConfig.CANVAS_TEXT
+          : themeConfig.CANVAS_TEXT_ALT;
+
+      particle.setFillStyle(nextFillStyle);
+    });
+  }
+
+  draw = (ctx: CanvasRenderingContext2D): void => {
+    const { width, height } = this;
+    const { r, g, b } = this.themeMainRGB;
+    clear(ctx, width, height);
+
+    this.contents.forEach((particle) => {
+      particle.render(ctx);
+    });
+
+    this.contents.forEach((p1, ind1) => {
+      this.contents.forEach((p2, ind2) => {
+        if (ind1 === ind2) return;
+
+        const { directSquared } = distanceSquared(p1, p2);
+        if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
+          const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
+          renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
+        }
+      });
+    });
+  };
+
   render = (ctx: CanvasRenderingContext2D): void => {
     const { width, height } = this;
+    const { r, g, b } = this.themeMainRGB;
     clear(ctx, width, height);
 
     this.contents.forEach((particle) => {
@@ -87,7 +159,7 @@ export class Field implements Field {
           p2.setVelocity(nextP2.vx, nextP2.vy);
         } else if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
           const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
-          renderLine(p1, p2, rgba(38, 166, 154, alpha), ctx);
+          renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
 
           const { p1: nextP1, p2: nextP2 } = spring(p1, p2, dx, dy);
           p1.setVelocity(nextP1.vx, nextP1.vy);

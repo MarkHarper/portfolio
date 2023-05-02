@@ -1,0 +1,33 @@
+:root.dark {
+  /***** Functions *****/
+  --accent-color: var(--white);
+  --inverted-accent-color: var(--dark-green);
+  --button-face: var(--green);
+  --button-text: var(--dark-green);
+  --button-border: var(--white);
+  --gray-text: var(--light-grey);
+  --link-text: var(--green);
+  --visited-text: var(--dark-red);
+  --highlight-text: var(--green);
+  --active-text: var(--red);
+  --canvas: var(--dark-green);
+  --canvas-text: var(--green);
+  --canvas-text-alt: var(--light-green);
+}
+
+:root.light {
+  /***** Functions *****/
+  --accent-color: var(--light-red);
+  --inverted-accent-color: var(--black);
+  --button-face: var(--green);
+  --button-text: var(--white);
+  --button-border: var(--dark-green);
+  --gray-text: var(--grey);
+  --link-text: var(--dark-green);
+  --visited-text: var(--red);
+  --highlight-text: var(--dark-green);
+  --active-text: var(--dark-red);
+  --canvas: var(--white);
+  --canvas-text: var(--red);
+  --canvas-text-alt: var(--dark-green);
+}

@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+}
+
+.tooltip {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 1;
+}
+
+.tooltip,
+.close {
+  color: var(--inverted-accent-color);
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.open {
+  display: block;
+}

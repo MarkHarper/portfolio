@@ -1,0 +1,15 @@
+hr.divider {
+  margin: 0;
+  border: none;
+  border-radius: 1px;
+}
+
+hr.divider.vertical {
+  height: 100%;
+  width: 1px;
+}
+
+hr.divider.horizontal {
+  height: 1px;
+  width: 100%;
+}

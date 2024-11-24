@@ -3,7 +3,7 @@ with (import <nixpkgs> {});
 
 mkShell {
   buildInputs = [
-    nodejs-16_x
+    nodejs_22
   ];
   shellHook = ''
     mkdir -p .nix-node

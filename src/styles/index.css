@@ -1,5 +1,5 @@
 @import 'reset.css';
-@import './variables.css';
+@import './primitive.css';
 @import './theme.css';
 
 /** design system **/
@@ -7,3 +7,6 @@
 
 /** app **/
 @import './unique.css';
+
+/** elements **/
+@import './elements/index.css';

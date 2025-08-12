@@ -13,11 +13,12 @@
   --red: #d95965;
   --dark-red: #741a23;
   --light-alt-green: #faf3dd;
-  --alt-green: ##2a9d8f;
+  --alt-green: #2a9d8f;
   --dark-alt-green: #f4a261;
 
   /***** Fonts *****/
-  --official-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+  --official-font:
+    'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', 'geneva', 'verdana', sans-serif;
   --nav-font: palatino, sans-serif;
   --body-font: helvetica neue, sans-serif;

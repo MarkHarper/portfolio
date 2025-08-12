@@ -22,15 +22,15 @@ const useVisualization = (canvas: HTMLCanvasElement | null) => {
     size: { width, height },
   } = useSize();
   const { themeName } = useThemeName();
+  const themeConfig = getThemeConfig();
 
   // set and start vizualization
   useEffect(() => {
-    if (!width || !height || !canvas) return;
+    if (!width || !height || !canvas || !themeConfig) return;
     const { width: refWidth, height: refHeight } = viz || {};
     const newWidth = refWidth && width !== refWidth;
     const newHeight = refHeight && height !== refHeight;
     const newDimensions = newWidth || newHeight;
-    const themeConfig = getThemeConfig(themeName);
     const theme: [ThemeName, ThemeConfig] = [themeName, themeConfig];
 
     if (!viz) {
@@ -66,7 +66,7 @@ const useVisualization = (canvas: HTMLCanvasElement | null) => {
       viz.field.setTheme(theme);
       viz.runner.draw();
     }
-  }, [width, height, canvas, viz, setViz, themeName]);
+  }, [width, height, canvas, viz, setViz, themeName, themeConfig]);
 
   return viz;
 };

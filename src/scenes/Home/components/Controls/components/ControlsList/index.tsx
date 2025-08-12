@@ -1,6 +1,5 @@
 import { Sizes } from '~/types/variant';
 import { useSize } from '~/services/contexts/size';
-import Divider, { Orientations } from '~/components/Divider';
 
 import PlayButton from '../PlayButton';
 import ThemeToggle from '../ThemeToggle';
@@ -13,16 +12,14 @@ const ControlsList = () => {
   } = useSize();
   const iconSize = isBelowBreakpoint1 ? Sizes.XL : Sizes.MD;
   const ControlDivider = (
-    <Divider
-      className='control-divider'
-      orientation={
-        isBelowBreakpoint1 ? Orientations.VERTICAL : Orientations.HORIZONTAL
-      }
-    />
+    <wa-divider
+      class='control-divider'
+      vertical={isBelowBreakpoint1}
+    ></wa-divider>
   );
 
   return (
-    <div className='controls-list'>
+    <div className='controls-list' onClick={(e) => e.stopPropagation()}>
       <ThemeToggle className='theme-toggle' iconSize={iconSize} />
       {ControlDivider}
       <PlayButton className='play-button' iconSize={iconSize} />

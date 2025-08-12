@@ -3,13 +3,13 @@ import { UiComponentProps } from '~/types/react';
 import { Size, Sizes, Variants } from '../../types/variant';
 import './styles.css';
 
-type HeadingProps = {
+type TextProps = {
   variant?: Variants.PRIMARY | Variants.ACCENT;
   size?: Omit<Size, Sizes.DBL_XL | Sizes.DBL_XS>;
 } & UiComponentProps &
   Omit<HTMLAttributes<HTMLDivElement>, 'size'>;
 
-const Heading = forwardRef<HTMLDivElement, HeadingProps>(function Heading(
+const Text = forwardRef<HTMLDivElement, TextProps>(function Heading(
   {
     variant = Variants.PRIMARY,
     size = Sizes.MD,
@@ -21,7 +21,7 @@ const Heading = forwardRef<HTMLDivElement, HeadingProps>(function Heading(
 ) {
   return (
     <div
-      className={`heading ${variant} ${size} ${className}`}
+      className={`text ${variant} ${size} ${className}`}
       ref={ref}
       {...props}
     >
@@ -30,4 +30,4 @@ const Heading = forwardRef<HTMLDivElement, HeadingProps>(function Heading(
   );
 });
 
-export default Heading;
+export default Text;

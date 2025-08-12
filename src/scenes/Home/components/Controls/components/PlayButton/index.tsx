@@ -1,8 +1,5 @@
-import { faPause, faPlay } from '@fortawesome/pro-solid-svg-icons';
-
-import { Size, Variants } from '~/types/variant';
+import { Size } from '~/types/variant';
 import { useViz } from '~/services/contexts/viz';
-import IconButton from '~/components/IconButton';
 import './styles.css';
 
 type Props = {
@@ -10,24 +7,19 @@ type Props = {
   iconSize: Size;
 };
 
-const PlayButton = ({
-  className = '',
-  iconSize,
-}: Props): JSX.Element | null => {
+const PlayButton = ({ className = '', iconSize }: Props) => {
   const { viz, toggle } = useViz();
   const { isRunning } = viz || {};
   if (!viz) return null;
 
   return (
-    <IconButton
-      variant={Variants.GHOST}
-      icon={isRunning ? faPause : faPlay}
-      title={isRunning ? 'Pause' : 'Play'}
-      iconSize={iconSize}
+    <wa-icon-button
+      class={`${className} ${!isRunning ? 'play-icon' : ''}`}
+      size={iconSize}
+      family='fontawesome'
+      name={isRunning ? 'pause' : 'play'}
       onClick={toggle}
-      className={`${className} ${!isRunning ? 'play-icon' : ''}`}
-      aria-label='play-visualization'
-    />
+    ></wa-icon-button>
   );
 };
 

@@ -8,23 +8,25 @@
   opacity: 0.7;
 }
 
-.controls-list .control-divider.divider.horizontal,
-.controls-list .control-divider.divider.vertical {
-  background-color: var(--button-border);
+.controls-list wa-icon-button {
+  --background-color-hover: unset;
 }
 
-.controls-list .control-divider.divider.horizontal {
+.controls-list .control-divider,
+.controls-list .control-divider {
+  --color: var(--button-border);
+}
+
+.controls-list .control-divider {
   width: calc(100% - 0.7rem);
 }
 
-.controls-list .control-divider.divider.vertical {
+.controls-list .control-divider[vertical] {
   height: calc(100% - 1rem);
 }
 
-.controls-list > .theme-toggle,
-.controls-list > .play-button,
-.controls-list > .restart-button {
-  padding: 0.8rem;
+.controls-list .playbutton:hover {
+  background-color: unset;
 }
 
 @media (max-width: 29rem) {
@@ -34,11 +36,5 @@
     position: fixed;
     bottom: 0;
     height: 4rem;
-  }
-
-  .controls-list > .theme-toggle,
-  .controls-list > .play-button,
-  .controls-list > .restart-button {
-    padding: 1.2rem;
   }
 }

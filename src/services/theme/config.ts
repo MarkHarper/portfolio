@@ -1,60 +1,66 @@
-import { Color, Colors } from './tokens/colors';
+export const ThemeNames = {
+  DARK: 'dark',
+  LIGHT: 'light',
+} as const;
 
-export enum ThemeNames {
-  DARK = 'dark',
-  LIGHT = 'light',
-}
-
-export type ThemeName = `${ThemeNames}`;
+type ThemeNameKeys = keyof typeof ThemeNames;
+export type ThemeName = (typeof ThemeNames)[ThemeNameKeys];
 
 export const isThemeName = (text: any): text is ThemeName => {
   return text === ThemeNames.DARK || text === ThemeNames.LIGHT;
 };
 
-export type ThemeConfig = {
-  ACCENT_COLOR: Color;
-  INVERTED_ACCENT_COLOR: Color;
-  BUTTON_FACE: Color;
-  BUTTON_TEXT: Color;
-  BUTTON_BORDER: Color;
-  LINK_TEXT: Color;
-  VISITED_TEXT: Color;
-  HIGHLIGHT_TEXT: Color;
-  ACTIVE_TEXT: Color;
-  CANVAS: Color;
-  CANVAS_TEXT: Color;
-  CANVAS_TEXT_ALT: Color;
-};
+export type Color =
+  | '--white'
+  | '--black'
+  | '--grey'
+  | '--light-grey'
+  | '--light-green'
+  | '--green'
+  | '--dark-green'
+  | '--light-red'
+  | '--red'
+  | '--dark-red'
+  | '--light-alt-green'
+  | '--alt-green'
+  | '--dark-alt-green';
 
+export type FontFamily = '--official-font' | '--nav-font' | '--body-font';
+
+export type IconFontSize =
+  | '--icon-2x'
+  | '--icon-xs'
+  | '--icon-sm'
+  | '--icon-md'
+  | '--icon-lg'
+  | '--icon-xl'
+  | '--icon-2xl';
+
+export type BlendMode = '--blend-mode';
+
+export type SemanticVars =
+  | '--accent-color'
+  | '--inverted-accent-color'
+  | '--buffon-face'
+  | '--button-text'
+  | '--button-border'
+  | '--gray-text'
+  | '--link-text'
+  | '--visited-text'
+  | '--highlight-text'
+  | '--active-text'
+  | '--canvas'
+  | '--canvas-text'
+  | '--canvas-text-alt'
+  | '--canvas-item'
+  | '--canvas-item-alt';
+
+export type CssVars =
+  | Color
+  | FontFamily
+  | IconFontSize
+  | BlendMode
+  | SemanticVars;
+
+export type ThemeConfig = Record<CssVars, string>;
 export type ThemeConfigMap = Record<ThemeName, ThemeConfig>;
-
-export const themeConfigs: ThemeConfigMap = {
-  [ThemeNames.DARK]: {
-    ACCENT_COLOR: Colors.WHITE,
-    INVERTED_ACCENT_COLOR: Colors.GREY,
-    BUTTON_FACE: Colors.GREEN,
-    BUTTON_TEXT: Colors.DARK_GREEN,
-    BUTTON_BORDER: Colors.WHITE,
-    LINK_TEXT: Colors.GREEN,
-    VISITED_TEXT: Colors.DARK_RED,
-    HIGHLIGHT_TEXT: Colors.RED,
-    ACTIVE_TEXT: Colors.DARK_GREEN,
-    CANVAS: Colors.DARK_GREEN,
-    CANVAS_TEXT: Colors.GREEN,
-    CANVAS_TEXT_ALT: Colors.LIGHT_GREEN,
-  },
-  [ThemeNames.LIGHT]: {
-    ACCENT_COLOR: Colors.WHITE,
-    INVERTED_ACCENT_COLOR: Colors.GREY,
-    BUTTON_FACE: Colors.GREEN,
-    BUTTON_TEXT: Colors.WHITE,
-    BUTTON_BORDER: Colors.DARK_GREEN,
-    LINK_TEXT: Colors.GREEN,
-    VISITED_TEXT: Colors.DARK_RED,
-    HIGHLIGHT_TEXT: Colors.RED,
-    ACTIVE_TEXT: Colors.DARK_GREEN,
-    CANVAS: Colors.WHITE,
-    CANVAS_TEXT: Colors.GREEN,
-    CANVAS_TEXT_ALT: Colors.DARK_GREEN,
-  },
-};

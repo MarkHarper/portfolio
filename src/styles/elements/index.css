@@ -1,0 +1,10 @@
+@import './button.css';
+@import './header.css';
+@import './tooltip.css';
+@import './paragraph.css';
+@import './divider.css';
+@import './icon-button.css';
+
+.wa-reduce-fouce {
+  opacity: 0;
+}

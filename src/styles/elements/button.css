@@ -1,0 +1,21 @@
+wa-button,
+wa-button[variant='primary'] {
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+  color: var(--button-text);
+}
+
+wa-button[appearance='accent'] {
+  background-color: var(--accent-color);
+  mix-blend-mode: var(--blend-mode);
+}
+
+wa-button[variant='ghost'] {
+  background-color: transparent;
+  padding: 0;
+}
+
+wa-button:disabled {
+  color: var(--gray-text) !important;
+}

@@ -1,31 +1,22 @@
-button,
-button.primary {
+wa-icon-button,
+wa-icon-button[variant='primary']::part(base),
+wa-icon-button[variant='primary'] {
   border: none;
   box-shadow: none;
-  padding: 0.7rem 0.8rem;
   border-radius: 5px;
   color: var(--button-text);
 }
 
-button.accent {
+wa-icon-button[appearance='accent']::part(base) {
   background-color: var(--accent-color);
   mix-blend-mode: var(--blend-mode);
 }
 
-button.ghost {
+wa-icon-button[variant='ghost'] {
   background-color: transparent;
   padding: 0;
 }
 
-button.rounded {
-  border-radius: 50%;
-  padding: 0.8rem;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-button:disabled {
+wa-icon-button:disabled {
   color: var(--gray-text) !important;
 }

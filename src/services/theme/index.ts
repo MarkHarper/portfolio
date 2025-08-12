@@ -1,11 +1,10 @@
+import { isThemeName, ThemeConfig, ThemeName, ThemeNames } from './config';
 import {
-  isThemeName,
-  ThemeConfig,
-  themeConfigs,
-  ThemeName,
-  ThemeNames,
-} from './config';
-import { elementHasTheme, getElementTheme, setElementTheme } from './html';
+  elementHasTheme,
+  getThemeClass,
+  getTokens,
+  setElementTheme,
+} from './html';
 import { getThemeFromStorage, setThemeInStorage } from './storage';
 
 const INITIAL_THEME = initTheme();
@@ -22,7 +21,7 @@ function getPreferredTheme() {
 
 function initTheme(): ThemeName {
   const themeInStorage = getThemeFromStorage();
-  const themeOnElement = getElementTheme();
+  const themeOnElement = getThemeClass();
 
   const isStorageThemeValid = isThemeName(themeInStorage);
   const isElementThemeValid = isThemeName(themeOnElement);
@@ -65,5 +64,4 @@ export const getThemeName = (): ThemeName => {
   return INITIAL_THEME;
 };
 
-export const getThemeConfig = (themeName: ThemeName): ThemeConfig =>
-  themeConfigs[themeName];
+export const getThemeConfig = () => getTokens();

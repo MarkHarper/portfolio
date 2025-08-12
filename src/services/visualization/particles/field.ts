@@ -41,7 +41,7 @@ export class Field implements Field {
     this.height = height;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig.CANVAS_TEXT);
+    this.themeMainRGB = hexToRGB(themeConfig['--canvas-item']);
 
     this.resetParticles();
   }
@@ -57,7 +57,7 @@ export class Field implements Field {
           return new Particle({
             radius: LARGE_RADIUS,
             mass: LARGE_MASS,
-            fillStyle: this.themeConfig.CANVAS_TEXT,
+            fillStyle: this.themeConfig['--canvas-item'],
             x: Math.random() * this.width,
             y: Math.random() * this.height,
             vx: Math.random() * 2 - 1,
@@ -68,7 +68,7 @@ export class Field implements Field {
         return new Particle({
           radius: SMALL_RADIUS,
           mass: SMALL_MASS,
-          fillStyle: this.themeConfig.CANVAS_TEXT_ALT,
+          fillStyle: this.themeConfig['--canvas-item-alt'],
           x: Math.random() * this.width,
           y: Math.random() * this.height,
           vx: Math.random() * 4 - 2,
@@ -94,13 +94,13 @@ export class Field implements Field {
     const [themeName, themeConfig] = theme;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig.CANVAS_TEXT);
+    this.themeMainRGB = hexToRGB(themeConfig['--canvas-item']);
 
     this.contents.forEach((particle) => {
       const nextFillStyle =
         particle.mass === LARGE_MASS
-          ? themeConfig.CANVAS_TEXT
-          : themeConfig.CANVAS_TEXT_ALT;
+          ? themeConfig['--canvas-item']
+          : themeConfig['--canvas-item-alt'];
 
       particle.setFillStyle(nextFillStyle);
     });

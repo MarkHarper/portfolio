@@ -13,7 +13,7 @@ type ThemeNameContextProviderProps = {
   children: Children;
 };
 
-export const themeNameContext = createContext<ThemeNameContext>({
+const themeNameContext = createContext<ThemeNameContext>({
   themeName: getThemeName(),
   setThemeName: noop,
 });

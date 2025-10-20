@@ -11,6 +11,7 @@ export interface Particle extends MovingCircleObject {
 
 export class Particle implements Particle {
   constructor({
+    tag,
     mass,
     radius,
     x,
@@ -19,6 +20,7 @@ export class Particle implements Particle {
     vy,
     fillStyle,
   }: {
+    tag: string;
     mass: number;
     radius: number;
     x: number;
@@ -27,6 +29,7 @@ export class Particle implements Particle {
     vy: number;
     fillStyle: string;
   }) {
+    this.tag = tag;
     this.mass = mass;
     this.radius = radius;
     this.x = x;

@@ -21,19 +21,6 @@ export function distanceSquared(
   };
 }
 
-export function distanceSqrt(
-  p1: DataPoint,
-  p2: DataPoint,
-): Omit<PointDifference, 'directSquared'> {
-  const { dx, dy } = dimensionDistance(p1, p2);
-
-  return {
-    dx,
-    dy,
-    direct: distance(dx, dy),
-  };
-}
-
 export function distance(dx: number, dy: number): number {
   return Math.sqrt(dx * dx + dy * dy);
 }

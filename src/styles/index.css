@@ -1,12 +1,5 @@
 @import 'reset.css';
 @import './primitive.css';
 @import './theme.css';
-
-/** design system **/
-@import './blend.css';
-
-/** app **/
 @import './unique.css';
-
-/** elements **/
-@import './elements/index.css';
+@import './elements/page.css';

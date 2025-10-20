@@ -1,7 +1,7 @@
 import { ThemeConfig, ThemeName } from './config';
 import { getThemeFromStorage } from './storage';
 
-export const getDocumentElement = (): HTMLElement => document.documentElement;
+const getDocumentElement = (): HTMLElement => document.documentElement;
 
 export const getTokens = (): ThemeConfig | null => {
   const root = document.querySelector(':root');
@@ -22,9 +22,6 @@ export const getTokens = (): ThemeConfig | null => {
 
 export const getThemeClass = (): ThemeName | string =>
   getDocumentElement().className;
-
-export const elementHasTheme = (theme: ThemeName): boolean =>
-  getDocumentElement().classList.contains(theme);
 
 export const setElementTheme = (theme: ThemeName) => {
   const currentTheme = getThemeFromStorage();

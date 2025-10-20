@@ -18,6 +18,38 @@ import { Particle } from './particle';
 
 const DENSITY = 0.00015;
 
+const PARTICLE_OPTIONS = {
+  A: {
+    color: '--color-item-A',
+    mass: LARGE_MASS,
+    radius: LARGE_RADIUS,
+    speedA: 2,
+    speedB: 1,
+  },
+  B: {
+    color: '--color-item-B',
+    mass: SMALL_MASS,
+    radius: SMALL_RADIUS,
+    speedA: 4,
+    speedB: 2,
+  },
+  C: {
+    color: '--color-item-C',
+    mass: LARGE_MASS,
+    radius: LARGE_RADIUS,
+    speedA: 2,
+    speedB: 1,
+  },
+  D: {
+    color: '--color-item-D',
+    mass: SMALL_MASS,
+    radius: SMALL_RADIUS,
+    speedA: 4,
+    speedB: 2,
+  },
+};
+const PARTICLE_OPTION_TYPES = ['A', 'B', 'D'];
+
 export interface Field extends Renderer {
   width: number;
   height: number;
@@ -41,7 +73,7 @@ export class Field implements Field {
     this.height = height;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig['--canvas-item']);
+    this.themeMainRGB = hexToRGB(themeConfig['--color-item-C']);
 
     this.resetParticles();
   }
@@ -52,27 +84,20 @@ export class Field implements Field {
 
     this.contents = Array(particleCount)
       .fill(null)
-      .map(() => {
-        if (Math.random() > 0.66) {
-          return new Particle({
-            radius: LARGE_RADIUS,
-            mass: LARGE_MASS,
-            fillStyle: this.themeConfig['--canvas-item'],
-            x: Math.random() * this.width,
-            y: Math.random() * this.height,
-            vx: Math.random() * 2 - 1,
-            vy: Math.random() * 2 - 1,
-          });
-        }
+      .map((_, i) => {
+        const optionIndex = (Math.random() * PARTICLE_OPTION_TYPES.length) | 0;
+        const optionType = PARTICLE_OPTION_TYPES[optionIndex];
+        const option = PARTICLE_OPTIONS[optionType];
 
         return new Particle({
-          radius: SMALL_RADIUS,
-          mass: SMALL_MASS,
-          fillStyle: this.themeConfig['--canvas-item-alt'],
+          tag: optionType,
+          radius: option.radius,
+          mass: option.mass,
+          fillStyle: this.themeConfig[option.color],
           x: Math.random() * this.width,
           y: Math.random() * this.height,
-          vx: Math.random() * 4 - 2,
-          vy: Math.random() * 4 - 2,
+          vx: Math.random() * option.speedA - option.speedB,
+          vy: Math.random() * option.speedA - option.speedB,
         });
       });
   }
@@ -94,13 +119,10 @@ export class Field implements Field {
     const [themeName, themeConfig] = theme;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig['--canvas-item']);
+    this.themeMainRGB = hexToRGB(themeConfig['--color-item-C']);
 
     this.contents.forEach((particle) => {
-      const nextFillStyle =
-        particle.mass === LARGE_MASS
-          ? themeConfig['--canvas-item']
-          : themeConfig['--canvas-item-alt'];
+      const nextFillStyle = themeConfig[PARTICLE_OPTIONS[particle.tag].color];
 
       particle.setFillStyle(nextFillStyle);
     });
@@ -110,10 +132,6 @@ export class Field implements Field {
     const { width, height } = this;
     const { r, g, b } = this.themeMainRGB;
     clear(ctx, width, height);
-
-    this.contents.forEach((particle) => {
-      particle.render(ctx);
-    });
 
     this.contents.forEach((p1, ind1) => {
       this.contents.forEach((p2, ind2) => {
@@ -126,23 +144,16 @@ export class Field implements Field {
         }
       });
     });
+
+    this.contents.forEach((particle) => {
+      particle.render(ctx);
+    });
   };
 
   render = (ctx: CanvasRenderingContext2D): void => {
     const { width, height } = this;
     const { r, g, b } = this.themeMainRGB;
     clear(ctx, width, height);
-
-    this.contents.forEach((particle) => {
-      const possibleX = particle.x + particle.vx;
-      const x = clamp(possibleX, 0, width);
-
-      const possibleY = particle.y + particle.vy;
-      const y = clamp(possibleY, 0, height);
-
-      particle.setPosition(x, y);
-      particle.render(ctx);
-    });
 
     this.contents.forEach((p1, ind1) => {
       this.contents.forEach((p2, ind2) => {
@@ -166,6 +177,17 @@ export class Field implements Field {
           p2.setVelocity(nextP2.vx, nextP2.vy);
         }
       });
+    });
+
+    this.contents.forEach((particle) => {
+      const possibleX = particle.x + particle.vx;
+      const x = clamp(possibleX, 0, width);
+
+      const possibleY = particle.y + particle.vy;
+      const y = clamp(possibleY, 0, height);
+
+      particle.setPosition(x, y);
+      particle.render(ctx);
     });
   };
 }

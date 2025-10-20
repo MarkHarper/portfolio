@@ -1,4 +1,4 @@
-import { setDimensions as setCanvasDimensions } from './dimensions';
+import { setDimensions as setCanvasDimensions } from './canvas/dimensions';
 
 export interface Renderer {
   draw: (a: CanvasRenderingContext2D) => void;

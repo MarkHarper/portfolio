@@ -19,7 +19,7 @@ export interface DataCircle extends DataPoint {
   radius: number;
 }
 
-export interface Vector2d {
+interface Vector2d {
   vx: number;
   vy: number;
 
@@ -34,14 +34,14 @@ export interface Vector2dDifference {
   dvy: number;
 }
 
-export interface MovingPoint extends Point, Vector2d {}
+interface MovingPoint extends Point, Vector2d {}
 
 export type DataMovingPoint = Omit<
   MovingPoint,
   'setX' | 'setY' | 'setVx' | 'setVy'
 >;
 
-export interface CircleObject {
+interface CircleObject {
   radius: number;
   mass: number;
 

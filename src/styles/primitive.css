@@ -22,16 +22,4 @@
     'Lucida Sans Unicode', 'geneva', 'verdana', sans-serif;
   --nav-font: palatino, sans-serif;
   --body-font: helvetica neue, sans-serif;
-
-  /****** Fontawesome Icon Sizes *******/
-  --icon-2xs: 0.625rem;
-  --icon-xs: 0.75rem;
-  --icon-sm: 0.875rem;
-  --icon-md: 1rem;
-  --icon-lg: 1.25rem;
-  --icon-xl: 1.5rem;
-  --icon-2xl: 2rem;
-
-  /****** Blending *******/
-  --blend-mode: exclusion;
 }

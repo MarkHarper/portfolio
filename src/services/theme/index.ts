@@ -1,10 +1,5 @@
-import { isThemeName, ThemeConfig, ThemeName, ThemeNames } from './config';
-import {
-  elementHasTheme,
-  getThemeClass,
-  getTokens,
-  setElementTheme,
-} from './html';
+import { isThemeName, ThemeName, ThemeNames } from './config';
+import { getThemeClass, getTokens, setElementTheme } from './html';
 import { getThemeFromStorage, setThemeInStorage } from './storage';
 
 const INITIAL_THEME = initTheme();
@@ -44,18 +39,6 @@ function initTheme(): ThemeName {
     return preferredTheme;
   }
 }
-
-export const toggleTheme = () => {
-  if (elementHasTheme(ThemeNames.DARK)) {
-    setElementTheme(ThemeNames.LIGHT);
-    setThemeInStorage(ThemeNames.LIGHT);
-    return ThemeNames.LIGHT;
-  }
-
-  setElementTheme(ThemeNames.DARK);
-  setThemeInStorage(ThemeNames.DARK);
-  return ThemeNames.DARK;
-};
 
 export const getThemeName = (): ThemeName => {
   const storedTheme = getThemeFromStorage();

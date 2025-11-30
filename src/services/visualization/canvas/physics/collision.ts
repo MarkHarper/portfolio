@@ -9,8 +9,6 @@ import { impulse } from './impulse';
 import { speed } from './speed';
 import { relativeVelocity } from './velocity';
 
-const MAX_VELOCITY = 10;
-
 export function checkCollision(
   p1: DataCircle,
   p2: DataCircle,
@@ -28,6 +26,7 @@ export function handleCollision(
   p2: DataMovingCircleObject,
   dx: number,
   dy: number,
+  maxVelocity: number,
 ): {
   p1: DataMovingPoint;
   p2: DataMovingPoint;
@@ -67,10 +66,10 @@ export function handleCollision(
   const p2Vx = p2.vx + imp * p1.mass * ncv.x;
   const p2Vy = p2.vy + imp * p1.mass * ncv.y;
 
-  const limitedVx1 = Math.abs(p1Vx) > MAX_VELOCITY ? MAX_VELOCITY : p1Vx;
-  const limitedVy1 = Math.abs(p1Vy) > MAX_VELOCITY ? MAX_VELOCITY : p1Vy;
-  const limitedVx2 = Math.abs(p2Vx) > MAX_VELOCITY ? MAX_VELOCITY : p2Vx;
-  const limitedVy2 = Math.abs(p2Vy) > MAX_VELOCITY ? MAX_VELOCITY : p2Vy;
+  const limitedVx1 = Math.abs(p1Vx) > maxVelocity ? maxVelocity : p1Vx;
+  const limitedVy1 = Math.abs(p1Vy) > maxVelocity ? maxVelocity : p1Vy;
+  const limitedVx2 = Math.abs(p2Vx) > maxVelocity ? maxVelocity : p2Vx;
+  const limitedVy2 = Math.abs(p2Vy) > maxVelocity ? maxVelocity : p2Vy;
 
   const declinedVx1 = limitedVx1 * 0.999;
   const declinedVy1 = limitedVy1 * 0.999;

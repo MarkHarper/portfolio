@@ -20,7 +20,7 @@ export class Particle implements Particle {
     vy,
     fillStyle,
   }: {
-    tag: string;
+    tag: number;
     mass: number;
     radius: number;
     x: number;
@@ -65,6 +65,10 @@ export class Particle implements Particle {
 
   setMass = (mass: number) => {
     this.mass = mass;
+  };
+
+  setRadius = (radius: number) => {
+    this.radius = radius;
   };
 
   setFillStyle = (fillStyle: string) => {

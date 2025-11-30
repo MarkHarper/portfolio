@@ -1,0 +1,52 @@
+import { useEffect, useRef } from 'react';
+import '~/elements/graph-canvas';
+
+import { useSize } from '~/services/contexts/size';
+import { useThemeName } from '~/services/contexts/theme';
+import { useViz } from '~/services/contexts/viz';
+
+const Visualization = () => {
+  const {
+    size: { width, height },
+  } = useSize();
+  const { themeName } = useThemeName();
+  const settings = useViz();
+  const ref = useRef();
+
+  useEffect(() => {
+    if (!ref.current || !settings?.nodes) return;
+
+    ref.current.nodes = settings?.nodes;
+  }, [settings?.nodes]);
+
+  if (!settings || !settings.nodes) return null;
+
+  const {
+    density,
+    lineColor,
+    maxVelocity,
+    edgeDistance,
+    springStrength,
+    isRunning,
+  } = settings;
+
+  return (
+    <>
+      <graph-canvas
+        ref={ref}
+        className='viz-home'
+        data-theme={themeName}
+        data-width={width}
+        data-height={height}
+        data-density={density}
+        data-line-color={lineColor}
+        data-max-velocity={maxVelocity}
+        data-edge-distance={edgeDistance}
+        data-spring-strength={springStrength}
+        data-play={isRunning}
+      ></graph-canvas>
+    </>
+  );
+};
+
+export default Visualization;

@@ -5,101 +5,156 @@ import { checkCollision, handleCollision } from '../canvas/physics/collision';
 import { clamp } from '../canvas/physics/clamp';
 import { distanceSquared } from '../canvas/physics/distance';
 import { spring } from '../canvas/physics/spring';
-import { Renderer } from '../canvas/runner';
+import { setDimensions as setCanvasDimensions } from '../canvas/dimensions';
 import { renderLine } from '../canvas/shapes/line';
-import {
-  DEFAULT_MIN_DISTANCE_SQUARED,
-  LARGE_MASS,
-  LARGE_RADIUS,
-  SMALL_MASS,
-  SMALL_RADIUS,
-} from './constants';
 import { Particle } from './particle';
 
-const DENSITY = 0.00015;
-
-const PARTICLE_OPTIONS = {
-  A: {
-    color: '--color-item-A',
-    mass: LARGE_MASS,
-    radius: LARGE_RADIUS,
-    speedA: 2,
-    speedB: 1,
-  },
-  B: {
-    color: '--color-item-B',
-    mass: SMALL_MASS,
-    radius: SMALL_RADIUS,
-    speedA: 4,
-    speedB: 2,
-  },
-  C: {
-    color: '--color-item-C',
-    mass: LARGE_MASS,
-    radius: LARGE_RADIUS,
-    speedA: 2,
-    speedB: 1,
-  },
-  D: {
-    color: '--color-item-D',
-    mass: SMALL_MASS,
-    radius: SMALL_RADIUS,
-    speedA: 4,
-    speedB: 2,
-  },
+type Renderer = {
+  draw: (a: CanvasRenderingContext2D) => void;
+  render: (a: CanvasRenderingContext2D) => void;
 };
-const PARTICLE_OPTION_TYPES = ['A', 'B', 'D'];
 
 export interface Field extends Renderer {
+  ctx: CanvasRenderingContext2D;
+  canvas: HTMLCanvasElement;
   width: number;
   height: number;
   themeName: ThemeName;
   themeConfig: ThemeConfig;
+  settings: any;
   themeMainRGB: RGB;
   contents: Particle[];
-  resetParticles(): void;
+  createParticles(): void;
+  updateParticles(): void;
   setWidth(a: number): void;
   setHeight(a: number): void;
   setDimensions(a: number, b: number): void;
   setTheme(a: [ThemeName, ThemeConfig]): void;
-  draw(a: CanvasRenderingContext2D): void;
-  render(a: CanvasRenderingContext2D): void;
+  draw(): void;
+  render(): void;
 }
 
 export class Field implements Field {
-  constructor(width: number, height: number, theme: [ThemeName, ThemeConfig]) {
+  constructor(
+    width: number,
+    height: number,
+    theme: [ThemeName, ThemeConfig],
+    settings: any,
+    canvas: HTMLCanvasElement,
+  ) {
     const [themeName, themeConfig] = theme;
+
     this.width = width;
     this.height = height;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig['--color-item-C']);
 
-    this.resetParticles();
+    this.settings = settings;
+    this.themeMainRGB = hexToRGB(settings.lineColor);
+
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+
+    setCanvasDimensions(canvas, this.ctx, width, height);
+    this.createParticles();
   }
 
-  resetParticles() {
+  updateSettings(updates) {
+    this.settings = {
+      ...this.settings,
+      ...updates,
+    };
+
+    if (updates.lineColor) {
+      this.themeMainRGB = hexToRGB(updates.lineColor);
+    }
+  }
+
+  createParticles() {
+    const { density, nodes } = this.settings;
+
     const area = this.width * this.height;
-    const particleCount = Math.floor(area * DENSITY);
+    const particleCount = Math.floor(area * density);
+    const values = nodes?.values();
+    const nodeOptionsArr = values ? Array.from(values) : [];
+    const optionsCount = nodeOptionsArr.length;
+
+    if (!nodes) {
+      this.contents = [];
+      return;
+    }
 
     this.contents = Array(particleCount)
       .fill(null)
-      .map((_, i) => {
-        const optionIndex = (Math.random() * PARTICLE_OPTION_TYPES.length) | 0;
-        const optionType = PARTICLE_OPTION_TYPES[optionIndex];
-        const option = PARTICLE_OPTIONS[optionType];
+      .map(() => {
+        const optionIndex = Math.floor(Math.random() * optionsCount);
+        const option = nodeOptionsArr[optionIndex];
+        const vxRand = Math.random();
+        const vxMag = vxRand * option.speed;
+        const vyRand = Math.random();
+        const vyMag = vyRand * option.speed;
 
         return new Particle({
-          tag: optionType,
+          tag: option.id,
           radius: option.radius,
           mass: option.mass,
-          fillStyle: this.themeConfig[option.color],
+          fillStyle: option.color,
           x: Math.random() * this.width,
           y: Math.random() * this.height,
-          vx: Math.random() * option.speedA - option.speedB,
-          vy: Math.random() * option.speedA - option.speedB,
+          vx: vxRand > 0.5 ? vxMag : -vxMag,
+          vy: vyRand > 0.5 ? vyMag : -vyMag,
         });
       });
+  }
+
+  updateParticles() {
+    const { density, nodes } = this.settings;
+
+    const area = this.width * this.height;
+    const newParticleCount = Math.floor(area * density);
+    const newContents = [];
+    const values = nodes?.values();
+    const nodeOptionsArr = values ? Array.from(values) : [];
+    const optionsCount = nodeOptionsArr.length;
+
+    if (optionsCount) {
+      for (let i = 0; i < newParticleCount; i++) {
+        const existingParticle = this.contents[i];
+        const option = nodes.get(existingParticle?.tag);
+
+        if (existingParticle && option) {
+          existingParticle.setMass(option.mass);
+          existingParticle.setRadius(option.radius);
+          existingParticle.setFillStyle(option.color);
+
+          newContents.push(existingParticle);
+        } else if (existingParticle && !option) {
+          continue;
+        } else {
+          const optionIndex = (Math.random() * optionsCount) | 0;
+          const option = nodeOptionsArr[optionIndex];
+          const vxRand = Math.random();
+          const vxMag = vxRand * option.speed;
+          const vyRand = Math.random();
+          const vyMag = vyRand * option.speed;
+
+          const newParticle = new Particle({
+            tag: option.id,
+            radius: option.radius,
+            mass: option.mass,
+            fillStyle: option.color,
+            x: Math.random() * this.width,
+            y: Math.random() * this.height,
+            vx: vxRand > 0.5 ? vxMag : -vxMag,
+            vy: vyRand > 0.5 ? vyMag : -vyMag,
+          });
+
+          newContents.push(newParticle);
+        }
+      }
+    }
+
+    this.contents = newContents;
   }
 
   setWidth(width: number) {
@@ -113,24 +168,29 @@ export class Field implements Field {
   setDimensions(width: number, height: number) {
     this.setWidth(width);
     this.setHeight(height);
+
+    setCanvasDimensions(this.canvas, this.ctx, width, height);
   }
 
   setTheme(theme: [ThemeName, ThemeConfig]) {
     const [themeName, themeConfig] = theme;
     this.themeName = themeName;
     this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(themeConfig['--color-item-C']);
+    this.themeMainRGB = hexToRGB(this.settings.lineColor);
+    const { nodes } = this.settings;
 
     this.contents.forEach((particle) => {
-      const nextFillStyle = themeConfig[PARTICLE_OPTIONS[particle.tag].color];
+      const nextFillStyle = nodes.get(particle.tag).color;
 
       particle.setFillStyle(nextFillStyle);
     });
   }
 
-  draw = (ctx: CanvasRenderingContext2D): void => {
-    const { width, height } = this;
+  draw = (): void => {
+    const { width, height, ctx } = this;
     const { r, g, b } = this.themeMainRGB;
+    const { edgeDistance } = this.settings;
+
     clear(ctx, width, height);
 
     this.contents.forEach((p1, ind1) => {
@@ -138,8 +198,8 @@ export class Field implements Field {
         if (ind1 === ind2) return;
 
         const { directSquared } = distanceSquared(p1, p2);
-        if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
-          const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
+        if (directSquared < edgeDistance) {
+          const alpha = alphaRGB(directSquared / edgeDistance);
           renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
         }
       });
@@ -150,9 +210,11 @@ export class Field implements Field {
     });
   };
 
-  render = (ctx: CanvasRenderingContext2D): void => {
-    const { width, height } = this;
+  render = (): void => {
+    const { width, height, ctx } = this;
     const { r, g, b } = this.themeMainRGB;
+    const { springStrength, edgeDistance, maxVelocity } = this.settings;
+
     clear(ctx, width, height);
 
     this.contents.forEach((p1, ind1) => {
@@ -161,18 +223,30 @@ export class Field implements Field {
 
         const { dx, dy, directSquared } = distanceSquared(p1, p2);
         if (checkCollision(p1, p2, directSquared)) {
-          const { p1: nextP1, p2: nextP2 } = handleCollision(p1, p2, dx, dy);
+          const { p1: nextP1, p2: nextP2 } = handleCollision(
+            p1,
+            p2,
+            dx,
+            dy,
+            maxVelocity,
+          );
 
           p1.setPosition(nextP1.x, nextP1.y);
           p1.setVelocity(nextP1.vx, nextP1.vy);
 
           p2.setPosition(nextP2.x, nextP2.y);
           p2.setVelocity(nextP2.vx, nextP2.vy);
-        } else if (directSquared < DEFAULT_MIN_DISTANCE_SQUARED) {
-          const alpha = alphaRGB(directSquared / DEFAULT_MIN_DISTANCE_SQUARED);
+        } else if (directSquared < edgeDistance) {
+          const alpha = alphaRGB(directSquared / edgeDistance);
           renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
 
-          const { p1: nextP1, p2: nextP2 } = spring(p1, p2, dx, dy);
+          const { p1: nextP1, p2: nextP2 } = spring(
+            p1,
+            p2,
+            dx,
+            dy,
+            springStrength,
+          );
           p1.setVelocity(nextP1.vx, nextP1.vy);
           p2.setVelocity(nextP2.vx, nextP2.vy);
         }

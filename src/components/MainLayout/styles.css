@@ -1,0 +1,24 @@
+main {
+  background-color: var(--wa-color-surface-default);
+  border-radius: 3px;
+  position: relative;
+  box-shadow: var(--wa-shadow-m);
+  display: flex;
+  justify-content: center;
+}
+
+article {
+  width: 60ch;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 15px;
+  margin-bottom: 0.5rem !important;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+}

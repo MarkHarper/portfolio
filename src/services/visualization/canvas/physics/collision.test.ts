@@ -37,11 +37,13 @@ const expectedA = {
   },
 };
 
+const MAX_VELOCITY = 10;
+
 describe('Collision Detection', () => {
   test('calculates the result of a collision', () => {
     const { p1, p2 } = testDataA;
     const { dx, dy } = dimensionDistance(p1, p2);
-    const res = handleCollision(p1, p2, dx, dy);
+    const res = handleCollision(p1, p2, dx, dy, MAX_VELOCITY);
 
     expect(res).toStrictEqual(expectedA);
   });

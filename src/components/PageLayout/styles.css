@@ -1,0 +1,34 @@
+.viz-home {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: var(--wa-color-surface-default);
+  line-height: 0;
+}
+
+header {
+  border-radius: 3px;
+}
+
+wa-page {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
+wa-page::part(header) {
+  justify-self: center;
+  left: 25%;
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+wa-page::part(base) {
+  padding: var(--wa-space-l) 0 0;
+}
+
+wa-page::part(main-content) {
+  justify-self: center;
+  min-width: 50%;
+  padding-bottom: 2rem;
+}

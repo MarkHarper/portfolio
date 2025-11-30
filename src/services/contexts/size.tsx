@@ -22,12 +22,13 @@ const SizingContext = createContext<SizingContextValue>({
     height: null,
     width: null,
   },
-  setSize: () => {}, // eslint-disable-line
+  setSize: () => {},
 });
 
 type Props = {
   children: ReactNode;
 };
+
 export const SizingContextProvider: FC<Props> = ({ children }) => {
   const [size, setSize] = useState<SizingState>({
     width: window.innerWidth,
@@ -39,12 +40,18 @@ export const SizingContextProvider: FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
+    let observer;
+    window.addEventListener('load', () => {
+      observer = new ResizeObserver(([entry]) => {
+        setSize({
+          width: entry.contentRect.width,
+          height: entry.contentRect.height,
+        });
       });
+      observer.observe(document.documentElement);
     });
+
+    return () => observer && observer.disconnect();
   }, []);
 
   return (

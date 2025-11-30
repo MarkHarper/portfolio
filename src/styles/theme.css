@@ -3,7 +3,7 @@
 
 :root {
   /* ==== BASE COLOR DEFINITIONS (05-95) ==== */
-
+  
   /* Red - Temple Crimson to Neon Magenta */
   --wa-color-red-05: #fef7f7;
   --wa-color-red-10: #fdf2f2;
@@ -201,23 +201,74 @@
   --wa-color-neutral-80: var(--wa-color-gray-80);
   --wa-color-neutral-90: var(--wa-color-gray-90);
   --wa-color-neutral-95: var(--wa-color-gray-95);
+
+  /* Particle Colors - Warm Energy Effects */
+  
+  /* Particle Gold - Yellow (Temple Gold/Neon Amber) */
+  --wa-color-particle-gold-05: var(--wa-color-yellow-05);
+  --wa-color-particle-gold-10: var(--wa-color-yellow-10);
+  --wa-color-particle-gold-20: var(--wa-color-yellow-20);
+  --wa-color-particle-gold-30: var(--wa-color-yellow-30);
+  --wa-color-particle-gold-40: var(--wa-color-yellow-40);
+  --wa-color-particle-gold-50: var(--wa-color-yellow-50);
+  --wa-color-particle-gold-60: var(--wa-color-yellow-60);
+  --wa-color-particle-gold-70: var(--wa-color-yellow-70);
+  --wa-color-particle-gold-80: var(--wa-color-yellow-80);
+  --wa-color-particle-gold-90: var(--wa-color-yellow-90);
+  --wa-color-particle-gold-95: var(--wa-color-yellow-95);
+
+  /* Particle Crimson - Red (Sacred Crimson/Hot Pink) */
+  --wa-color-particle-crimson-05: var(--wa-color-red-05);
+  --wa-color-particle-crimson-10: var(--wa-color-red-10);
+  --wa-color-particle-crimson-20: var(--wa-color-red-20);
+  --wa-color-particle-crimson-30: var(--wa-color-red-30);
+  --wa-color-particle-crimson-40: var(--wa-color-red-40);
+  --wa-color-particle-crimson-50: var(--wa-color-red-50);
+  --wa-color-particle-crimson-60: var(--wa-color-red-60);
+  --wa-color-particle-crimson-70: var(--wa-color-red-70);
+  --wa-color-particle-crimson-80: var(--wa-color-red-80);
+  --wa-color-particle-crimson-90: var(--wa-color-red-90);
+  --wa-color-particle-crimson-95: var(--wa-color-red-95);
+
+  /* Particle Bronze - Orange (Bronze Fire/Cyber Orange) */
+  --wa-color-particle-bronze-05: var(--wa-color-orange-05);
+  --wa-color-particle-bronze-10: var(--wa-color-orange-10);
+  --wa-color-particle-bronze-20: var(--wa-color-orange-20);
+  --wa-color-particle-bronze-30: var(--wa-color-orange-30);
+  --wa-color-particle-bronze-40: var(--wa-color-orange-40);
+  --wa-color-particle-bronze-50: var(--wa-color-orange-50);
+  --wa-color-particle-bronze-60: var(--wa-color-orange-60);
+  --wa-color-particle-bronze-70: var(--wa-color-orange-70);
+  --wa-color-particle-bronze-80: var(--wa-color-orange-80);
+  --wa-color-particle-bronze-90: var(--wa-color-orange-90);
+  --wa-color-particle-bronze-95: var(--wa-color-orange-95);
+
+  /* Particle Jade - Green (Jade Glow/Electric Jade) */
+  --wa-color-particle-jade-05: var(--wa-color-green-05);
+  --wa-color-particle-jade-10: var(--wa-color-green-10);
+  --wa-color-particle-jade-20: var(--wa-color-green-20);
+  --wa-color-particle-jade-30: var(--wa-color-green-30);
+  --wa-color-particle-jade-40: var(--wa-color-green-40);
+  --wa-color-particle-jade-50: var(--wa-color-green-50);
+  --wa-color-particle-jade-60: var(--wa-color-green-60);
+  --wa-color-particle-jade-70: var(--wa-color-green-70);
+  --wa-color-particle-jade-80: var(--wa-color-green-80);
+  --wa-color-particle-jade-90: var(--wa-color-green-90);
+  --wa-color-particle-jade-95: var(--wa-color-green-95);
 }
 
-/* ==== LIGHT THEME VARIABLES ==== */
-/* Nine Sols Temple Aesthetic - using variant variables */
 @layer wa-theme {
-  :where(:root),
-  .wa-theme-default,
-  .wa-light,
-  .wa-dark .wa-invert,
-  .wa-light .wa-theme-default,
-  .wa-dark .wa-theme-default.wa-invert,
-  .wa-dark .wa-theme-default .wa-invert {
-    /* Surface & Layout Colors */
-    --wa-color-surface-raised: var(--wa-color-neutral-05);
-    --wa-color-surface-default: var(--wa-color-neutral-10);
-    --wa-color-surface-lowered: var(--wa-color-neutral-20);
-    --wa-color-surface-border: var(--wa-color-neutral-30);
+  /* ==== LIGHT THEME VARIABLES ==== */
+  /* Nine Sols Temple Aesthetic - using variant variables */
+  .wa-theme-taopunk,
+  .wa-theme-taopunk.wa-theme-default,
+  .wa-taopunk-light,
+  .wa-taopunk-dark .wa-invert {
+    /* Surface & Layout Colors - Jade Garden Temple */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-green-10) 50%, var(--wa-color-cyan-05) 50%); /* Soft jade mist */
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-green-20) 60%, var(--wa-color-cyan-10) 40%); /* Jade garden */
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-green-30) 70%, var(--wa-color-cyan-20) 30%); /* Deep moss */
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-green-40) 60%, var(--wa-color-cyan-30) 40%); /* Jade stone border */
 
     /* Text Colors */
     --wa-color-text-normal: var(--wa-color-neutral-90);
@@ -225,23 +276,11 @@
     --wa-color-text-link: var(--wa-color-brand-60);
 
     /* Overlay Colors */
-    --wa-color-overlay-modal: color-mix(
-      in oklab,
-      var(--wa-color-neutral-95) 50%,
-      transparent
-    );
-    --wa-color-overlay-inline: color-mix(
-      in oklab,
-      var(--wa-color-neutral-70) 25%,
-      transparent
-    );
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-neutral-95) 50%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-neutral-70) 25%, transparent);
 
     /* Utility Colors */
-    --wa-color-shadow: color-mix(
-      in oklab,
-      var(--wa-color-neutral-95) 15%,
-      transparent
-    );
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-neutral-95) 15%, transparent);
     --wa-color-focus: var(--wa-color-brand-50);
     --wa-color-mix-hover: var(--wa-color-brand-60) 10%;
     --wa-color-mix-active: var(--wa-color-brand-60) 20%;
@@ -301,11 +340,11 @@
     --wa-color-neutral-on-normal: var(--wa-color-neutral-70);
     --wa-color-neutral-on-loud: var(--wa-color-neutral-05);
 
-    /* Unique Item Colors width */
-    --color-item-A: var(--wa-color-brand-60);
-    --color-item-B: var(--wa-color-success-60);
-    --color-item-C: var(--wa-color-warning-60);
-    --color-item-D: var(--wa-color-danger-60);
+    /* Particle Color Variants - Light Theme (Temple Energy) */
+    --color-item-A: var(--wa-color-particle-gold-60);
+    --color-item-B: var(--wa-color-particle-crimson-60);
+    --color-item-C: var(--wa-color-particle-bronze-70);
+    --color-item-D: var(--wa-color-particle-jade-60);
   }
 
   /* ==== DARK THEME VARIABLES ==== */
@@ -327,23 +366,11 @@
     --wa-color-text-link: var(--wa-color-brand-30);
 
     /* Overlay Colors */
-    --wa-color-overlay-modal: color-mix(
-      in oklab,
-      var(--wa-color-neutral-95) 80%,
-      transparent
-    );
-    --wa-color-overlay-inline: color-mix(
-      in oklab,
-      var(--wa-color-neutral-80) 40%,
-      transparent
-    );
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-neutral-95) 80%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-neutral-80) 40%, transparent);
 
     /* Utility Colors */
-    --wa-color-shadow: color-mix(
-      in oklab,
-      var(--wa-color-neutral-95) 60%,
-      transparent
-    );
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-neutral-95) 60%, transparent);
     --wa-color-focus: var(--wa-color-brand-40);
     --wa-color-mix-hover: var(--wa-color-brand-40) 8%;
     --wa-color-mix-active: var(--wa-color-brand-40) 16%;
@@ -403,66 +430,38 @@
     --wa-color-neutral-on-normal: var(--wa-color-neutral-30);
     --wa-color-neutral-on-loud: var(--wa-color-neutral-95);
 
-    /* Unique Item Colors width */
-    --color-item-A: var(--wa-color-brand-40);
-    --color-item-B: var(--wa-color-success-40);
-    --color-item-C: var(--wa-color-warning-40);
-    --color-item-D: var(--wa-color-danger-40);
+    /* Particle Color Variants - Dark Theme (Cyber Energy) */
+    --color-item-A: var(--wa-color-particle-gold-40);
+    --color-item-B: var(--wa-color-particle-crimson-40);
+    --color-item-C: var(--wa-color-particle-bronze-40);
+    --color-item-D: var(--wa-color-particle-jade-40);
   }
 
   /* ==== UNIVERSAL DESIGN SYSTEM VARIABLES ==== */
   /* Nine Sols Taopunk Aesthetic - Typography, Spacing, Shadows, etc. */
-  :where(:root),
-  .wa-theme-default,
-  .wa-light,
-  .wa-dark,
-  .wa-invert {
+  .wa-theme-taopunk,
+  .wa-theme-taopunk.wa-theme-default,
+  .wa-taopunk-light,
+  .wa-taopunk-dark {
     font-family: var(--wa-font-family-body);
 
     /* #region Fonts - Taopunk Typography ~~~~~~ */
-    --wa-font-family-body:
-      'Inter', 'Noto Sans CJK', ui-sans-serif, system-ui, sans-serif;
+    --wa-font-family-body: 'Inter', 'Noto Sans CJK', ui-sans-serif, system-ui, sans-serif;
     --wa-font-family-heading: 'Inter Display', var(--wa-font-family-body);
-    --wa-font-family-code:
-      'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    --wa-font-family-longform:
-      'Source Serif Pro', 'Noto Serif CJK', ui-serif, serif;
+    --wa-font-family-code: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    --wa-font-family-longform: 'Source Serif Pro', 'Noto Serif CJK', ui-serif, serif;
 
     /* Font sizes with 1.125 ratio - optimized for both temple and cyber aesthetics */
     --wa-font-size-scale: 1;
-    --wa-font-size-2xs: round(
-      calc(var(--wa-font-size-xs) / 1.125),
-      1px
-    ); /* 11px */
-    --wa-font-size-xs: round(
-      calc(var(--wa-font-size-s) / 1.125),
-      1px
-    ); /* 12px */
-    --wa-font-size-s: round(
-      calc(var(--wa-font-size-m) / 1.125),
-      1px
-    ); /* 14px */
+    --wa-font-size-2xs: round(calc(var(--wa-font-size-xs) / 1.125), 1px); /* 11px */
+    --wa-font-size-xs: round(calc(var(--wa-font-size-s) / 1.125), 1px); /* 12px */
+    --wa-font-size-s: round(calc(var(--wa-font-size-m) / 1.125), 1px); /* 14px */
     --wa-font-size-m: calc(1rem * var(--wa-font-size-scale)); /* 16px */
-    --wa-font-size-l: round(
-      calc(var(--wa-font-size-m) * 1.125 * 1.125),
-      1px
-    ); /* 20px */
-    --wa-font-size-xl: round(
-      calc(var(--wa-font-size-l) * 1.125 * 1.125),
-      1px
-    ); /* 25px */
-    --wa-font-size-2xl: round(
-      calc(var(--wa-font-size-xl) * 1.125 * 1.125),
-      1px
-    ); /* 32px */
-    --wa-font-size-3xl: round(
-      calc(var(--wa-font-size-2xl) * 1.125 * 1.125),
-      1px
-    ); /* 41px */
-    --wa-font-size-4xl: round(
-      calc(var(--wa-font-size-3xl) * 1.125 * 1.125),
-      1px
-    ); /* 52px */
+    --wa-font-size-l: round(calc(var(--wa-font-size-m) * 1.125 * 1.125), 1px); /* 20px */
+    --wa-font-size-xl: round(calc(var(--wa-font-size-l) * 1.125 * 1.125), 1px); /* 25px */
+    --wa-font-size-2xl: round(calc(var(--wa-font-size-xl) * 1.125 * 1.125), 1px); /* 32px */
+    --wa-font-size-3xl: round(calc(var(--wa-font-size-2xl) * 1.125 * 1.125), 1px); /* 41px */
+    --wa-font-size-4xl: round(calc(var(--wa-font-size-3xl) * 1.125 * 1.125), 1px); /* 52px */
 
     --wa-font-size-smaller: round(calc(1em / 1.125), 1px);
     --wa-font-size-larger: round(calc(1em * 1.125 * 1.125), 1px);
@@ -489,11 +488,9 @@
     --wa-line-height-loose: 2.2;
 
     /* Link decorations with Nine Sols styling */
-    --wa-link-decoration-default: underline
-      color-mix(in oklab, currentColor 60%, transparent) dotted;
+    --wa-link-decoration-default: underline color-mix(in oklab, currentColor 60%, transparent) dotted;
     --wa-link-decoration-hover: underline solid;
-    --wa-link-decoration-cyber: underline
-      color-mix(in oklab, var(--wa-color-brand-40) 80%, transparent) solid;
+    --wa-link-decoration-cyber: underline color-mix(in oklab, var(--wa-color-brand-40) 80%, transparent) solid;
     /* #endregion */
 
     /* #region Space - Harmonic Proportions ~~~~ */
@@ -520,43 +517,21 @@
     --wa-border-style-dotted: dotted;
 
     --wa-border-width-scale: 1;
-    --wa-border-width-xs: calc(
-      var(--wa-border-width-scale) * 0.03125rem
-    ); /* 0.5px */
-    --wa-border-width-s: calc(
-      var(--wa-border-width-scale) * 0.0625rem
-    ); /* 1px */
-    --wa-border-width-m: calc(
-      var(--wa-border-width-scale) * 0.125rem
-    ); /* 2px */
-    --wa-border-width-l: calc(
-      var(--wa-border-width-scale) * 0.1875rem
-    ); /* 3px */
-    --wa-border-width-xl: calc(
-      var(--wa-border-width-scale) * 0.25rem
-    ); /* 4px */
+    --wa-border-width-xs: calc(var(--wa-border-width-scale) * 0.03125rem); /* 0.5px */
+    --wa-border-width-s: calc(var(--wa-border-width-scale) * 0.0625rem); /* 1px */
+    --wa-border-width-m: calc(var(--wa-border-width-scale) * 0.125rem); /* 2px */
+    --wa-border-width-l: calc(var(--wa-border-width-scale) * 0.1875rem); /* 3px */
+    --wa-border-width-xl: calc(var(--wa-border-width-scale) * 0.25rem); /* 4px */
     /* #endregion */
 
     /* #region Rounding - Organic to Geometric ~~ */
     --wa-border-radius-scale: 1;
-    --wa-border-radius-xs: calc(
-      var(--wa-border-radius-scale) * 0.125rem
-    ); /* 2px */
-    --wa-border-radius-s: calc(
-      var(--wa-border-radius-scale) * 0.25rem
-    ); /* 4px */
-    --wa-border-radius-m: calc(
-      var(--wa-border-radius-scale) * 0.5rem
-    ); /* 8px */
-    --wa-border-radius-l: calc(
-      var(--wa-border-radius-scale) * 0.75rem
-    ); /* 12px */
-    --wa-border-radius-xl: calc(
-      var(--wa-border-radius-scale) * 1rem
-    ); /* 16px */
-    --wa-border-radius-2xl: calc(
-      var(--wa-border-radius-scale) * 1.5rem
-    ); /* 24px */
+    --wa-border-radius-xs: calc(var(--wa-border-radius-scale) * 0.125rem); /* 2px */
+    --wa-border-radius-s: calc(var(--wa-border-radius-scale) * 0.25rem); /* 4px */
+    --wa-border-radius-m: calc(var(--wa-border-radius-scale) * 0.5rem); /* 8px */
+    --wa-border-radius-l: calc(var(--wa-border-radius-scale) * 0.75rem); /* 12px */
+    --wa-border-radius-xl: calc(var(--wa-border-radius-scale) * 1rem); /* 16px */
+    --wa-border-radius-2xl: calc(var(--wa-border-radius-scale) * 1.5rem); /* 24px */
 
     --wa-border-radius-pill: 9999px;
     --wa-border-radius-circle: 50%;
@@ -567,18 +542,14 @@
     --wa-focus-ring-style: solid;
     --wa-focus-ring-width: 0.125rem; /* 2px - subtle but visible */
     --wa-focus-ring-width-bold: 0.1875rem; /* 3px - for emphasis */
-    --wa-focus-ring: var(--wa-focus-ring-style) var(--wa-focus-ring-width)
-      var(--wa-color-focus);
-    --wa-focus-ring-bold: var(--wa-focus-ring-style)
-      var(--wa-focus-ring-width-bold) var(--wa-color-focus);
+    --wa-focus-ring: var(--wa-focus-ring-style) var(--wa-focus-ring-width) var(--wa-color-focus);
+    --wa-focus-ring-bold: var(--wa-focus-ring-style) var(--wa-focus-ring-width-bold) var(--wa-color-focus);
     --wa-focus-ring-offset: 0.0625rem; /* 1px */
     --wa-focus-ring-offset-large: 0.125rem; /* 2px */
-
+    
     /* Cyber glow effect */
-    --wa-focus-glow:
-      0 0 0 var(--wa-focus-ring-width)
-        color-mix(in oklab, var(--wa-color-focus) 40%, transparent),
-      0 0 0.5rem color-mix(in oklab, var(--wa-color-focus) 25%, transparent);
+    --wa-focus-glow: 0 0 0 var(--wa-focus-ring-width) color-mix(in oklab, var(--wa-color-focus) 40%, transparent),
+                     0 0 0.5rem color-mix(in oklab, var(--wa-color-focus) 25%, transparent);
     /* #endregion */
 
     /* #region Shadows - Temple Stone to Neon Glow */
@@ -588,18 +559,10 @@
     --wa-shadow-offset-x-l: calc(var(--wa-shadow-offset-x-scale) * 0.25rem);
 
     --wa-shadow-offset-y-scale: 1;
-    --wa-shadow-offset-y-s: calc(
-      var(--wa-shadow-offset-y-scale) * 0.0625rem
-    ); /* 1px */
-    --wa-shadow-offset-y-m: calc(
-      var(--wa-shadow-offset-y-scale) * 0.125rem
-    ); /* 2px */
-    --wa-shadow-offset-y-l: calc(
-      var(--wa-shadow-offset-y-scale) * 0.25rem
-    ); /* 4px */
-    --wa-shadow-offset-y-xl: calc(
-      var(--wa-shadow-offset-y-scale) * 0.5rem
-    ); /* 8px */
+    --wa-shadow-offset-y-s: calc(var(--wa-shadow-offset-y-scale) * 0.0625rem); /* 1px */
+    --wa-shadow-offset-y-m: calc(var(--wa-shadow-offset-y-scale) * 0.125rem); /* 2px */
+    --wa-shadow-offset-y-l: calc(var(--wa-shadow-offset-y-scale) * 0.25rem); /* 4px */
+    --wa-shadow-offset-y-xl: calc(var(--wa-shadow-offset-y-scale) * 0.5rem); /* 8px */
 
     --wa-shadow-blur-scale: 1;
     --wa-shadow-blur-s: calc(var(--wa-shadow-blur-scale) * 0.125rem); /* 2px */
@@ -613,49 +576,30 @@
     --wa-shadow-spread-l: calc(var(--wa-shadow-spread-scale) * 0.5rem);
 
     /* Standard shadows */
-    --wa-shadow-s: var(--wa-shadow-offset-x-s) var(--wa-shadow-offset-y-s)
-      var(--wa-shadow-blur-s) var(--wa-shadow-spread-s) var(--wa-color-shadow);
-    --wa-shadow-m: var(--wa-shadow-offset-x-m) var(--wa-shadow-offset-y-m)
-      var(--wa-shadow-blur-m) var(--wa-shadow-spread-m) var(--wa-color-shadow);
-    --wa-shadow-l: var(--wa-shadow-offset-x-l) var(--wa-shadow-offset-y-l)
-      var(--wa-shadow-blur-l) var(--wa-shadow-spread-l) var(--wa-color-shadow);
+    --wa-shadow-s: var(--wa-shadow-offset-x-s) var(--wa-shadow-offset-y-s) var(--wa-shadow-blur-s)
+      var(--wa-shadow-spread-s) var(--wa-color-shadow);
+    --wa-shadow-m: var(--wa-shadow-offset-x-m) var(--wa-shadow-offset-y-m) var(--wa-shadow-blur-m)
+      var(--wa-shadow-spread-m) var(--wa-color-shadow);
+    --wa-shadow-l: var(--wa-shadow-offset-x-l) var(--wa-shadow-offset-y-l) var(--wa-shadow-blur-l)
+      var(--wa-shadow-spread-l) var(--wa-color-shadow);
 
     /* Temple shadows - soft and warm */
-    --wa-shadow-temple-s: 0 var(--wa-shadow-offset-y-s) var(--wa-shadow-blur-m)
+    --wa-shadow-temple-s: 0 var(--wa-shadow-offset-y-s) var(--wa-shadow-blur-m) 
       color-mix(in oklab, var(--wa-color-orange-30) 20%, transparent);
-    --wa-shadow-temple-m: 0 var(--wa-shadow-offset-y-m) var(--wa-shadow-blur-l)
+    --wa-shadow-temple-m: 0 var(--wa-shadow-offset-y-m) var(--wa-shadow-blur-l) 
       color-mix(in oklab, var(--wa-color-orange-40) 15%, transparent);
 
     /* Cyber glow shadows - neon effects */
-    --wa-shadow-cyber-brand: 0 0 var(--wa-shadow-blur-m)
-      color-mix(in oklab, var(--wa-color-brand-40) 50%, transparent);
-    --wa-shadow-cyber-success: 0 0 var(--wa-shadow-blur-m)
-      color-mix(in oklab, var(--wa-color-success-40) 40%, transparent);
-    --wa-shadow-cyber-warning: 0 0 var(--wa-shadow-blur-m)
-      color-mix(in oklab, var(--wa-color-warning-40) 45%, transparent);
-    --wa-shadow-cyber-danger: 0 0 var(--wa-shadow-blur-m)
-      color-mix(in oklab, var(--wa-color-danger-40) 40%, transparent);
+    --wa-shadow-cyber-brand: 0 0 var(--wa-shadow-blur-m) color-mix(in oklab, var(--wa-color-brand-40) 50%, transparent);
+    --wa-shadow-cyber-success: 0 0 var(--wa-shadow-blur-m) color-mix(in oklab, var(--wa-color-success-40) 40%, transparent);
+    --wa-shadow-cyber-warning: 0 0 var(--wa-shadow-blur-m) color-mix(in oklab, var(--wa-color-warning-40) 45%, transparent);
+    --wa-shadow-cyber-danger: 0 0 var(--wa-shadow-blur-m) color-mix(in oklab, var(--wa-color-danger-40) 40%, transparent);
     /* #endregion */
 
     /* #region Transitions - Smooth Temple to Snappy Cyber */
-    --wa-transition-easing: cubic-bezier(
-      0.25,
-      0.1,
-      0.25,
-      1
-    ); /* Smooth, natural */
-    --wa-transition-easing-sharp: cubic-bezier(
-      0.4,
-      0,
-      0.2,
-      1
-    ); /* Sharp, cyber */
-    --wa-transition-easing-bounce: cubic-bezier(
-      0.68,
-      -0.55,
-      0.265,
-      1.55
-    ); /* Playful */
+    --wa-transition-easing: cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth, natural */
+    --wa-transition-easing-sharp: cubic-bezier(0.4, 0, 0.2, 1); /* Sharp, cyber */
+    --wa-transition-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Playful */
 
     --wa-transition-instant: 0ms;
     --wa-transition-fast: 100ms;
@@ -664,12 +608,9 @@
     --wa-transition-slower: 500ms;
 
     /* Contextual transitions */
-    --wa-transition-temple: var(--wa-transition-slow)
-      var(--wa-transition-easing);
-    --wa-transition-cyber: var(--wa-transition-fast)
-      var(--wa-transition-easing-sharp);
-    --wa-transition-hover: var(--wa-transition-normal)
-      var(--wa-transition-easing);
+    --wa-transition-temple: var(--wa-transition-slow) var(--wa-transition-easing);
+    --wa-transition-cyber: var(--wa-transition-fast) var(--wa-transition-easing-sharp);
+    --wa-transition-hover: var(--wa-transition-normal) var(--wa-transition-easing);
     /* #endregion */
 
     /* #region Components - Nine Sols UI Elements */
@@ -704,10 +645,7 @@
     --wa-form-control-padding-block: 0.75em;
     --wa-form-control-padding-inline: 1em;
     --wa-form-control-height: round(
-      calc(
-        2 * var(--wa-form-control-padding-block) + 1em *
-          var(--wa-form-control-value-line-height)
-      ),
+      calc(2 * var(--wa-form-control-padding-block) + 1em * var(--wa-form-control-value-line-height)),
       1px
     );
     --wa-form-control-toggle-size: round(1.25em, 1px);
@@ -759,6 +697,26 @@
     --wa-divider-width: var(--wa-border-width-s);
     --wa-divider-color: var(--wa-color-neutral-border-quiet);
     --wa-divider-spacing: var(--wa-space-l);
+
+    /* Frosted Glass Effect - Maximum Readability */
+    --wa-glass-backdrop-blur: 12px;
+    --wa-glass-backdrop-saturate: 180%;
+    --wa-glass-background: color-mix(in oklab, var(--wa-color-surface-raised) 75%, transparent);
+    --wa-glass-border: var(--wa-border-width-s) solid color-mix(in oklab, var(--wa-color-surface-border) 30%, transparent);
+    --wa-glass-shadow: 0 8px 32px color-mix(in oklab, var(--wa-color-shadow) 20%, transparent),
+                       0 2px 8px color-mix(in oklab, var(--wa-color-shadow) 10%, transparent);
     /* #endregion */
   }
+}
+
+/* ==== FROSTED GLASS UTILITY CLASS ==== */
+.wa-glass,
+.frosted-glass {
+  backdrop-filter: blur(var(--wa-glass-backdrop-blur)) saturate(var(--wa-glass-backdrop-saturate));
+  background-color: var(--wa-glass-background);
+  border: var(--wa-glass-border);
+  box-shadow: var(--wa-glass-shadow);
+  
+  /* Enhanced readability */
+  -webkit-backdrop-filter: blur(var(--wa-glass-backdrop-blur)) saturate(var(--wa-glass-backdrop-saturate));
 }

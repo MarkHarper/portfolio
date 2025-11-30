@@ -1,4 +1,4 @@
-const DEFAULT_MIN_DISTANCE = 80;
+const DEFAULT_MIN_DISTANCE = 100;
 export const DEFAULT_MIN_DISTANCE_SQUARED =
   DEFAULT_MIN_DISTANCE * DEFAULT_MIN_DISTANCE;
 
@@ -6,5 +6,5 @@ export const LARGE_RADIUS = 10;
 
 export const SMALL_RADIUS = 6;
 
-export const LARGE_MASS = 10;
-export const SMALL_MASS = 6;
+export const LARGE_MASS = 1;
+export const SMALL_MASS = 0.5;

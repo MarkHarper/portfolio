@@ -22,8 +22,7 @@ const { Provider } = themeNameContext;
 export const ThemeNameContextProvider = ({
   children,
 }: ThemeNameContextProviderProps) => {
-  const { themeName: defaultThemeName } = useContext(themeNameContext);
-  const [themeName, setThemeName] = useState<ThemeName>(defaultThemeName);
+  const [themeName, setThemeName] = useState<ThemeName>(getThemeName());
   const contextValue = {
     themeName,
     setThemeName,

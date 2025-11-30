@@ -1,10 +1,12 @@
 import React from 'react';
 import { LitElement, css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+
 import { getThemeConfig } from '~/services/theme';
 import type { ThemeConfig, ThemeName } from '~/services/theme/config';
-import { Runner } from '~/services/visualization/runner';
 import { Field } from '~/services/visualization/field';
+
+import { AnimationController } from './AnimationController';
 
 @customElement('graph-canvas')
 export class GraphCanvas extends LitElement {
@@ -16,6 +18,8 @@ export class GraphCanvas extends LitElement {
       background-color: var(--canvas);
     }
   `;
+
+  private animation = new AnimationController(this);
 
   @query('#graph-canvas')
   _canvas?: HTMLCanvasElement;
@@ -29,43 +33,64 @@ export class GraphCanvas extends LitElement {
   @property({ type: Number, attribute: 'data-height', reflect: true })
   height?: number = undefined;
 
-  @property()
-  isRunning: boolean = false;
+  @property({ type: Boolean, attribute: 'data-play', reflect: true })
+  play: boolean = false;
+
+  @property({ type: Number, attribute: 'data-density', reflect: true })
+  density?: number = undefined;
+
+  @property({ type: String, attribute: 'data-line-color', reflect: true })
+  lineColor?: string = undefined;
+
+  @property({ type: Number, attribute: 'data-max-velocity', reflect: true })
+  maxVelocity?: number = undefined;
+
+  @property({ type: Number, attribute: 'data-edge-distance', reflect: true })
+  edgeDistance?: number = undefined;
+
+  @property({ type: Number, attribute: 'data-spring-strength', reflect: true })
+  springStrength?: number = undefined;
+
+  @property({ type: Array, reflect: true })
+  nodes?: any[] = undefined;
 
   @state()
-  private _field?: Field = undefined;
+  private field?: Field = undefined;
 
-  @state()
-  private _runner?: Runner = undefined;
+  connectedCallback() {
+    super.connectedCallback();
 
-  _init() {
+    this.init();
+  }
+
+  private init() {
     const { width, height, theme } = this;
     const themeConfig = getThemeConfig();
+    const settings = {
+      density: this.density,
+      lineColor: this.lineColor,
+      edgeDistance: this.edgeDistance,
+      maxVelocity: this.maxVelocity,
+      springStrength: this.springStrength,
+      nodes: this.nodes,
+    };
 
     if (!width || !height || !theme || !themeConfig || !this._canvas) {
       return;
     }
 
     const themeTuple: [ThemeName, ThemeConfig] = [theme, themeConfig];
-    const field = new Field(width, height, themeTuple);
-    const runner = new Runner(this._canvas, field, width, height);
 
-    runner.start(width, height);
+    this.field = new Field(width, height, themeTuple, settings, this._canvas);
+    this.animation.setRender(this.field.render);
+    this.animation.start();
 
-    this._field = field;
-    this._runner = runner;
-    this.isRunning = true;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    this._init();
+    this.play = true;
   }
 
   updated(changedProperties) {
-    if (!this._runner) {
-      this._init();
+    if (!this.field) {
+      this.init();
     }
 
     if (changedProperties.has('height') || changedProperties.has('width')) {
@@ -73,28 +98,85 @@ export class GraphCanvas extends LitElement {
       const nextWidth = width ?? this.width;
       const nextHeight = height ?? this.height;
 
-      this._runner.stop();
-      this._field.setDimensions(nextWidth, nextHeight);
-      this._runner.setDimensions(nextWidth, nextHeight);
+      this.animation?.stop();
+      this.field?.setDimensions(nextWidth, nextHeight);
 
-      if (this.isRunning) {
-        this._runner.start(nextWidth, nextHeight);
+      if (!this.play) {
+        this.field?.draw();
       } else {
-        this._runner.draw();
+        this.animation.setRender(this.field?.render);
+        this.animation?.start();
       }
     }
 
     if (changedProperties.has('theme')) {
       const { theme } = changedProperties;
 
-      const themeConfig = getThemeConfig(theme);
-      this._field.setTheme([theme, themeConfig]);
-      this._runner.draw();
+      const themeConfig = getThemeConfig();
+
+      if (!themeConfig) return;
+
+      this.field?.setTheme([theme, themeConfig]);
+      this.field?.draw();
+    }
+
+    if (changedProperties.has('play') && this.play && !changedProperties.play) {
+      this.animation?.stop();
+    } else if (
+      changedProperties.has('play') &&
+      !this.play &&
+      changedProperties.play
+    ) {
+      const { width, height } = this;
+
+      this.animation?.stop();
+      this.field?.setDimensions(width, height);
+      this.animation.setRender(this.field?.render);
+      this.animation?.start();
+    }
+
+    if (
+      changedProperties.has('lineColor') ||
+      changedProperties.has('maxVelocity') ||
+      changedProperties.has('springStrength') ||
+      changedProperties.has('edgeDistance')
+    ) {
+      const settings = {
+        lineColor: this.lineColor,
+        edgeDistance: this.edgeDistance,
+        maxVelocity: this.maxVelocity,
+        springStrength: this.springStrength,
+      };
+
+      this.animation?.stop();
+      this.field?.updateSettings(settings);
+      this.animation.setRender(this.field?.render);
+      this.animation?.start();
+    } else if (changedProperties.has('density')) {
+      this.animation?.stop();
+      this.field?.updateSettings({
+        density: this.density,
+      });
+      this.field?.updateParticles();
+      this.animation.setRender(this.field?.render);
+      this.animation?.start();
+    } else if (changedProperties.has('nodes')) {
+      this.animation?.stop();
+      this.field?.updateSettings({
+        nodes: this.nodes,
+      });
+      this.field?.updateParticles();
+      this.animation.setRender(this.field?.render);
+      this.animation?.start();
     }
   }
 
   render() {
-    return html`<canvas id="graph-canvas" />`;
+    return html`<canvas
+      id="graph-canvas"
+      width="${this.width}"
+      height="${this.height}"
+    />`;
   }
 }
 

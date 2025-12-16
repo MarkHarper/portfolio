@@ -1,4 +1,3 @@
 @import 'reset.css';
-@import './primitive.css';
-@import './theme.css';
+@import './theme/index.css';
 @import './unique.css';

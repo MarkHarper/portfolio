@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import '@awesome.me/webawesome/dist/components/button/button.js';
 
 import { useViz, useVizDispatch } from '~/services/contexts/viz';
-import { getTokens } from '~/services/theme/html';
+import { getTokensFromCss } from '~/services/theme/html';
 import {
   LARGE_MASS,
   LARGE_RADIUS,
@@ -14,7 +14,7 @@ export const NodeList = () => {
   const context = useViz();
   const dispatch = useVizDispatch();
   const nodesArr = Array.from(context?.nodes?.values() || []);
-  const tokens = useMemo(() => getTokens(), []);
+  const tokens = useMemo(() => getTokensFromCss(), []);
 
   const addNodeType = useCallback(
     () =>

@@ -22,6 +22,7 @@
     "isolatedModules": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "exactOptionalPropertyTypes": true,
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,

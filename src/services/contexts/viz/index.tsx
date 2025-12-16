@@ -9,7 +9,7 @@ import {
 import { nanoid } from 'nanoid';
 
 import { Children } from '~/types/react';
-import { getTokens } from '../../theme/html';
+import { getTokensFromCss } from '../../theme/html';
 import {
   LARGE_MASS,
   LARGE_RADIUS,
@@ -18,6 +18,8 @@ import {
 } from '../../visualization/field/constants';
 import { vizReducer } from './reducer';
 import { ReverseMap } from '~/utils/ReverseMap';
+import { setThemeTokensInStorage } from '~/services/theme/storage';
+import { useTheme } from '../theme';
 
 type VizContext = {
   density: number;
@@ -51,15 +53,17 @@ const VizContext = createContext<VizContext | null>(null);
 const VizDispatchContext = createContext(null);
 
 export const VizContextProvider = ({ children }: VizContextProviderProps) => {
+  const { name, mode, tokens } = useTheme();
   const [vizSettings, dispatch] = useReducer(vizReducer, DEFAULT_VIZ_SETTINGS);
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const tokens = getTokens();
+    const tokens = getTokensFromCss();
 
     if (tokens) {
       const nodeOptionA = {
         id: nanoid(),
+        colorVar: '--color-item-A',
         color: tokens['--color-item-A'],
         mass: LARGE_MASS,
         radius: LARGE_RADIUS,
@@ -67,6 +71,7 @@ export const VizContextProvider = ({ children }: VizContextProviderProps) => {
       };
       const nodeOptionB = {
         id: nanoid(),
+        colorVar: '--color-item-B',
         color: tokens['--color-item-B'],
         mass: SMALL_MASS,
         radius: SMALL_RADIUS,
@@ -74,6 +79,7 @@ export const VizContextProvider = ({ children }: VizContextProviderProps) => {
       };
       const nodeOptionD = {
         id: nanoid(),
+        colorVar: '--color-item-D',
         color: tokens['--color-item-D'],
         mass: SMALL_MASS,
         radius: SMALL_RADIUS,
@@ -94,6 +100,21 @@ export const VizContextProvider = ({ children }: VizContextProviderProps) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (!vizSettings?.nodes) return;
+
+    setThemeTokensInStorage(name, mode, {
+      ...tokens,
+      ...Array.from(vizSettings.nodes).reduce(
+        (map, [_, node]) => ({
+          ...map,
+          [node.colorVar]: node.color,
+        }),
+        {},
+      ),
+    });
+  }, [vizSettings, name, mode, tokens]);
 
   const value = useMemo(
     () => ({

@@ -44,8 +44,8 @@ export const SizingContextProvider: FC<Props> = ({ children }) => {
     window.addEventListener('load', () => {
       observer = new ResizeObserver(([entry]) => {
         setSize({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
+          width: window.innerWidth,
+          height: window.innerHeight,
         });
       });
       observer.observe(document.documentElement);

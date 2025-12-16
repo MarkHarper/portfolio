@@ -4,6 +4,7 @@ import '~/elements/graph-canvas';
 
 import Header from './components/Header';
 import Visualization from './components/Visualization';
+import CanvasGradientIndicator from './components/CanvasGradientIndicator';
 import './styles.css';
 
 const PageLayout = () => (
@@ -14,6 +15,7 @@ const PageLayout = () => (
     </wa-page>
 
     <Visualization />
+    <CanvasGradientIndicator />
   </>
 );
 

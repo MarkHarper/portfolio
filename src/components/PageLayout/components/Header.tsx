@@ -8,6 +8,7 @@ import '@awesome.me/webawesome/dist/components/icon/icon.js';
 import { BLURB, TAG_LINE } from '~/services/content';
 
 import '~/elements/graph-canvas';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const popover = useRef<HTMLElement>(null);
@@ -20,7 +21,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header slot='header' className='wa-split wa-glass'>
+    <header slot='header' className='header wa-split wa-glass'>
       <div className='wa-split'>
         <div>
           <wa-popover for='name-button' placement='bottom-start' ref={popover}>
@@ -39,17 +40,18 @@ const Header = () => {
             <wa-button appearance='plain'>Work</wa-button>
           </Link>
         </div>
-        <div>
+        <div className='wa-align-items-center wa-gap-2xs'>
           <Link to='/themes'>
-            <wa-button appearance='plain'>
+            <wa-button appearance='plain' size='small' pill>
               <wa-icon name='palette'></wa-icon>
             </wa-button>
           </Link>
           <Link to='/settings'>
-            <wa-button appearance='plain'>
+            <wa-button appearance='plain' size='small' pill>
               <wa-icon name='gear'></wa-icon>
             </wa-button>
           </Link>
+          <ThemeToggle />
         </div>
       </div>
     </header>

@@ -2,8 +2,6 @@ import React from 'react';
 import { LitElement, css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 
-import { getThemeConfig } from '~/services/theme';
-import type { ThemeConfig, ThemeName } from '~/services/theme/config';
 import { Field } from '~/services/visualization/field';
 
 import { AnimationController } from './AnimationController';
@@ -23,9 +21,6 @@ export class GraphCanvas extends LitElement {
 
   @query('#graph-canvas')
   _canvas?: HTMLCanvasElement;
-
-  @property({ attribute: 'data-theme', reflect: true })
-  theme?: ThemeName = undefined;
 
   @property({ type: Number, attribute: 'data-width', reflect: true })
   width?: number = undefined;
@@ -64,8 +59,7 @@ export class GraphCanvas extends LitElement {
   }
 
   private init() {
-    const { width, height, theme } = this;
-    const themeConfig = getThemeConfig();
+    const { width, height } = this;
     const settings = {
       density: this.density,
       lineColor: this.lineColor,
@@ -75,13 +69,11 @@ export class GraphCanvas extends LitElement {
       nodes: this.nodes,
     };
 
-    if (!width || !height || !theme || !themeConfig || !this._canvas) {
+    if (!width || !height || !this._canvas) {
       return;
     }
 
-    const themeTuple: [ThemeName, ThemeConfig] = [theme, themeConfig];
-
-    this.field = new Field(width, height, themeTuple, settings, this._canvas);
+    this.field = new Field(width, height, settings, this._canvas);
     this.animation.setRender(this.field.render);
     this.animation.start();
 
@@ -107,17 +99,6 @@ export class GraphCanvas extends LitElement {
         this.animation.setRender(this.field?.render);
         this.animation?.start();
       }
-    }
-
-    if (changedProperties.has('theme')) {
-      const { theme } = changedProperties;
-
-      const themeConfig = getThemeConfig();
-
-      if (!themeConfig) return;
-
-      this.field?.setTheme([theme, themeConfig]);
-      this.field?.draw();
     }
 
     if (changedProperties.has('play') && this.play && !changedProperties.play) {

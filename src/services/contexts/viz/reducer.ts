@@ -46,11 +46,11 @@ export const vizReducer = produce((draft, action) => {
     }
 
     case 'nodeColor': {
-      const { id, nodeColor } = action;
+      const { id, color } = action;
       const nodeSetting = draft.nodes.get(id);
       draft.nodes.set(id, {
         ...nodeSetting,
-        nodeColor,
+        color,
       });
 
       break;

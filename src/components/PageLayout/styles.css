@@ -16,7 +16,8 @@ wa-page {
   background-color: transparent;
 }
 
-wa-page::part(header) {
+wa-page::part(header),
+.header {
   justify-self: center;
   left: 25%;
   width: 50%;

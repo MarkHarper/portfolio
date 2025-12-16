@@ -1,40 +1,26 @@
-export const ThemeNames = {
+export const THEME_MDOES = {
   DARK: 'dark',
   LIGHT: 'light',
 } as const;
 
-type ThemeNameKeys = keyof typeof ThemeNames;
-export type ThemeName = (typeof ThemeNames)[ThemeNameKeys];
+type TThemeModeKeys = keyof typeof THEME_MDOES;
+export type TThemeMode = (typeof THEME_MDOES)[TThemeModeKeys];
 
-export const isThemeName = (text: any): text is ThemeName => {
-  return text === ThemeNames.DARK || text === ThemeNames.LIGHT;
+export const isThemeMode = (text: any): text is TThemeMode => {
+  return text === THEME_MDOES.DARK || text === THEME_MDOES.LIGHT;
 };
 
-export type Color =
-  | '--white'
-  | '--black'
-  | '--grey'
-  | '--light-grey'
-  | '--light-green'
-  | '--green'
-  | '--dark-green'
-  | '--light-red'
-  | '--red'
-  | '--dark-red'
-  | '--light-alt-green'
-  | '--alt-green'
-  | '--dark-alt-green';
+export const STATIC_THEME_NAMES = {
+  taopunk: 'taopunk',
+} as const;
 
-export type FontFamily = '--official-font' | '--nav-font' | '--body-font';
+type TStaticThemeNameKeys = keyof typeof STATIC_THEME_NAMES;
+export type TStaticThemeName =
+  (typeof STATIC_THEME_NAMES)[TStaticThemeNameKeys];
 
-export type SemanticVars =
-  | '--accent-color'
-  | '--button-text'
-  | '--gray-text'
-  | '--canvas-item'
-  | '--canvas-item-alt';
+export const isStaticThemeName = (text: any): text is TStaticThemeName => {
+  return text in STATIC_THEME_NAMES;
+};
 
-export type CssVars = Color | FontFamily | SemanticVars;
-
-export type ThemeConfig = Record<CssVars, string>;
-export type ThemeConfigMap = Record<ThemeName, ThemeConfig>;
+export type TThemeConfig = Record<string, string>;
+export type TThemeConfigMap = Record<string, TThemeConfig>;

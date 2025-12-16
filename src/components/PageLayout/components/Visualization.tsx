@@ -2,14 +2,12 @@ import { useEffect, useRef } from 'react';
 import '~/elements/graph-canvas';
 
 import { useSize } from '~/services/contexts/size';
-import { useThemeName } from '~/services/contexts/theme';
 import { useViz } from '~/services/contexts/viz';
 
 const Visualization = () => {
   const {
     size: { width, height },
   } = useSize();
-  const { themeName } = useThemeName();
   const settings = useViz();
   const ref = useRef();
 
@@ -35,7 +33,6 @@ const Visualization = () => {
       <graph-canvas
         ref={ref}
         className='viz-home'
-        data-theme={themeName}
         data-width={width}
         data-height={height}
         data-density={density}

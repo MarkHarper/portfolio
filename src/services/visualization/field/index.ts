@@ -1,4 +1,3 @@
-import { ThemeConfig, ThemeName } from '~/services/theme/config';
 import { clear } from '../canvas';
 import { alphaRGB, hexToRGB, RGB, rgba } from '../canvas/color';
 import { checkCollision, handleCollision } from '../canvas/physics/collision';
@@ -19,8 +18,6 @@ export interface Field extends Renderer {
   canvas: HTMLCanvasElement;
   width: number;
   height: number;
-  themeName: ThemeName;
-  themeConfig: ThemeConfig;
   settings: any;
   themeMainRGB: RGB;
   contents: Particle[];
@@ -29,7 +26,6 @@ export interface Field extends Renderer {
   setWidth(a: number): void;
   setHeight(a: number): void;
   setDimensions(a: number, b: number): void;
-  setTheme(a: [ThemeName, ThemeConfig]): void;
   draw(): void;
   render(): void;
 }
@@ -38,16 +34,11 @@ export class Field implements Field {
   constructor(
     width: number,
     height: number,
-    theme: [ThemeName, ThemeConfig],
     settings: any,
     canvas: HTMLCanvasElement,
   ) {
-    const [themeName, themeConfig] = theme;
-
     this.width = width;
     this.height = height;
-    this.themeName = themeName;
-    this.themeConfig = themeConfig;
 
     this.settings = settings;
     this.themeMainRGB = hexToRGB(settings.lineColor);
@@ -64,6 +55,10 @@ export class Field implements Field {
       ...this.settings,
       ...updates,
     };
+
+    for (const prop in updates) {
+      this.settings[prop] = updates[prop];
+    }
 
     if (updates.lineColor) {
       this.themeMainRGB = hexToRGB(updates.lineColor);
@@ -113,9 +108,8 @@ export class Field implements Field {
     const area = this.width * this.height;
     const newParticleCount = Math.floor(area * density);
     const newContents = [];
-    const values = nodes?.values();
-    const nodeOptionsArr = values ? Array.from(values) : [];
-    const optionsCount = nodeOptionsArr.length;
+    const nodeOptionsArr = nodes ? [...nodes.values()] : [];
+    const optionsCount = nodes?.size;
 
     if (optionsCount) {
       for (let i = 0; i < newParticleCount; i++) {
@@ -170,20 +164,6 @@ export class Field implements Field {
     this.setHeight(height);
 
     setCanvasDimensions(this.canvas, this.ctx, width, height);
-  }
-
-  setTheme(theme: [ThemeName, ThemeConfig]) {
-    const [themeName, themeConfig] = theme;
-    this.themeName = themeName;
-    this.themeConfig = themeConfig;
-    this.themeMainRGB = hexToRGB(this.settings.lineColor);
-    const { nodes } = this.settings;
-
-    this.contents.forEach((particle) => {
-      const nextFillStyle = nodes.get(particle.tag).color;
-
-      particle.setFillStyle(nextFillStyle);
-    });
   }
 
   draw = (): void => {

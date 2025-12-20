@@ -1,0 +1,159 @@
+/* Enter the Void - Option 2: DMT Psychedelic (Purple Brand) */
+/* This variant emphasizes the psychedelic/spiritual journey aspects with deep purples */
+
+.enterthevoid-purple,
+.enterthevoid-purple.wa-theme-default,
+.enterthevoid-purple-light,
+.enterthevoid-purple.wa-dark,
+.enterthevoid-purple-dark,
+.wa-dark .enterthevoid-purple,
+.enterthevoid-purple .wa-dark,
+.enterthevoid-purple-dark .wa-invert {
+  /* Inherit all base colors from main enterthevoid theme */
+  /* Only override semantic mappings */
+
+  /* Brand - Psychedelic Purple (DMT/spiritual journey) */
+  --wa-color-brand-05: var(--wa-color-purple-05);
+  --wa-color-brand-10: var(--wa-color-purple-10);
+  --wa-color-brand-20: var(--wa-color-purple-20);
+  --wa-color-brand-30: var(--wa-color-purple-30);
+  --wa-color-brand-40: var(--wa-color-purple-40);
+  --wa-color-brand-50: var(--wa-color-purple-50);
+  --wa-color-brand-60: var(--wa-color-purple-60);
+  --wa-color-brand-70: var(--wa-color-purple-70);
+  --wa-color-brand-80: var(--wa-color-purple-80);
+  --wa-color-brand-90: var(--wa-color-purple-90);
+  --wa-color-brand-95: var(--wa-color-purple-95);
+
+  /* Success - Acid Green (transcendence) */
+  --wa-color-success-05: var(--wa-color-green-05);
+  --wa-color-success-10: var(--wa-color-green-10);
+  --wa-color-success-20: var(--wa-color-green-20);
+  --wa-color-success-30: var(--wa-color-green-30);
+  --wa-color-success-40: var(--wa-color-green-40);
+  --wa-color-success-50: var(--wa-color-green-50);
+  --wa-color-success-60: var(--wa-color-green-60);
+  --wa-color-success-70: var(--wa-color-green-70);
+  --wa-color-success-80: var(--wa-color-green-80);
+  --wa-color-success-90: var(--wa-color-green-90);
+  --wa-color-success-95: var(--wa-color-green-95);
+
+  /* Warning - Electric Cyan (altered perception) */
+  --wa-color-warning-05: var(--wa-color-cyan-05);
+  --wa-color-warning-10: var(--wa-color-cyan-10);
+  --wa-color-warning-20: var(--wa-color-cyan-20);
+  --wa-color-warning-30: var(--wa-color-cyan-30);
+  --wa-color-warning-40: var(--wa-color-cyan-40);
+  --wa-color-warning-50: var(--wa-color-cyan-50);
+  --wa-color-warning-60: var(--wa-color-cyan-60);
+  --wa-color-warning-70: var(--wa-color-cyan-70);
+  --wa-color-warning-80: var(--wa-color-cyan-80);
+  --wa-color-warning-90: var(--wa-color-cyan-90);
+  --wa-color-warning-95: var(--wa-color-cyan-95);
+
+  /* Danger - Hot Pink (intensity/extremity) */
+  --wa-color-danger-05: var(--wa-color-pink-05);
+  --wa-color-danger-10: var(--wa-color-pink-10);
+  --wa-color-danger-20: var(--wa-color-pink-20);
+  --wa-color-danger-30: var(--wa-color-pink-30);
+  --wa-color-danger-40: var(--wa-color-pink-40);
+  --wa-color-danger-50: var(--wa-color-pink-50);
+  --wa-color-danger-60: var(--wa-color-pink-60);
+  --wa-color-danger-70: var(--wa-color-pink-70);
+  --wa-color-danger-80: var(--wa-color-pink-80);
+  --wa-color-danger-90: var(--wa-color-pink-90);
+  --wa-color-danger-95: var(--wa-color-pink-95);
+
+  /* Neutral - Smoke to Void */
+  --wa-color-neutral-05: var(--wa-color-gray-05);
+  --wa-color-neutral-10: var(--wa-color-gray-10);
+  --wa-color-neutral-20: var(--wa-color-gray-20);
+  --wa-color-neutral-30: var(--wa-color-gray-30);
+  --wa-color-neutral-40: var(--wa-color-gray-40);
+  --wa-color-neutral-50: var(--wa-color-gray-50);
+  --wa-color-neutral-60: var(--wa-color-gray-60);
+  --wa-color-neutral-70: var(--wa-color-gray-70);
+  --wa-color-neutral-80: var(--wa-color-gray-80);
+  --wa-color-neutral-90: var(--wa-color-gray-90);
+  --wa-color-neutral-95: var(--wa-color-gray-95);
+}
+
+@layer wa-theme {
+  /* ==== LIGHT THEME ==== */
+  .enterthevoid-purple:not(.wa-dark),
+  .enterthevoid-purple.wa-theme-default:not(.wa-dark),
+  .enterthevoid-purple-light,
+  .enterthevoid-purple-dark .wa-invert {
+    /* Surface & Layout - Purple psychedelic haze */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-purple-05) 75%, var(--wa-color-indigo-05) 25%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-purple-10) 70%, var(--wa-color-pink-10) 30%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-purple-20) 60%, var(--wa-color-indigo-20) 40%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-purple-30) 70%, var(--wa-color-cyan-30) 30%);
+
+    /* Text */
+    --wa-color-text-normal: var(--wa-color-neutral-90);
+    --wa-color-text-quiet: var(--wa-color-neutral-60);
+    --wa-color-text-link: var(--wa-color-brand-60);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-neutral-95) 50%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-neutral-70) 25%, transparent);
+
+    /* Utilities - Purple glow */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-purple-60) 30%, transparent);
+    --wa-color-focus: var(--wa-color-brand-50);
+    --wa-color-mix-hover: var(--wa-color-brand-60) 12%;
+    --wa-color-mix-active: var(--wa-color-brand-60) 24%;
+
+    /* Shadows */
+    --wa-shadow-offset-x-scale: 1;
+    --wa-shadow-offset-y-scale: 1;
+    --wa-shadow-blur-scale: 2;
+    --wa-shadow-spread-scale: 1.4;
+
+    /* Particle Colors - Purple psychedelia */
+    --color-item-A: var(--wa-color-purple-50);
+    --color-item-B: var(--wa-color-indigo-50);
+    --color-item-C: var(--wa-color-pink-50);
+    --color-item-D: var(--wa-color-cyan-50);
+  }
+
+  /* ==== DARK THEME ==== */
+  .enterthevoid-purple.wa-dark,
+  .enterthevoid-purple-dark:not(.wa-invert),
+  .wa-dark .enterthevoid-purple,
+  .enterthevoid-purple .wa-dark {
+    /* Surface & Layout - Deep purple void */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-neutral-80) 80%, var(--wa-color-purple-90) 20%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-neutral-90) 85%, var(--wa-color-purple-95) 15%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-neutral-95) 90%, var(--wa-color-indigo-95) 10%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-neutral-70) 40%, var(--wa-color-purple-80) 60%);
+
+    /* Text - Purple tinted */
+    --wa-color-text-normal: color-mix(in oklab, var(--wa-color-neutral-05) 85%, var(--wa-color-purple-20) 15%);
+    --wa-color-text-quiet: color-mix(in oklab, var(--wa-color-neutral-40) 80%, var(--wa-color-purple-40) 20%);
+    --wa-color-text-link: var(--wa-color-brand-30);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-neutral-95) 85%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-neutral-80) 50%, transparent);
+
+    /* Utilities - Psychedelic purple glow */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-purple-50) 50%, transparent);
+    --wa-color-focus: var(--wa-color-brand-40);
+    --wa-color-mix-hover: var(--wa-color-brand-40) 15%;
+    --wa-color-mix-active: var(--wa-color-brand-40) 30%;
+
+    /* Shadows - Intense purple aura */
+    --wa-shadow-offset-x-scale: 0;
+    --wa-shadow-offset-y-scale: 0;
+    --wa-shadow-blur-scale: 3;
+    --wa-shadow-spread-scale: 2.5;
+
+    /* Particle Colors - Deep psychedelic */
+    --color-item-A: var(--wa-color-purple-40);
+    --color-item-B: var(--wa-color-indigo-40);
+    --color-item-C: var(--wa-color-pink-40);
+    --color-item-D: var(--wa-color-green-40);
+  }
+}

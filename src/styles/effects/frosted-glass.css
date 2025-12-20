@@ -1,0 +1,23 @@
+/* ==== FROSTED GLASS UTILITY CLASS ==== */
+
+:root {
+  /* Frosted Glass Effect - Maximum Readability */
+    --wa-glass-backdrop-blur: 12px;
+    --wa-glass-backdrop-saturate: 180%;
+    --wa-glass-background: color-mix(in oklab, var(--wa-color-surface-raised) 75%, transparent);
+    --wa-glass-border: var(--wa-border-width-s) solid color-mix(in oklab, var(--wa-color-surface-border) 30%, transparent);
+    --wa-glass-shadow: 0 8px 32px color-mix(in oklab, var(--wa-color-shadow) 20%, transparent),
+                       0 2px 8px color-mix(in oklab, var(--wa-color-shadow) 10%, transparent);
+    /* #endregion */
+}
+
+.wa-glass,
+.frosted-glass {
+  backdrop-filter: blur(var(--wa-glass-backdrop-blur)) saturate(var(--wa-glass-backdrop-saturate));
+  background-color: var(--wa-glass-background);
+  border: var(--wa-glass-border);
+  box-shadow: var(--wa-glass-shadow);
+  
+  /* Enhanced readability */
+  -webkit-backdrop-filter: blur(var(--wa-glass-backdrop-blur)) saturate(var(--wa-glass-backdrop-saturate));
+}

@@ -24,6 +24,7 @@ import { useTheme } from '../theme';
 type VizContext = {
   density: number;
   lineColor: string;
+  lineColorVar: string;
   edgeDistance: number;
   maxVelocity: number;
   springStrength: number;
@@ -91,6 +92,7 @@ export const VizContextProvider = ({ children }: VizContextProviderProps) => {
         settings: {
           ...DEFAULT_VIZ_SETTINGS,
           lineColor: tokens[DEFAULT_LINE_COLOR_VAR],
+          lineColorVar: DEFAULT_LINE_COLOR_VAR,
           nodes: new ReverseMap([
             [nodeOptionA.id, nodeOptionA],
             [nodeOptionB.id, nodeOptionB],
@@ -101,11 +103,39 @@ export const VizContextProvider = ({ children }: VizContextProviderProps) => {
     }
   }, []);
 
+  // Update colors when theme changes
+  useEffect(() => {
+    if (!vizSettings?.nodes || !tokens) return;
+
+    // Update line color from the current theme's tokens
+    const newLineColor = tokens[vizSettings.lineColorVar];
+    if (newLineColor && newLineColor !== vizSettings.lineColor) {
+      dispatch({
+        type: 'lineColor',
+        lineColor: newLineColor,
+        lineColorVar: vizSettings.lineColorVar,
+      });
+    }
+
+    // Update node colors from the current theme's tokens
+    vizSettings.nodes.forEach((node: any, id: any) => {
+      const newNodeColor = tokens[node.colorVar];
+      if (newNodeColor && newNodeColor !== node.color) {
+        dispatch({
+          type: 'nodeColor',
+          id,
+          color: newNodeColor,
+        });
+      }
+    });
+  }, [name, mode, tokens, vizSettings, dispatch]);
+
   useEffect(() => {
     if (!vizSettings?.nodes) return;
 
     setThemeTokensInStorage(name, mode, {
       ...tokens,
+      [vizSettings.lineColorVar]: vizSettings.lineColor,
       ...Array.from(vizSettings.nodes).reduce(
         (map, [_, node]) => ({
           ...map,

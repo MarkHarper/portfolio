@@ -41,7 +41,7 @@ const Header = () => {
           </Link>
         </div>
         <div className='wa-align-items-center wa-gap-2xs'>
-          <Link to='/themes'>
+          <Link to='/palettes'>
             <wa-button appearance='plain' size='small' pill>
               <wa-icon name='palette'></wa-icon>
             </wa-button>

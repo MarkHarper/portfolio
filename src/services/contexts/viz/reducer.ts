@@ -12,6 +12,7 @@ export const vizReducer = produce((draft, action) => {
 
     case 'lineColor': {
       draft.lineColor = action.lineColor;
+      draft.lineColorVar = action.lineColorVar;
 
       break;
     }

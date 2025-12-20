@@ -1,0 +1,15 @@
+.canvas-gradient-indicator {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--wa-color-surface-default) 0%,
+    var(--wa-color-surface-raisedf) 100%
+  );
+}
+

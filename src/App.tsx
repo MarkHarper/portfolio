@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import Work from './pages/Work';
 import About from './pages/About';
-import Themes from './pages/Themes';
+import Palettes from './pages/Palettes';
 import Settings from './pages/Settings';
 import { VizContextProvider } from './services/contexts/viz';
 
@@ -24,7 +24,7 @@ const App = () => {
                 <Route index element={<Home />} />
                 <Route path='about' element={<About />} />
                 <Route path='work' element={<Work />} />
-                <Route path='themes' element={<Themes />} />
+                <Route path='palettes' element={<Palettes />} />
                 <Route path='settings' element={<Settings />} />
                 <Route element={<NoMatch />} />
               </Route>

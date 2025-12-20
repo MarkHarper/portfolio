@@ -1,0 +1,405 @@
+/* Robot Dreams Inspired Color System - Retro Sci-Fi Melancholy */
+
+.robotdreams,
+.robotdreams.wa-theme-default,
+.robotdreams-light,
+.robotdreams.wa-dark,
+.robotdreams-dark,
+.wa-dark .robotdreams,
+.robotdreams .wa-dark,
+.robotdreams-dark .wa-invert {
+  /* ==== BASE COLOR DEFINITIONS (05-95) ==== */
+
+  /* Red - Sunset Warning Lights */
+  --wa-color-red-05: #fff8f5;
+  --wa-color-red-10: #ffede8;
+  --wa-color-red-20: #ffd4cc;
+  --wa-color-red-30: #ffb3a3;
+  --wa-color-red-40: #ff927a;
+  --wa-color-red-50: #ff4d29;
+  --wa-color-red-60: #e64525;
+  --wa-color-red-70: #b3361d;
+  --wa-color-red-80: #802715;
+  --wa-color-red-90: #4d170d;
+  --wa-color-red-95: #1a0804;
+
+  /* Orange - Beach Sunset */
+  --wa-color-orange-05: #fffaf5;
+  --wa-color-orange-10: #fff5e8;
+  --wa-color-orange-20: #ffe8cc;
+  --wa-color-orange-30: #ffd6a3;
+  --wa-color-orange-40: #ffc47a;
+  --wa-color-orange-50: #ff9b29;
+  --wa-color-orange-60: #e68c25;
+  --wa-color-orange-70: #b36d1d;
+  --wa-color-orange-80: #804f15;
+  --wa-color-orange-90: #4d2f0d;
+  --wa-color-orange-95: #1a1004;
+
+  /* Yellow - Summer Sun */
+  --wa-color-yellow-05: #fffef5;
+  --wa-color-yellow-10: #fffde8;
+  --wa-color-yellow-20: #fffacc;
+  --wa-color-yellow-30: #fff6a3;
+  --wa-color-yellow-40: #fff27a;
+  --wa-color-yellow-50: #ffe829;
+  --wa-color-yellow-60: #e6d125;
+  --wa-color-yellow-70: #b3a31d;
+  --wa-color-yellow-80: #807515;
+  --wa-color-yellow-90: #4d470d;
+  --wa-color-yellow-95: #1a1804;
+
+  /* Green - Ocean Depths */
+  --wa-color-green-05: #f5faf8;
+  --wa-color-green-10: #e8f5f0;
+  --wa-color-green-20: #cce8dd;
+  --wa-color-green-30: #a3d9c4;
+  --wa-color-green-40: #7acaab;
+  --wa-color-green-50: #29a379;
+  --wa-color-green-60: #25926d;
+  --wa-color-green-70: #1d7255;
+  --wa-color-green-80: #15523d;
+  --wa-color-green-90: #0d3124;
+  --wa-color-green-95: #04110c;
+
+  /* Cyan - Robot Blue */
+  --wa-color-cyan-05: #f5fbfd;
+  --wa-color-cyan-10: #e8f6fb;
+  --wa-color-cyan-20: #ccebf5;
+  --wa-color-cyan-30: #a3dded;
+  --wa-color-cyan-40: #7acfe5;
+  --wa-color-cyan-50: #29afd4;
+  --wa-color-cyan-60: #259ebf;
+  --wa-color-cyan-70: #1d7b95;
+  --wa-color-cyan-80: #15586b;
+  --wa-color-cyan-90: #0d3540;
+  --wa-color-cyan-95: #041216;
+
+  /* Blue - Sky Melancholy */
+  --wa-color-blue-05: #f5f9fc;
+  --wa-color-blue-10: #e8f2f9;
+  --wa-color-blue-20: #cce3f0;
+  --wa-color-blue-30: #a3cfe6;
+  --wa-color-blue-40: #7abbdc;
+  --wa-color-blue-50: #298ec5;
+  --wa-color-blue-60: #2580b1;
+  --wa-color-blue-70: #1d648a;
+  --wa-color-blue-80: #154863;
+  --wa-color-blue-90: #0d2b3b;
+  --wa-color-blue-95: #040f14;
+
+  /* Indigo - Evening Circuits */
+  --wa-color-indigo-05: #f7f5fc;
+  --wa-color-indigo-10: #ede8f9;
+  --wa-color-indigo-20: #d6ccf0;
+  --wa-color-indigo-30: #b8a3e6;
+  --wa-color-indigo-40: #9a7adc;
+  --wa-color-indigo-50: #5e29c5;
+  --wa-color-indigo-60: #5425b1;
+  --wa-color-indigo-70: #421d8a;
+  --wa-color-indigo-80: #2f1563;
+  --wa-color-indigo-90: #1c0d3b;
+  --wa-color-indigo-95: #0a0414;
+
+  /* Purple - Neon Dreams */
+  --wa-color-purple-05: #faf5fc;
+  --wa-color-purple-10: #f5e8f9;
+  --wa-color-purple-20: #e8ccf0;
+  --wa-color-purple-30: #d9a3e6;
+  --wa-color-purple-40: #ca7adc;
+  --wa-color-purple-50: #a329c5;
+  --wa-color-purple-60: #9225b1;
+  --wa-color-purple-70: #721d8a;
+  --wa-color-purple-80: #521563;
+  --wa-color-purple-90: #310d3b;
+  --wa-color-purple-95: #110414;
+
+  /* Pink - Warm Memory */
+  --wa-color-pink-05: #fcf5f9;
+  --wa-color-pink-10: #f9e8f2;
+  --wa-color-pink-20: #f0cce3;
+  --wa-color-pink-30: #e6a3cf;
+  --wa-color-pink-40: #dc7abb;
+  --wa-color-pink-50: #c5298e;
+  --wa-color-pink-60: #b12580;
+  --wa-color-pink-70: #8a1d64;
+  --wa-color-pink-80: #631548;
+  --wa-color-pink-90: #3b0d2b;
+  --wa-color-pink-95: #14040f;
+
+  /* Gray - Metallic Chrome */
+  --wa-color-gray-05: #f9f9f9;
+  --wa-color-gray-10: #f0f0f0;
+  --wa-color-gray-20: #dedede;
+  --wa-color-gray-30: #c7c7c7;
+  --wa-color-gray-40: #9e9e9e;
+  --wa-color-gray-50: #757575;
+  --wa-color-gray-60: #5a5a5a;
+  --wa-color-gray-70: #454545;
+  --wa-color-gray-80: #303030;
+  --wa-color-gray-90: #1c1c1c;
+  --wa-color-gray-95: #0f0f0f;
+
+  /* ==== VARIANT COLOR MAPPINGS ==== */
+
+  /* Brand - Robot Blue */
+  --wa-color-brand-05: var(--wa-color-cyan-05);
+  --wa-color-brand-10: var(--wa-color-cyan-10);
+  --wa-color-brand-20: var(--wa-color-cyan-20);
+  --wa-color-brand-30: var(--wa-color-cyan-30);
+  --wa-color-brand-40: var(--wa-color-cyan-40);
+  --wa-color-brand-50: var(--wa-color-cyan-50);
+  --wa-color-brand-60: var(--wa-color-cyan-60);
+  --wa-color-brand-70: var(--wa-color-cyan-70);
+  --wa-color-brand-80: var(--wa-color-cyan-80);
+  --wa-color-brand-90: var(--wa-color-cyan-90);
+  --wa-color-brand-95: var(--wa-color-cyan-95);
+
+  /* Success - Ocean Green */
+  --wa-color-success-05: var(--wa-color-green-05);
+  --wa-color-success-10: var(--wa-color-green-10);
+  --wa-color-success-20: var(--wa-color-green-20);
+  --wa-color-success-30: var(--wa-color-green-30);
+  --wa-color-success-40: var(--wa-color-green-40);
+  --wa-color-success-50: var(--wa-color-green-50);
+  --wa-color-success-60: var(--wa-color-green-60);
+  --wa-color-success-70: var(--wa-color-green-70);
+  --wa-color-success-80: var(--wa-color-green-80);
+  --wa-color-success-90: var(--wa-color-green-90);
+  --wa-color-success-95: var(--wa-color-green-95);
+
+  /* Warning - Sunset Orange */
+  --wa-color-warning-05: var(--wa-color-orange-05);
+  --wa-color-warning-10: var(--wa-color-orange-10);
+  --wa-color-warning-20: var(--wa-color-orange-20);
+  --wa-color-warning-30: var(--wa-color-orange-30);
+  --wa-color-warning-40: var(--wa-color-orange-40);
+  --wa-color-warning-50: var(--wa-color-orange-50);
+  --wa-color-warning-60: var(--wa-color-orange-60);
+  --wa-color-warning-70: var(--wa-color-orange-70);
+  --wa-color-warning-80: var(--wa-color-orange-80);
+  --wa-color-warning-90: var(--wa-color-orange-90);
+  --wa-color-warning-95: var(--wa-color-orange-95);
+
+  /* Danger - Warning Red */
+  --wa-color-danger-05: var(--wa-color-red-05);
+  --wa-color-danger-10: var(--wa-color-red-10);
+  --wa-color-danger-20: var(--wa-color-red-20);
+  --wa-color-danger-30: var(--wa-color-red-30);
+  --wa-color-danger-40: var(--wa-color-red-40);
+  --wa-color-danger-50: var(--wa-color-red-50);
+  --wa-color-danger-60: var(--wa-color-red-60);
+  --wa-color-danger-70: var(--wa-color-red-70);
+  --wa-color-danger-80: var(--wa-color-red-80);
+  --wa-color-danger-90: var(--wa-color-red-90);
+  --wa-color-danger-95: var(--wa-color-red-95);
+
+  /* Neutral - Chrome Gray */
+  --wa-color-neutral-05: var(--wa-color-gray-05);
+  --wa-color-neutral-10: var(--wa-color-gray-10);
+  --wa-color-neutral-20: var(--wa-color-gray-20);
+  --wa-color-neutral-30: var(--wa-color-gray-30);
+  --wa-color-neutral-40: var(--wa-color-gray-40);
+  --wa-color-neutral-50: var(--wa-color-gray-50);
+  --wa-color-neutral-60: var(--wa-color-gray-60);
+  --wa-color-neutral-70: var(--wa-color-gray-70);
+  --wa-color-neutral-80: var(--wa-color-gray-80);
+  --wa-color-neutral-90: var(--wa-color-gray-90);
+  --wa-color-neutral-95: var(--wa-color-gray-95);
+}
+
+@layer wa-theme {
+  /* ==== LIGHT THEME (Summer Beach Day) ==== */
+  .robotdreams:not(.wa-dark),
+  .robotdreams.wa-theme-default:not(.wa-dark),
+  .robotdreams-light,
+  .robotdreams-dark .wa-invert {
+    /* Surface & Layout - Warm beach sand and sky */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-orange-05) 60%, var(--wa-color-yellow-05) 40%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-orange-10) 50%, var(--wa-color-yellow-10) 50%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-orange-20) 60%, var(--wa-color-blue-10) 40%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-cyan-40) 70%, var(--wa-color-gray-40) 30%);
+
+    /* Text - Clear contrast */
+    --wa-color-text-normal: var(--wa-color-gray-90);
+    --wa-color-text-quiet: var(--wa-color-gray-60);
+    --wa-color-text-link: var(--wa-color-brand-60);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-blue-90) 50%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-gray-70) 20%, transparent);
+
+    /* Utilities */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-blue-80) 20%, transparent);
+    --wa-color-focus: var(--wa-color-brand-50);
+    --wa-color-mix-hover: var(--wa-color-cyan-50) 10%;
+    --wa-color-mix-active: var(--wa-color-cyan-50) 20%;
+
+    /* Shadows - Soft summer shadows */
+    --wa-shadow-offset-x-scale: 1;
+    --wa-shadow-offset-y-scale: 1.3;
+    --wa-shadow-blur-scale: 2;
+    --wa-shadow-spread-scale: 1;
+    --wa-shadow-s: 0 calc(1px * var(--wa-shadow-offset-y-scale)) calc(4px * var(--wa-shadow-blur-scale)) 0 var(--wa-color-shadow);
+    --wa-shadow-m: 0 calc(2px * var(--wa-shadow-offset-y-scale)) calc(8px * var(--wa-shadow-blur-scale)) calc(-1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 calc(4px * var(--wa-shadow-offset-y-scale)) calc(16px * var(--wa-shadow-blur-scale)) calc(-2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-05);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-10);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-50);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-20);
+    --wa-color-brand-border-normal: var(--wa-color-brand-30);
+    --wa-color-brand-border-loud: var(--wa-color-brand-60);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-70);
+    --wa-color-brand-on-normal: var(--wa-color-brand-80);
+    --wa-color-brand-on-loud: var(--wa-color-orange-05);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-05);
+    --wa-color-success-fill-normal: var(--wa-color-success-10);
+    --wa-color-success-fill-loud: var(--wa-color-success-50);
+    --wa-color-success-border-quiet: var(--wa-color-success-20);
+    --wa-color-success-border-normal: var(--wa-color-success-30);
+    --wa-color-success-border-loud: var(--wa-color-success-60);
+    --wa-color-success-on-quiet: var(--wa-color-success-70);
+    --wa-color-success-on-normal: var(--wa-color-success-80);
+    --wa-color-success-on-loud: var(--wa-color-orange-05);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-05);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-10);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-20);
+    --wa-color-warning-border-normal: var(--wa-color-warning-30);
+    --wa-color-warning-border-loud: var(--wa-color-warning-60);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-70);
+    --wa-color-warning-on-normal: var(--wa-color-warning-80);
+    --wa-color-warning-on-loud: var(--wa-color-gray-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-05);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-10);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-50);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-20);
+    --wa-color-danger-border-normal: var(--wa-color-danger-30);
+    --wa-color-danger-border-loud: var(--wa-color-danger-60);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-70);
+    --wa-color-danger-on-normal: var(--wa-color-danger-80);
+    --wa-color-danger-on-loud: var(--wa-color-orange-05);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-gray-05);
+    --wa-color-neutral-fill-normal: var(--wa-color-gray-10);
+    --wa-color-neutral-fill-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-20);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-30);
+    --wa-color-neutral-border-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-on-quiet: var(--wa-color-gray-60);
+    --wa-color-neutral-on-normal: var(--wa-color-gray-70);
+    --wa-color-neutral-on-loud: var(--wa-color-orange-05);
+
+    /* Particle Colors - Light Theme (Sunny day) */
+    --color-item-A: var(--wa-color-cyan-50);
+    --color-item-B: var(--wa-color-yellow-50);
+    --color-item-C: var(--wa-color-orange-50);
+    --color-item-D: var(--wa-color-blue-50);
+  }
+
+  /* ==== DARK THEME (Lonely Night) ==== */
+  .robotdreams.wa-dark,
+  .robotdreams-dark:not(.wa-invert),
+  .wa-dark .robotdreams,
+  .robotdreams .wa-dark {
+    /* Surface & Layout - Dark city night */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-gray-80) 70%, var(--wa-color-blue-90) 30%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-gray-90) 80%, var(--wa-color-blue-95) 20%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-gray-95) 90%, var(--wa-color-indigo-95) 10%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-cyan-70) 60%, var(--wa-color-gray-60) 40%);
+
+    /* Text - Soft glow */
+    --wa-color-text-normal: var(--wa-color-gray-05);
+    --wa-color-text-quiet: var(--wa-color-gray-40);
+    --wa-color-text-link: var(--wa-color-brand-40);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-gray-95) 85%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-gray-80) 50%, transparent);
+
+    /* Utilities - Neon glow */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-cyan-50) 25%, transparent);
+    --wa-color-focus: var(--wa-color-brand-40);
+    --wa-color-mix-hover: var(--wa-color-cyan-40) 12%;
+    --wa-color-mix-active: var(--wa-color-cyan-40) 24%;
+
+    /* Shadows - Neon light glow */
+    --wa-shadow-offset-x-scale: 0;
+    --wa-shadow-offset-y-scale: 0;
+    --wa-shadow-blur-scale: 3;
+    --wa-shadow-spread-scale: 1;
+    --wa-shadow-s: 0 0 calc(8px * var(--wa-shadow-blur-scale)) 0 var(--wa-color-shadow);
+    --wa-shadow-m: 0 0 calc(16px * var(--wa-shadow-blur-scale)) calc(1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 0 calc(24px * var(--wa-shadow-blur-scale)) calc(2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-95);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-90);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-40);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-80);
+    --wa-color-brand-border-normal: var(--wa-color-brand-60);
+    --wa-color-brand-border-loud: var(--wa-color-brand-40);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-30);
+    --wa-color-brand-on-normal: var(--wa-color-brand-20);
+    --wa-color-brand-on-loud: var(--wa-color-gray-95);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-95);
+    --wa-color-success-fill-normal: var(--wa-color-success-90);
+    --wa-color-success-fill-loud: var(--wa-color-success-40);
+    --wa-color-success-border-quiet: var(--wa-color-success-80);
+    --wa-color-success-border-normal: var(--wa-color-success-60);
+    --wa-color-success-border-loud: var(--wa-color-success-40);
+    --wa-color-success-on-quiet: var(--wa-color-success-30);
+    --wa-color-success-on-normal: var(--wa-color-success-20);
+    --wa-color-success-on-loud: var(--wa-color-gray-95);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-95);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-90);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-80);
+    --wa-color-warning-border-normal: var(--wa-color-warning-60);
+    --wa-color-warning-border-loud: var(--wa-color-warning-50);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-30);
+    --wa-color-warning-on-normal: var(--wa-color-warning-20);
+    --wa-color-warning-on-loud: var(--wa-color-gray-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-95);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-90);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-40);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-80);
+    --wa-color-danger-border-normal: var(--wa-color-danger-60);
+    --wa-color-danger-border-loud: var(--wa-color-danger-40);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-30);
+    --wa-color-danger-on-normal: var(--wa-color-danger-20);
+    --wa-color-danger-on-loud: var(--wa-color-gray-95);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-gray-95);
+    --wa-color-neutral-fill-normal: var(--wa-color-gray-90);
+    --wa-color-neutral-fill-loud: var(--wa-color-gray-40);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-80);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-60);
+    --wa-color-neutral-border-loud: var(--wa-color-gray-50);
+    --wa-color-neutral-on-quiet: var(--wa-color-gray-40);
+    --wa-color-neutral-on-normal: var(--wa-color-gray-30);
+    --wa-color-neutral-on-loud: var(--wa-color-gray-95);
+
+    /* Particle Colors - Dark Theme (Neon night) */
+    --color-item-A: var(--wa-color-cyan-40);
+    --color-item-B: var(--wa-color-purple-40);
+    --color-item-C: var(--wa-color-pink-40);
+    --color-item-D: var(--wa-color-blue-40);
+  }
+}

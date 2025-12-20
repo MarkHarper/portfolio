@@ -1,0 +1,405 @@
+/* Over the Garden Wall Inspired Color System - Autumn Folklore */
+
+.overthegardenwall,
+.overthegardenwall.wa-theme-default,
+.overthegardenwall-light,
+.overthegardenwall.wa-dark,
+.overthegardenwall-dark,
+.wa-dark .overthegardenwall,
+.overthegardenwall .wa-dark,
+.overthegardenwall-dark .wa-invert {
+  /* ==== BASE COLOR DEFINITIONS (05-95) ==== */
+
+  /* Red - Autumn Maple */
+  --wa-color-red-05: #fff7f5;
+  --wa-color-red-10: #ffebe8;
+  --wa-color-red-20: #ffd1cc;
+  --wa-color-red-30: #ffada3;
+  --wa-color-red-40: #ff897a;
+  --wa-color-red-50: #ff3d29;
+  --wa-color-red-60: #e63725;
+  --wa-color-red-70: #b32b1d;
+  --wa-color-red-80: #801f15;
+  --wa-color-red-90: #4d130d;
+  --wa-color-red-95: #1a0604;
+
+  /* Orange - Pumpkin Harvest */
+  --wa-color-orange-05: #fff9f5;
+  --wa-color-orange-10: #fff2e8;
+  --wa-color-orange-20: #ffe3cc;
+  --wa-color-orange-30: #ffcfa3;
+  --wa-color-orange-40: #ffbb7a;
+  --wa-color-orange-50: #ff8e29;
+  --wa-color-orange-60: #e68025;
+  --wa-color-orange-70: #b3641d;
+  --wa-color-orange-80: #804815;
+  --wa-color-orange-90: #4d2b0d;
+  --wa-color-orange-95: #1a0f04;
+
+  /* Yellow - Lantern Glow */
+  --wa-color-yellow-05: #fffdf5;
+  --wa-color-yellow-10: #fffbe8;
+  --wa-color-yellow-20: #fff6cc;
+  --wa-color-yellow-30: #fff0a3;
+  --wa-color-yellow-40: #ffea7a;
+  --wa-color-yellow-50: #ffd929;
+  --wa-color-yellow-60: #e6c325;
+  --wa-color-yellow-70: #b3981d;
+  --wa-color-yellow-80: #806d15;
+  --wa-color-yellow-90: #4d410d;
+  --wa-color-yellow-95: #1a1604;
+
+  /* Green - Moss and Pine */
+  --wa-color-green-05: #f6f9f5;
+  --wa-color-green-10: #ebf2e8;
+  --wa-color-green-20: #d3e3cc;
+  --wa-color-green-30: #b4cfa3;
+  --wa-color-green-40: #95bb7a;
+  --wa-color-green-50: #568e29;
+  --wa-color-green-60: #4d8025;
+  --wa-color-green-70: #3c641d;
+  --wa-color-green-80: #2b4815;
+  --wa-color-green-90: #1a2b0d;
+  --wa-color-green-95: #090f04;
+
+  /* Cyan - Foggy Creek */
+  --wa-color-cyan-05: #f5fafa;
+  --wa-color-cyan-10: #e8f4f4;
+  --wa-color-cyan-20: #cce6e6;
+  --wa-color-cyan-30: #a3d4d4;
+  --wa-color-cyan-40: #7ac2c2;
+  --wa-color-cyan-50: #299a9a;
+  --wa-color-cyan-60: #258a8a;
+  --wa-color-cyan-70: #1d6c6c;
+  --wa-color-cyan-80: #154e4e;
+  --wa-color-cyan-90: #0d2f2f;
+  --wa-color-cyan-95: #041010;
+
+  /* Blue - Twilight Sky */
+  --wa-color-blue-05: #f5f8fa;
+  --wa-color-blue-10: #e8eff4;
+  --wa-color-blue-20: #ccdde6;
+  --wa-color-blue-30: #a3c7d4;
+  --wa-color-blue-40: #7ab1c2;
+  --wa-color-blue-50: #29809a;
+  --wa-color-blue-60: #25738a;
+  --wa-color-blue-70: #1d5a6c;
+  --wa-color-blue-80: #15414e;
+  --wa-color-blue-90: #0d272f;
+  --wa-color-blue-95: #040d10;
+
+  /* Indigo - Deep Woods */
+  --wa-color-indigo-05: #f6f5f9;
+  --wa-color-indigo-10: #ebe8f2;
+  --wa-color-indigo-20: #d3cce3;
+  --wa-color-indigo-30: #b4a3cf;
+  --wa-color-indigo-40: #957abb;
+  --wa-color-indigo-50: #56298e;
+  --wa-color-indigo-60: #4d2580;
+  --wa-color-indigo-70: #3c1d64;
+  --wa-color-indigo-80: #2b1548;
+  --wa-color-indigo-90: #1a0d2b;
+  --wa-color-indigo-95: #09040f;
+
+  /* Purple - Beast Mystery */
+  --wa-color-purple-05: #f9f5f9;
+  --wa-color-purple-10: #f2e8f2;
+  --wa-color-purple-20: #e3cce3;
+  --wa-color-purple-30: #cfa3cf;
+  --wa-color-purple-40: #bb7abb;
+  --wa-color-purple-50: #8e298e;
+  --wa-color-purple-60: #802580;
+  --wa-color-purple-70: #641d64;
+  --wa-color-purple-80: #481548;
+  --wa-color-purple-90: #2b0d2b;
+  --wa-color-purple-95: #0f040f;
+
+  /* Pink - Rose Hips */
+  --wa-color-pink-05: #faf5f7;
+  --wa-color-pink-10: #f4e8ed;
+  --wa-color-pink-20: #e6ccd8;
+  --wa-color-pink-30: #d4a3bc;
+  --wa-color-pink-40: #c27aa0;
+  --wa-color-pink-50: #9a2968;
+  --wa-color-pink-60: #8a255e;
+  --wa-color-pink-70: #6c1d49;
+  --wa-color-pink-80: #4e1535;
+  --wa-color-pink-90: #2f0d20;
+  --wa-color-pink-95: #10040b;
+
+  /* Gray - Weathered Stone */
+  --wa-color-gray-05: #f8f8f7;
+  --wa-color-gray-10: #efeeed;
+  --wa-color-gray-20: #dbd9d6;
+  --wa-color-gray-30: #c3c0ba;
+  --wa-color-gray-40: #a09c94;
+  --wa-color-gray-50: #6e6b63;
+  --wa-color-gray-60: #54524c;
+  --wa-color-gray-70: #41403b;
+  --wa-color-gray-80: #2e2d2a;
+  --wa-color-gray-90: #1c1b19;
+  --wa-color-gray-95: #0e0e0d;
+
+  /* ==== VARIANT COLOR MAPPINGS ==== */
+
+  /* Brand - Lantern Glow */
+  --wa-color-brand-05: var(--wa-color-yellow-05);
+  --wa-color-brand-10: var(--wa-color-yellow-10);
+  --wa-color-brand-20: var(--wa-color-yellow-20);
+  --wa-color-brand-30: var(--wa-color-yellow-30);
+  --wa-color-brand-40: var(--wa-color-yellow-40);
+  --wa-color-brand-50: var(--wa-color-yellow-50);
+  --wa-color-brand-60: var(--wa-color-yellow-60);
+  --wa-color-brand-70: var(--wa-color-yellow-70);
+  --wa-color-brand-80: var(--wa-color-yellow-80);
+  --wa-color-brand-90: var(--wa-color-yellow-90);
+  --wa-color-brand-95: var(--wa-color-yellow-95);
+
+  /* Success - Moss Green */
+  --wa-color-success-05: var(--wa-color-green-05);
+  --wa-color-success-10: var(--wa-color-green-10);
+  --wa-color-success-20: var(--wa-color-green-20);
+  --wa-color-success-30: var(--wa-color-green-30);
+  --wa-color-success-40: var(--wa-color-green-40);
+  --wa-color-success-50: var(--wa-color-green-50);
+  --wa-color-success-60: var(--wa-color-green-60);
+  --wa-color-success-70: var(--wa-color-green-70);
+  --wa-color-success-80: var(--wa-color-green-80);
+  --wa-color-success-90: var(--wa-color-green-90);
+  --wa-color-success-95: var(--wa-color-green-95);
+
+  /* Warning - Pumpkin Orange */
+  --wa-color-warning-05: var(--wa-color-orange-05);
+  --wa-color-warning-10: var(--wa-color-orange-10);
+  --wa-color-warning-20: var(--wa-color-orange-20);
+  --wa-color-warning-30: var(--wa-color-orange-30);
+  --wa-color-warning-40: var(--wa-color-orange-40);
+  --wa-color-warning-50: var(--wa-color-orange-50);
+  --wa-color-warning-60: var(--wa-color-orange-60);
+  --wa-color-warning-70: var(--wa-color-orange-70);
+  --wa-color-warning-80: var(--wa-color-orange-80);
+  --wa-color-warning-90: var(--wa-color-orange-90);
+  --wa-color-warning-95: var(--wa-color-orange-95);
+
+  /* Danger - Autumn Red */
+  --wa-color-danger-05: var(--wa-color-red-05);
+  --wa-color-danger-10: var(--wa-color-red-10);
+  --wa-color-danger-20: var(--wa-color-red-20);
+  --wa-color-danger-30: var(--wa-color-red-30);
+  --wa-color-danger-40: var(--wa-color-red-40);
+  --wa-color-danger-50: var(--wa-color-red-50);
+  --wa-color-danger-60: var(--wa-color-red-60);
+  --wa-color-danger-70: var(--wa-color-red-70);
+  --wa-color-danger-80: var(--wa-color-red-80);
+  --wa-color-danger-90: var(--wa-color-red-90);
+  --wa-color-danger-95: var(--wa-color-red-95);
+
+  /* Neutral - Weathered Stone */
+  --wa-color-neutral-05: var(--wa-color-gray-05);
+  --wa-color-neutral-10: var(--wa-color-gray-10);
+  --wa-color-neutral-20: var(--wa-color-gray-20);
+  --wa-color-neutral-30: var(--wa-color-gray-30);
+  --wa-color-neutral-40: var(--wa-color-gray-40);
+  --wa-color-neutral-50: var(--wa-color-gray-50);
+  --wa-color-neutral-60: var(--wa-color-gray-60);
+  --wa-color-neutral-70: var(--wa-color-gray-70);
+  --wa-color-neutral-80: var(--wa-color-gray-80);
+  --wa-color-neutral-90: var(--wa-color-gray-90);
+  --wa-color-neutral-95: var(--wa-color-gray-95);
+}
+
+@layer wa-theme {
+  /* ==== LIGHT THEME (Autumn Woodland) ==== */
+  .overthegardenwall:not(.wa-dark),
+  .overthegardenwall.wa-theme-default:not(.wa-dark),
+  .overthegardenwall-light,
+  .overthegardenwall-dark .wa-invert {
+    /* Surface & Layout - Warm earthy tones */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-orange-05) 50%, var(--wa-color-yellow-05) 50%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-orange-10) 60%, var(--wa-color-gray-10) 40%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-orange-20) 50%, var(--wa-color-gray-20) 50%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-gray-40) 60%, var(--wa-color-orange-40) 40%);
+
+    /* Text - Deep forest ink */
+    --wa-color-text-normal: color-mix(in oklab, var(--wa-color-gray-90) 70%, var(--wa-color-indigo-90) 30%);
+    --wa-color-text-quiet: var(--wa-color-gray-60);
+    --wa-color-text-link: var(--wa-color-brand-70);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-indigo-90) 55%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-gray-70) 25%, transparent);
+
+    /* Utilities */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-indigo-80) 30%, transparent);
+    --wa-color-focus: var(--wa-color-brand-50);
+    --wa-color-mix-hover: var(--wa-color-orange-50) 10%;
+    --wa-color-mix-active: var(--wa-color-orange-50) 20%;
+
+    /* Shadows - Soft woodland shadows */
+    --wa-shadow-offset-x-scale: 1;
+    --wa-shadow-offset-y-scale: 1.2;
+    --wa-shadow-blur-scale: 1.8;
+    --wa-shadow-spread-scale: 1;
+    --wa-shadow-s: 0 calc(1px * var(--wa-shadow-offset-y-scale)) calc(4px * var(--wa-shadow-blur-scale)) 0 var(--wa-color-shadow);
+    --wa-shadow-m: 0 calc(2px * var(--wa-shadow-offset-y-scale)) calc(8px * var(--wa-shadow-blur-scale)) calc(-1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 calc(3px * var(--wa-shadow-offset-y-scale)) calc(12px * var(--wa-shadow-blur-scale)) calc(-2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-05);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-10);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-50);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-20);
+    --wa-color-brand-border-normal: var(--wa-color-brand-30);
+    --wa-color-brand-border-loud: var(--wa-color-brand-60);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-70);
+    --wa-color-brand-on-normal: var(--wa-color-brand-80);
+    --wa-color-brand-on-loud: var(--wa-color-indigo-90);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-05);
+    --wa-color-success-fill-normal: var(--wa-color-success-10);
+    --wa-color-success-fill-loud: var(--wa-color-success-50);
+    --wa-color-success-border-quiet: var(--wa-color-success-20);
+    --wa-color-success-border-normal: var(--wa-color-success-30);
+    --wa-color-success-border-loud: var(--wa-color-success-60);
+    --wa-color-success-on-quiet: var(--wa-color-success-70);
+    --wa-color-success-on-normal: var(--wa-color-success-80);
+    --wa-color-success-on-loud: var(--wa-color-yellow-05);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-05);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-10);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-20);
+    --wa-color-warning-border-normal: var(--wa-color-warning-30);
+    --wa-color-warning-border-loud: var(--wa-color-warning-60);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-70);
+    --wa-color-warning-on-normal: var(--wa-color-warning-80);
+    --wa-color-warning-on-loud: var(--wa-color-gray-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-05);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-10);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-50);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-20);
+    --wa-color-danger-border-normal: var(--wa-color-danger-30);
+    --wa-color-danger-border-loud: var(--wa-color-danger-60);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-70);
+    --wa-color-danger-on-normal: var(--wa-color-danger-80);
+    --wa-color-danger-on-loud: var(--wa-color-yellow-05);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-gray-05);
+    --wa-color-neutral-fill-normal: var(--wa-color-gray-10);
+    --wa-color-neutral-fill-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-20);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-30);
+    --wa-color-neutral-border-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-on-quiet: var(--wa-color-gray-60);
+    --wa-color-neutral-on-normal: var(--wa-color-gray-70);
+    --wa-color-neutral-on-loud: var(--wa-color-yellow-05);
+
+    /* Particle Colors - Light Theme (Autumn leaves) */
+    --color-item-A: var(--wa-color-red-50);
+    --color-item-B: var(--wa-color-orange-50);
+    --color-item-C: var(--wa-color-yellow-50);
+    --color-item-D: var(--wa-color-green-50);
+  }
+
+  /* ==== DARK THEME (Unknown Forest) ==== */
+  .overthegardenwall.wa-dark,
+  .overthegardenwall-dark:not(.wa-invert),
+  .wa-dark .overthegardenwall,
+  .overthegardenwall .wa-dark {
+    /* Surface & Layout - Dark mysterious woods */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-gray-80) 60%, var(--wa-color-indigo-90) 40%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-gray-90) 70%, var(--wa-color-indigo-95) 30%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-gray-95) 80%, var(--wa-color-indigo-95) 20%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-gray-70) 50%, var(--wa-color-indigo-70) 50%);
+
+    /* Text - Lantern light */
+    --wa-color-text-normal: color-mix(in oklab, var(--wa-color-yellow-10) 70%, var(--wa-color-orange-10) 30%);
+    --wa-color-text-quiet: var(--wa-color-gray-40);
+    --wa-color-text-link: var(--wa-color-brand-40);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-indigo-95) 90%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-gray-80) 55%, transparent);
+
+    /* Utilities - Warm lantern glow */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-yellow-50) 20%, transparent);
+    --wa-color-focus: var(--wa-color-brand-40);
+    --wa-color-mix-hover: var(--wa-color-yellow-40) 12%;
+    --wa-color-mix-active: var(--wa-color-yellow-40) 24%;
+
+    /* Shadows - Lantern glow */
+    --wa-shadow-offset-x-scale: 0;
+    --wa-shadow-offset-y-scale: 0;
+    --wa-shadow-blur-scale: 2.5;
+    --wa-shadow-spread-scale: 1;
+    --wa-shadow-s: 0 0 calc(8px * var(--wa-shadow-blur-scale)) 0 var(--wa-color-shadow);
+    --wa-shadow-m: 0 0 calc(16px * var(--wa-shadow-blur-scale)) calc(1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 0 calc(24px * var(--wa-shadow-blur-scale)) calc(2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-95);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-90);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-40);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-80);
+    --wa-color-brand-border-normal: var(--wa-color-brand-60);
+    --wa-color-brand-border-loud: var(--wa-color-brand-40);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-30);
+    --wa-color-brand-on-normal: var(--wa-color-brand-20);
+    --wa-color-brand-on-loud: var(--wa-color-indigo-95);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-95);
+    --wa-color-success-fill-normal: var(--wa-color-success-90);
+    --wa-color-success-fill-loud: var(--wa-color-success-40);
+    --wa-color-success-border-quiet: var(--wa-color-success-80);
+    --wa-color-success-border-normal: var(--wa-color-success-60);
+    --wa-color-success-border-loud: var(--wa-color-success-40);
+    --wa-color-success-on-quiet: var(--wa-color-success-30);
+    --wa-color-success-on-normal: var(--wa-color-success-20);
+    --wa-color-success-on-loud: var(--wa-color-indigo-95);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-95);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-90);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-80);
+    --wa-color-warning-border-normal: var(--wa-color-warning-60);
+    --wa-color-warning-border-loud: var(--wa-color-warning-50);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-30);
+    --wa-color-warning-on-normal: var(--wa-color-warning-20);
+    --wa-color-warning-on-loud: var(--wa-color-gray-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-95);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-90);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-40);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-80);
+    --wa-color-danger-border-normal: var(--wa-color-danger-60);
+    --wa-color-danger-border-loud: var(--wa-color-danger-40);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-30);
+    --wa-color-danger-on-normal: var(--wa-color-danger-20);
+    --wa-color-danger-on-loud: var(--wa-color-indigo-95);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-gray-95);
+    --wa-color-neutral-fill-normal: var(--wa-color-gray-90);
+    --wa-color-neutral-fill-loud: var(--wa-color-gray-40);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-80);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-60);
+    --wa-color-neutral-border-loud: var(--wa-color-gray-50);
+    --wa-color-neutral-on-quiet: var(--wa-color-gray-40);
+    --wa-color-neutral-on-normal: var(--wa-color-gray-30);
+    --wa-color-neutral-on-loud: var(--wa-color-indigo-95);
+
+    /* Particle Colors - Dark Theme (Mystery lanterns) */
+    --color-item-A: var(--wa-color-yellow-40);
+    --color-item-B: var(--wa-color-orange-40);
+    --color-item-C: var(--wa-color-red-40);
+    --color-item-D: var(--wa-color-cyan-40);
+  }
+}

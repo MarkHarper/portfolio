@@ -1,0 +1,418 @@
+/* The Spine of Night Inspired Color System - Rotoscope Fantasy Horror */
+
+.thespineofnight,
+.thespineofnight.wa-theme-default,
+.thespineofnight-light,
+.thespineofnight.wa-dark,
+.thespineofnight-dark,
+.wa-dark .thespineofnight,
+.thespineofnight .wa-dark,
+.thespineofnight-dark .wa-invert {
+  /* ==== BASE COLOR DEFINITIONS (05-95) ==== */
+
+  /* Red - Blood Ritual */
+  --wa-color-red-05: #fff5f7;
+  --wa-color-red-10: #ffe8ed;
+  --wa-color-red-20: #ffc9d6;
+  --wa-color-red-30: #ffa3b8;
+  --wa-color-red-40: #ff7d9a;
+  --wa-color-red-50: #ff335e;
+  --wa-color-red-60: #e62e54;
+  --wa-color-red-70: #b32442;
+  --wa-color-red-80: #801a2f;
+  --wa-color-red-90: #4d0f1c;
+  --wa-color-red-95: #1a050a;
+
+  /* Orange - Mystic Flame */
+  --wa-color-orange-05: #fff8f5;
+  --wa-color-orange-10: #ffede8;
+  --wa-color-orange-20: #ffd6cc;
+  --wa-color-orange-30: #ffb8a3;
+  --wa-color-orange-40: #ff9a7a;
+  --wa-color-orange-50: #ff5e29;
+  --wa-color-orange-60: #e65525;
+  --wa-color-orange-70: #b3421d;
+  --wa-color-orange-80: #802f15;
+  --wa-color-orange-90: #4d1c0d;
+  --wa-color-orange-95: #1a0a04;
+
+  /* Yellow - Ancient Power */
+  --wa-color-yellow-05: #fffdf5;
+  --wa-color-yellow-10: #fffae8;
+  --wa-color-yellow-20: #fff4cc;
+  --wa-color-yellow-30: #ffeda3;
+  --wa-color-yellow-40: #ffe67a;
+  --wa-color-yellow-50: #ffd329;
+  --wa-color-yellow-60: #e6be25;
+  --wa-color-yellow-70: #b3941d;
+  --wa-color-yellow-80: #806a15;
+  --wa-color-yellow-90: #4d3f0d;
+  --wa-color-yellow-95: #1a1504;
+
+  /* Green - Toxic Bloom */
+  --wa-color-green-05: #f5faf7;
+  --wa-color-green-10: #e8f5ed;
+  --wa-color-green-20: #cce8d6;
+  --wa-color-green-30: #a3d9b8;
+  --wa-color-green-40: #7aca9a;
+  --wa-color-green-50: #29a35e;
+  --wa-color-green-60: #259254;
+  --wa-color-green-70: #1d7242;
+  --wa-color-green-80: #15522f;
+  --wa-color-green-90: #0d311c;
+  --wa-color-green-95: #04110a;
+
+  /* Cyan - Ethereal Glow */
+  --wa-color-cyan-05: #f5fcfc;
+  --wa-color-cyan-10: #e8f9f9;
+  --wa-color-cyan-20: #ccf0f0;
+  --wa-color-cyan-30: #a3e6e6;
+  --wa-color-cyan-40: #7adcdc;
+  --wa-color-cyan-50: #29c5c5;
+  --wa-color-cyan-60: #25b1b1;
+  --wa-color-cyan-70: #1d8a8a;
+  --wa-color-cyan-80: #156363;
+  --wa-color-cyan-90: #0d3b3b;
+  --wa-color-cyan-95: #041414;
+
+  /* Blue - Midnight Sorcery */
+  --wa-color-blue-05: #f5f7fc;
+  --wa-color-blue-10: #e8edf9;
+  --wa-color-blue-20: #ccd6f0;
+  --wa-color-blue-30: #a3b8e6;
+  --wa-color-blue-40: #7a9adc;
+  --wa-color-blue-50: #295ec5;
+  --wa-color-blue-60: #2554b1;
+  --wa-color-blue-70: #1d428a;
+  --wa-color-blue-80: #152f63;
+  --wa-color-blue-90: #0d1c3b;
+  --wa-color-blue-95: #040a14;
+
+  /* Indigo - Deep Magic */
+  --wa-color-indigo-05: #f7f5fc;
+  --wa-color-indigo-10: #ede8f9;
+  --wa-color-indigo-20: #d6ccf0;
+  --wa-color-indigo-30: #b8a3e6;
+  --wa-color-indigo-40: #9a7adc;
+  --wa-color-indigo-50: #5e29c5;
+  --wa-color-indigo-60: #5425b1;
+  --wa-color-indigo-70: #421d8a;
+  --wa-color-indigo-80: #2f1563;
+  --wa-color-indigo-90: #1c0d3b;
+  --wa-color-indigo-95: #0a0414;
+
+  /* Purple - Eldritch Void */
+  --wa-color-purple-05: #faf5fc;
+  --wa-color-purple-10: #f5e8f9;
+  --wa-color-purple-20: #e8ccf0;
+  --wa-color-purple-30: #d9a3e6;
+  --wa-color-purple-40: #ca7adc;
+  --wa-color-purple-50: #a329c5;
+  --wa-color-purple-60: #9225b1;
+  --wa-color-purple-70: #721d8a;
+  --wa-color-purple-80: #521563;
+  --wa-color-purple-90: #310d3b;
+  --wa-color-purple-95: #110414;
+
+  /* Pink - Arcane Energy */
+  --wa-color-pink-05: #fcf5fa;
+  --wa-color-pink-10: #f9e8f5;
+  --wa-color-pink-20: #f0cce8;
+  --wa-color-pink-30: #e6a3d9;
+  --wa-color-pink-40: #dc7aca;
+  --wa-color-pink-50: #c529a3;
+  --wa-color-pink-60: #b12592;
+  --wa-color-pink-70: #8a1d72;
+  --wa-color-pink-80: #631552;
+  --wa-color-pink-90: #3b0d31;
+  --wa-color-pink-95: #140411;
+
+  /* Gray - Ancient Stone */
+  --wa-color-gray-05: #f7f7f7;
+  --wa-color-gray-10: #ebebeb;
+  --wa-color-gray-20: #d1d1d1;
+  --wa-color-gray-30: #b8b8b8;
+  --wa-color-gray-40: #8f8f8f;
+  --wa-color-gray-50: #666666;
+  --wa-color-gray-60: #4d4d4d;
+  --wa-color-gray-70: #3d3d3d;
+  --wa-color-gray-80: #2b2b2b;
+  --wa-color-gray-90: #1a1a1a;
+  --wa-color-gray-95: #0d0d0d;
+
+  /* Void - Absolute Darkness */
+  --wa-color-void-05: #141414;
+  --wa-color-void-10: #0f0f0f;
+  --wa-color-void-20: #0c0c0c;
+  --wa-color-void-30: #0a0a0a;
+  --wa-color-void-40: #080808;
+  --wa-color-void-50: #060606;
+  --wa-color-void-60: #040404;
+  --wa-color-void-70: #030303;
+  --wa-color-void-80: #020202;
+  --wa-color-void-90: #010101;
+  --wa-color-void-95: #000000;
+
+  /* ==== VARIANT COLOR MAPPINGS ==== */
+
+  /* Brand - Eldritch Purple */
+  --wa-color-brand-05: var(--wa-color-purple-05);
+  --wa-color-brand-10: var(--wa-color-purple-10);
+  --wa-color-brand-20: var(--wa-color-purple-20);
+  --wa-color-brand-30: var(--wa-color-purple-30);
+  --wa-color-brand-40: var(--wa-color-purple-40);
+  --wa-color-brand-50: var(--wa-color-purple-50);
+  --wa-color-brand-60: var(--wa-color-purple-60);
+  --wa-color-brand-70: var(--wa-color-purple-70);
+  --wa-color-brand-80: var(--wa-color-purple-80);
+  --wa-color-brand-90: var(--wa-color-purple-90);
+  --wa-color-brand-95: var(--wa-color-purple-95);
+
+  /* Success - Toxic Green */
+  --wa-color-success-05: var(--wa-color-green-05);
+  --wa-color-success-10: var(--wa-color-green-10);
+  --wa-color-success-20: var(--wa-color-green-20);
+  --wa-color-success-30: var(--wa-color-green-30);
+  --wa-color-success-40: var(--wa-color-green-40);
+  --wa-color-success-50: var(--wa-color-green-50);
+  --wa-color-success-60: var(--wa-color-green-60);
+  --wa-color-success-70: var(--wa-color-green-70);
+  --wa-color-success-80: var(--wa-color-green-80);
+  --wa-color-success-90: var(--wa-color-green-90);
+  --wa-color-success-95: var(--wa-color-green-95);
+
+  /* Warning - Mystic Flame */
+  --wa-color-warning-05: var(--wa-color-orange-05);
+  --wa-color-warning-10: var(--wa-color-orange-10);
+  --wa-color-warning-20: var(--wa-color-orange-20);
+  --wa-color-warning-30: var(--wa-color-orange-30);
+  --wa-color-warning-40: var(--wa-color-orange-40);
+  --wa-color-warning-50: var(--wa-color-orange-50);
+  --wa-color-warning-60: var(--wa-color-orange-60);
+  --wa-color-warning-70: var(--wa-color-orange-70);
+  --wa-color-warning-80: var(--wa-color-orange-80);
+  --wa-color-warning-90: var(--wa-color-orange-90);
+  --wa-color-warning-95: var(--wa-color-orange-95);
+
+  /* Danger - Blood Red */
+  --wa-color-danger-05: var(--wa-color-red-05);
+  --wa-color-danger-10: var(--wa-color-red-10);
+  --wa-color-danger-20: var(--wa-color-red-20);
+  --wa-color-danger-30: var(--wa-color-red-30);
+  --wa-color-danger-40: var(--wa-color-red-40);
+  --wa-color-danger-50: var(--wa-color-red-50);
+  --wa-color-danger-60: var(--wa-color-red-60);
+  --wa-color-danger-70: var(--wa-color-red-70);
+  --wa-color-danger-80: var(--wa-color-red-80);
+  --wa-color-danger-90: var(--wa-color-red-90);
+  --wa-color-danger-95: var(--wa-color-red-95);
+
+  /* Neutral - Ancient Stone */
+  --wa-color-neutral-05: var(--wa-color-gray-05);
+  --wa-color-neutral-10: var(--wa-color-gray-10);
+  --wa-color-neutral-20: var(--wa-color-gray-20);
+  --wa-color-neutral-30: var(--wa-color-gray-30);
+  --wa-color-neutral-40: var(--wa-color-gray-40);
+  --wa-color-neutral-50: var(--wa-color-gray-50);
+  --wa-color-neutral-60: var(--wa-color-gray-60);
+  --wa-color-neutral-70: var(--wa-color-gray-70);
+  --wa-color-neutral-80: var(--wa-color-gray-80);
+  --wa-color-neutral-90: var(--wa-color-gray-90);
+  --wa-color-neutral-95: var(--wa-color-gray-95);
+}
+
+@layer wa-theme {
+  /* ==== LIGHT THEME (Ancient Ruins) ==== */
+  .thespineofnight:not(.wa-dark),
+  .thespineofnight.wa-theme-default:not(.wa-dark),
+  .thespineofnight-light,
+  .thespineofnight-dark .wa-invert {
+    /* Surface & Layout - Weathered stone and magic */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-gray-05) 70%, var(--wa-color-purple-05) 30%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-gray-10) 65%, var(--wa-color-indigo-10) 35%);
+    --wa-color-surface-lowered: color-mix(in oklab, var(--wa-color-gray-20) 60%, var(--wa-color-indigo-20) 40%);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-purple-40) 60%, var(--wa-color-gray-40) 40%);
+
+    /* Text - Dark mystical text */
+    --wa-color-text-normal: color-mix(in oklab, var(--wa-color-gray-90) 80%, var(--wa-color-indigo-90) 20%);
+    --wa-color-text-quiet: var(--wa-color-gray-60);
+    --wa-color-text-link: var(--wa-color-brand-60);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-indigo-90) 60%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-purple-70) 30%, transparent);
+
+    /* Utilities */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-purple-80) 35%, transparent);
+    --wa-color-focus: var(--wa-color-brand-50);
+    --wa-color-mix-hover: var(--wa-color-purple-50) 12%;
+    --wa-color-mix-active: var(--wa-color-purple-50) 24%;
+
+    /* Shadows - Mystical energy */
+    --wa-shadow-offset-x-scale: 1;
+    --wa-shadow-offset-y-scale: 1;
+    --wa-shadow-blur-scale: 2.2;
+    --wa-shadow-spread-scale: 1;
+    --wa-shadow-s: 0 calc(1px * var(--wa-shadow-offset-y-scale)) calc(5px * var(--wa-shadow-blur-scale)) 0 var(--wa-color-shadow);
+    --wa-shadow-m: 0 calc(2px * var(--wa-shadow-offset-y-scale)) calc(10px * var(--wa-shadow-blur-scale)) calc(-1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 calc(3px * var(--wa-shadow-offset-y-scale)) calc(15px * var(--wa-shadow-blur-scale)) calc(-2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-05);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-10);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-50);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-20);
+    --wa-color-brand-border-normal: var(--wa-color-brand-30);
+    --wa-color-brand-border-loud: var(--wa-color-brand-60);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-70);
+    --wa-color-brand-on-normal: var(--wa-color-brand-80);
+    --wa-color-brand-on-loud: var(--wa-color-gray-05);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-05);
+    --wa-color-success-fill-normal: var(--wa-color-success-10);
+    --wa-color-success-fill-loud: var(--wa-color-success-50);
+    --wa-color-success-border-quiet: var(--wa-color-success-20);
+    --wa-color-success-border-normal: var(--wa-color-success-30);
+    --wa-color-success-border-loud: var(--wa-color-success-60);
+    --wa-color-success-on-quiet: var(--wa-color-success-70);
+    --wa-color-success-on-normal: var(--wa-color-success-80);
+    --wa-color-success-on-loud: var(--wa-color-gray-05);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-05);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-10);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-20);
+    --wa-color-warning-border-normal: var(--wa-color-warning-30);
+    --wa-color-warning-border-loud: var(--wa-color-warning-60);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-70);
+    --wa-color-warning-on-normal: var(--wa-color-warning-80);
+    --wa-color-warning-on-loud: var(--wa-color-gray-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-05);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-10);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-50);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-20);
+    --wa-color-danger-border-normal: var(--wa-color-danger-30);
+    --wa-color-danger-border-loud: var(--wa-color-danger-60);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-70);
+    --wa-color-danger-on-normal: var(--wa-color-danger-80);
+    --wa-color-danger-on-loud: var(--wa-color-gray-05);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-gray-05);
+    --wa-color-neutral-fill-normal: var(--wa-color-gray-10);
+    --wa-color-neutral-fill-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-20);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-30);
+    --wa-color-neutral-border-loud: var(--wa-color-gray-60);
+    --wa-color-neutral-on-quiet: var(--wa-color-gray-60);
+    --wa-color-neutral-on-normal: var(--wa-color-gray-70);
+    --wa-color-neutral-on-loud: var(--wa-color-gray-05);
+
+    /* Particle Colors - Light Theme (Ritual magic) */
+    --color-item-A: var(--wa-color-purple-50);
+    --color-item-B: var(--wa-color-pink-50);
+    --color-item-C: var(--wa-color-cyan-50);
+    --color-item-D: var(--wa-color-orange-50);
+  }
+
+  /* ==== DARK THEME (Nightmare Void) ==== */
+  .thespineofnight.wa-dark,
+  .thespineofnight-dark:not(.wa-invert),
+  .wa-dark .thespineofnight,
+  .thespineofnight .wa-dark {
+    /* Surface & Layout - Absolute darkness and magic */
+    --wa-color-surface-raised: color-mix(in oklab, var(--wa-color-void-20) 70%, var(--wa-color-purple-95) 30%);
+    --wa-color-surface-default: color-mix(in oklab, var(--wa-color-void-40) 80%, var(--wa-color-indigo-95) 20%);
+    --wa-color-surface-lowered: var(--wa-color-void-70);
+    --wa-color-surface-border: color-mix(in oklab, var(--wa-color-purple-70) 60%, var(--wa-color-pink-70) 40%);
+
+    /* Text - Eldritch glow */
+    --wa-color-text-normal: color-mix(in oklab, var(--wa-color-purple-10) 60%, var(--wa-color-pink-10) 40%);
+    --wa-color-text-quiet: color-mix(in oklab, var(--wa-color-purple-40) 70%, var(--wa-color-gray-40) 30%);
+    --wa-color-text-link: var(--wa-color-brand-40);
+
+    /* Overlays */
+    --wa-color-overlay-modal: color-mix(in oklab, var(--wa-color-void-90) 95%, transparent);
+    --wa-color-overlay-inline: color-mix(in oklab, var(--wa-color-void-70) 70%, transparent);
+
+    /* Utilities - Arcane energy */
+    --wa-color-shadow: color-mix(in oklab, var(--wa-color-purple-50) 30%, transparent);
+    --wa-color-focus: var(--wa-color-brand-40);
+    --wa-color-mix-hover: var(--wa-color-purple-40) 15%;
+    --wa-color-mix-active: var(--wa-color-purple-40) 30%;
+
+    /* Shadows - Magical aura */
+    --wa-shadow-offset-x-scale: 0;
+    --wa-shadow-offset-y-scale: 0;
+    --wa-shadow-blur-scale: 4;
+    --wa-shadow-spread-scale: 2;
+    --wa-shadow-s: 0 0 calc(10px * var(--wa-shadow-blur-scale)) calc(1px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-m: 0 0 calc(20px * var(--wa-shadow-blur-scale)) calc(2px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+    --wa-shadow-l: 0 0 calc(30px * var(--wa-shadow-blur-scale)) calc(3px * var(--wa-shadow-spread-scale)) var(--wa-color-shadow);
+
+    /* Brand Variants */
+    --wa-color-brand-fill-quiet: var(--wa-color-brand-95);
+    --wa-color-brand-fill-normal: var(--wa-color-brand-90);
+    --wa-color-brand-fill-loud: var(--wa-color-brand-40);
+    --wa-color-brand-border-quiet: var(--wa-color-brand-80);
+    --wa-color-brand-border-normal: var(--wa-color-brand-60);
+    --wa-color-brand-border-loud: var(--wa-color-brand-40);
+    --wa-color-brand-on-quiet: var(--wa-color-brand-30);
+    --wa-color-brand-on-normal: var(--wa-color-brand-20);
+    --wa-color-brand-on-loud: var(--wa-color-void-90);
+
+    /* Success Variants */
+    --wa-color-success-fill-quiet: var(--wa-color-success-95);
+    --wa-color-success-fill-normal: var(--wa-color-success-90);
+    --wa-color-success-fill-loud: var(--wa-color-success-40);
+    --wa-color-success-border-quiet: var(--wa-color-success-80);
+    --wa-color-success-border-normal: var(--wa-color-success-60);
+    --wa-color-success-border-loud: var(--wa-color-success-40);
+    --wa-color-success-on-quiet: var(--wa-color-success-30);
+    --wa-color-success-on-normal: var(--wa-color-success-20);
+    --wa-color-success-on-loud: var(--wa-color-void-90);
+
+    /* Warning Variants */
+    --wa-color-warning-fill-quiet: var(--wa-color-warning-95);
+    --wa-color-warning-fill-normal: var(--wa-color-warning-90);
+    --wa-color-warning-fill-loud: var(--wa-color-warning-50);
+    --wa-color-warning-border-quiet: var(--wa-color-warning-80);
+    --wa-color-warning-border-normal: var(--wa-color-warning-60);
+    --wa-color-warning-border-loud: var(--wa-color-warning-50);
+    --wa-color-warning-on-quiet: var(--wa-color-warning-30);
+    --wa-color-warning-on-normal: var(--wa-color-warning-20);
+    --wa-color-warning-on-loud: var(--wa-color-void-90);
+
+    /* Danger Variants */
+    --wa-color-danger-fill-quiet: var(--wa-color-danger-95);
+    --wa-color-danger-fill-normal: var(--wa-color-danger-90);
+    --wa-color-danger-fill-loud: var(--wa-color-danger-50);
+    --wa-color-danger-border-quiet: var(--wa-color-danger-80);
+    --wa-color-danger-border-normal: var(--wa-color-danger-60);
+    --wa-color-danger-border-loud: var(--wa-color-danger-40);
+    --wa-color-danger-on-quiet: var(--wa-color-danger-30);
+    --wa-color-danger-on-normal: var(--wa-color-danger-20);
+    --wa-color-danger-on-loud: var(--wa-color-void-90);
+
+    /* Neutral Variants */
+    --wa-color-neutral-fill-quiet: var(--wa-color-void-50);
+    --wa-color-neutral-fill-normal: var(--wa-color-void-40);
+    --wa-color-neutral-fill-loud: var(--wa-color-purple-40);
+    --wa-color-neutral-border-quiet: var(--wa-color-gray-80);
+    --wa-color-neutral-border-normal: var(--wa-color-gray-70);
+    --wa-color-neutral-border-loud: var(--wa-color-purple-60);
+    --wa-color-neutral-on-quiet: var(--wa-color-purple-40);
+    --wa-color-neutral-on-normal: var(--wa-color-purple-30);
+    --wa-color-neutral-on-loud: var(--wa-color-void-90);
+
+    /* Particle Colors - Dark Theme (Eldritch power) */
+    --color-item-A: var(--wa-color-purple-40);
+    --color-item-B: var(--wa-color-pink-40);
+    --color-item-C: var(--wa-color-cyan-40);
+    --color-item-D: var(--wa-color-red-40);
+  }
+}

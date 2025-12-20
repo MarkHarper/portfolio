@@ -12,6 +12,16 @@ export const isThemeMode = (text: any): text is TThemeMode => {
 
 export const STATIC_THEME_NAMES = {
   taopunk: 'taopunk',
+  enterthevoid: 'enterthevoid',
+  'enterthevoid-cyan': 'enterthevoid-cyan',
+  'enterthevoid-purple': 'enterthevoid-purple',
+  'enterthevoid-red': 'enterthevoid-red',
+  cuphead: 'cuphead',
+  hollowknight: 'hollowknight',
+  robotdreams: 'robotdreams',
+  overthegardenwall: 'overthegardenwall',
+  thespineofnight: 'thespineofnight',
+  renoir: 'renoir',
 } as const;
 
 type TStaticThemeNameKeys = keyof typeof STATIC_THEME_NAMES;

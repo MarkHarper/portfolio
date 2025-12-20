@@ -1,3 +1,4 @@
 @import 'reset.css';
+@import './effects/index.css';
 @import './theme/index.css';
 @import './unique.css';

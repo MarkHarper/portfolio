@@ -9,7 +9,6 @@ export function renderCircle(
 ): void {
   ctx.beginPath();
   ctx.arc(circle.x, circle.y, circle.radius, 0, DOUBLE_PI);
-  ctx.closePath();
 
   if (fillStyle) {
     ctx.fillStyle = fillStyle;

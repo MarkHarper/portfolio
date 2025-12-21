@@ -57,10 +57,6 @@ export class Field implements Field {
       ...updates,
     };
 
-    for (const prop in updates) {
-      this.settings[prop] = updates[prop];
-    }
-
     if (updates.lineColor) {
       this.themeMainRGB = hexToRGB(updates.lineColor);
     }
@@ -174,16 +170,34 @@ export class Field implements Field {
 
     clear(ctx, width, height);
 
+    const edgesByAlpha = new Map<
+      number,
+      Array<{ p1: Particle; p2: Particle }>
+    >();
+
     this.contents.forEach((p1, ind1) => {
       this.contents.forEach((p2, ind2) => {
-        if (ind1 === ind2) return;
+        if (ind2 <= ind1) return;
 
         const { directSquared } = distanceSquared(p1, p2);
         if (directSquared < edgeDistance) {
           const alpha = alphaRGB(directSquared / edgeDistance);
-          renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
+          if (!edgesByAlpha.has(alpha)) {
+            edgesByAlpha.set(alpha, []);
+          }
+          edgesByAlpha.get(alpha)?.push({ p1, p2 });
         }
       });
+    });
+
+    edgesByAlpha.forEach((edges, alpha) => {
+      ctx.beginPath();
+      ctx.strokeStyle = rgba(r, g, b, alpha);
+      edges.forEach(({ p1, p2 }) => {
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+      });
+      ctx.stroke();
     });
 
     this.contents.forEach((particle) => {
@@ -198,9 +212,14 @@ export class Field implements Field {
 
     clear(ctx, width, height);
 
+    const edgesByAlpha = new Map<
+      number,
+      Array<{ p1: Particle; p2: Particle }>
+    >();
+
     this.contents.forEach((p1, ind1) => {
       this.contents.forEach((p2, ind2) => {
-        if (ind1 === ind2) return;
+        if (ind2 <= ind1) return;
 
         const { dx, dy, directSquared } = distanceSquared(p1, p2);
         if (checkCollision(p1, p2, directSquared)) {
@@ -219,7 +238,10 @@ export class Field implements Field {
           p2.setVelocity(nextP2.vx, nextP2.vy);
         } else if (directSquared < edgeDistance) {
           const alpha = alphaRGB(directSquared / edgeDistance);
-          renderLine(p1, p2, rgba(r, g, b, alpha), ctx);
+          if (!edgesByAlpha.has(alpha)) {
+            edgesByAlpha.set(alpha, []);
+          }
+          edgesByAlpha.get(alpha).push({ p1, p2 });
 
           const { p1: nextP1, p2: nextP2 } = spring(
             p1,
@@ -232,6 +254,16 @@ export class Field implements Field {
           p2.setVelocity(nextP2.vx, nextP2.vy);
         }
       });
+    });
+
+    edgesByAlpha.forEach((edges, alpha) => {
+      ctx.beginPath();
+      ctx.strokeStyle = rgba(r, g, b, alpha);
+      edges.forEach(({ p1, p2 }) => {
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+      });
+      ctx.stroke();
     });
 
     this.contents.forEach((particle) => {

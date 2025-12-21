@@ -4,8 +4,18 @@ export type RGB = {
   b: number;
 };
 
+const rgbaCache = new Map<string, string>();
+
 export function rgba(r: number, g: number, b: number, a: number): string {
-  return `rgba(${r}, ${g}, ${b}, ${a})`;
+  const key = `${r},${g},${b},${a}`;
+  let cached = rgbaCache.get(key);
+
+  if (!cached) {
+    cached = `rgba(${r}, ${g}, ${b}, ${a})`;
+    rgbaCache.set(key, cached);
+  }
+
+  return cached;
 }
 
 // converts a value from 0 to 1 to an rgb (0 - 255) scale

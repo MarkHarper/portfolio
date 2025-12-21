@@ -10,6 +10,5 @@ export function renderLine(
   ctx.strokeStyle = strokeStyle;
   ctx.moveTo(p1.x, p1.y);
   ctx.lineTo(p2.x, p2.y);
-  ctx.closePath();
   ctx.stroke();
 }

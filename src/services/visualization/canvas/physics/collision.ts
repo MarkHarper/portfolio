@@ -86,7 +86,7 @@ export function handleCollision(
     p2: {
       x: p2.x + declinedVx2,
       y: p2.y + declinedVy2,
-      vx: declinedVy2,
+      vx: declinedVx2,
       vy: declinedVy2,
     },
   };

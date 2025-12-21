@@ -28,6 +28,7 @@ export interface Field extends Renderer {
   setDimensions(a: number, b: number): void;
   draw(): void;
   render(): void;
+  renderFPS(fps: number): void;
 }
 
 export class Field implements Field {
@@ -244,4 +245,18 @@ export class Field implements Field {
       particle.render(ctx);
     });
   };
+
+  renderFPS(fps: number): void {
+    const { ctx } = this;
+    ctx.font = '16px monospace';
+    ctx.fillStyle = rgba(
+      this.themeMainRGB.r,
+      this.themeMainRGB.g,
+      this.themeMainRGB.b,
+      1,
+    );
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText(`FPS: ${fps}`, 10, 10);
+  }
 }

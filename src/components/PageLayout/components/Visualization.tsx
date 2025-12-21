@@ -41,6 +41,7 @@ const Visualization = () => {
         data-edge-distance={edgeDistance}
         data-spring-strength={springStrength}
         data-play={isRunning}
+        data-show-fps={true}
       ></graph-canvas>
     </>
   );

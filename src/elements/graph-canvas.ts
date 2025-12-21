@@ -49,13 +49,43 @@ export class GraphCanvas extends LitElement {
   @property({ type: Array, reflect: true })
   nodes?: any[] = undefined;
 
+  @property({ type: Boolean, attribute: 'data-show-fps', reflect: true })
+  showFps: boolean = false;
+
   @state()
   private field?: Field = undefined;
+
+  @state()
+  private fps: number = 0;
 
   connectedCallback() {
     super.connectedCallback();
 
     this.init();
+    this.startFPSUpdates();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.stopFPSUpdates();
+  }
+
+  private fpsUpdateInterval?: number;
+
+  private startFPSUpdates() {
+    this.fpsUpdateInterval = window.setInterval(() => {
+      this.fps = this.animation.getFPS();
+    }, 100);
+  }
+
+  private stopFPSUpdates() {
+    if (this.fpsUpdateInterval) {
+      clearInterval(this.fpsUpdateInterval);
+    }
+  }
+
+  getFPS(): number {
+    return this.fps;
   }
 
   private init() {
@@ -74,10 +104,19 @@ export class GraphCanvas extends LitElement {
     }
 
     this.field = new Field(width, height, settings, this._canvas);
-    this.animation.setRender(this.field.render);
+    this.animation.setRender(this.createRenderFunction());
     this.animation.start();
 
     this.play = true;
+  }
+
+  private createRenderFunction() {
+    return () => {
+      this.field?.render();
+      if (this.showFps) {
+        this.field?.renderFPS(this.fps);
+      }
+    };
   }
 
   updated(changedProperties) {
@@ -95,8 +134,11 @@ export class GraphCanvas extends LitElement {
 
       if (!this.play) {
         this.field?.draw();
+        if (this.showFps) {
+          this.field?.renderFPS(this.fps);
+        }
       } else {
-        this.animation.setRender(this.field?.render);
+        this.animation.setRender(this.createRenderFunction());
         this.animation?.start();
       }
     }
@@ -112,7 +154,7 @@ export class GraphCanvas extends LitElement {
 
       this.animation?.stop();
       this.field?.setDimensions(width, height);
-      this.animation.setRender(this.field?.render);
+      this.animation.setRender(this.createRenderFunction());
       this.animation?.start();
     }
 
@@ -131,7 +173,7 @@ export class GraphCanvas extends LitElement {
 
       this.animation?.stop();
       this.field?.updateSettings(settings);
-      this.animation.setRender(this.field?.render);
+      this.animation.setRender(this.createRenderFunction());
       this.animation?.start();
     } else if (changedProperties.has('density')) {
       this.animation?.stop();
@@ -139,7 +181,7 @@ export class GraphCanvas extends LitElement {
         density: this.density,
       });
       this.field?.updateParticles();
-      this.animation.setRender(this.field?.render);
+      this.animation.setRender(this.createRenderFunction());
       this.animation?.start();
     } else if (changedProperties.has('nodes')) {
       this.animation?.stop();
@@ -147,8 +189,21 @@ export class GraphCanvas extends LitElement {
         nodes: this.nodes,
       });
       this.field?.updateParticles();
-      this.animation.setRender(this.field?.render);
+      this.animation.setRender(this.createRenderFunction());
       this.animation?.start();
+    }
+
+    if (changedProperties.has('showFps')) {
+      if (this.play) {
+        this.animation?.stop();
+        this.animation.setRender(this.createRenderFunction());
+        this.animation?.start();
+      } else {
+        this.field?.draw();
+        if (this.showFps) {
+          this.field?.renderFPS(this.fps);
+        }
+      }
     }
   }
 

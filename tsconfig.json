@@ -33,7 +33,8 @@
       ]
     },
     "types": [
-      "@awesome.me/webawesome/dist/custom-elements-jsx.d.ts"
+      "@awesome.me/webawesome/dist/custom-elements-jsx.d.ts",
+      "@webgpu/types"
     ]
   },
   "include": [

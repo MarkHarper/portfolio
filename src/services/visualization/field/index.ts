@@ -7,6 +7,7 @@ import { spring } from '../canvas/physics/spring';
 import { setDimensions as setCanvasDimensions } from '../canvas/dimensions';
 import { renderLine } from '../canvas/shapes/line';
 import { Particle } from './particle';
+import { SpatialHashGrid } from '../canvas/spatial-hash-grid';
 
 type Renderer = {
   draw: (a: CanvasRenderingContext2D) => void;
@@ -32,6 +33,9 @@ export interface Field extends Renderer {
 }
 
 export class Field implements Field {
+  private spatialGrid: SpatialHashGrid;
+  private particleIndexMap: Map<Particle, number>;
+
   constructor(
     width: number,
     height: number,
@@ -47,6 +51,9 @@ export class Field implements Field {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
 
+    this.spatialGrid = new SpatialHashGrid(settings.edgeDistance);
+    this.particleIndexMap = new Map();
+
     setCanvasDimensions(canvas, this.ctx, width, height);
     this.createParticles();
   }
@@ -59,6 +66,10 @@ export class Field implements Field {
 
     if (updates.lineColor) {
       this.themeMainRGB = hexToRGB(updates.lineColor);
+    }
+
+    if (updates.edgeDistance) {
+      this.spatialGrid = new SpatialHashGrid(updates.edgeDistance);
     }
   }
 
@@ -170,39 +181,38 @@ export class Field implements Field {
 
     clear(ctx, width, height);
 
-    const edgesByAlpha = new Map<
-      number,
-      Array<{ p1: Particle; p2: Particle }>
-    >();
+    this.spatialGrid.clear();
+    this.particleIndexMap.clear();
+    for (let i = 0; i < this.contents.length; i++) {
+      const particle = this.contents[i];
+      this.spatialGrid.insert(particle);
+      this.particleIndexMap.set(particle, i);
+    }
 
-    this.contents.forEach((p1, ind1) => {
-      this.contents.forEach((p2, ind2) => {
-        if (ind2 <= ind1) return;
+    ctx.beginPath();
+    ctx.strokeStyle = rgba(r, g, b, 0.3);
+
+    for (let i = 0; i < this.contents.length; i++) {
+      const p1 = this.contents[i];
+      const nearby = this.spatialGrid.getNearbyParticles(p1);
+
+      for (let j = 0; j < nearby.length; j++) {
+        const p2 = nearby[j];
+        const p2Index = this.particleIndexMap.get(p2)!;
+        if (p2Index <= i) continue;
 
         const { directSquared } = distanceSquared(p1, p2);
         if (directSquared < edgeDistance) {
-          const alpha = alphaRGB(directSquared / edgeDistance);
-          if (!edgesByAlpha.has(alpha)) {
-            edgesByAlpha.set(alpha, []);
-          }
-          edgesByAlpha.get(alpha)?.push({ p1, p2 });
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
         }
-      });
-    });
+      }
+    }
+    ctx.stroke();
 
-    edgesByAlpha.forEach((edges, alpha) => {
-      ctx.beginPath();
-      ctx.strokeStyle = rgba(r, g, b, alpha);
-      edges.forEach(({ p1, p2 }) => {
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-      });
-      ctx.stroke();
-    });
-
-    this.contents.forEach((particle) => {
-      particle.render(ctx);
-    });
+    for (let i = 0; i < this.contents.length; i++) {
+      this.contents[i].render(ctx);
+    }
   };
 
   render = (): void => {
@@ -212,14 +222,25 @@ export class Field implements Field {
 
     clear(ctx, width, height);
 
-    const edgesByAlpha = new Map<
-      number,
-      Array<{ p1: Particle; p2: Particle }>
-    >();
+    this.spatialGrid.clear();
+    this.particleIndexMap.clear();
+    for (let i = 0; i < this.contents.length; i++) {
+      const particle = this.contents[i];
+      this.spatialGrid.insert(particle);
+      this.particleIndexMap.set(particle, i);
+    }
 
-    this.contents.forEach((p1, ind1) => {
-      this.contents.forEach((p2, ind2) => {
-        if (ind2 <= ind1) return;
+    ctx.beginPath();
+    ctx.strokeStyle = rgba(r, g, b, 0.3);
+
+    for (let i = 0; i < this.contents.length; i++) {
+      const p1 = this.contents[i];
+      const nearby = this.spatialGrid.getNearbyParticles(p1);
+
+      for (let j = 0; j < nearby.length; j++) {
+        const p2 = nearby[j];
+        const p2Index = this.particleIndexMap.get(p2)!;
+        if (p2Index <= i) continue;
 
         const { dx, dy, directSquared } = distanceSquared(p1, p2);
         if (checkCollision(p1, p2, directSquared)) {
@@ -237,11 +258,8 @@ export class Field implements Field {
           p2.setPosition(nextP2.x, nextP2.y);
           p2.setVelocity(nextP2.vx, nextP2.vy);
         } else if (directSquared < edgeDistance) {
-          const alpha = alphaRGB(directSquared / edgeDistance);
-          if (!edgesByAlpha.has(alpha)) {
-            edgesByAlpha.set(alpha, []);
-          }
-          edgesByAlpha.get(alpha).push({ p1, p2 });
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
 
           const { p1: nextP1, p2: nextP2 } = spring(
             p1,
@@ -253,20 +271,12 @@ export class Field implements Field {
           p1.setVelocity(nextP1.vx, nextP1.vy);
           p2.setVelocity(nextP2.vx, nextP2.vy);
         }
-      });
-    });
+      }
+    }
+    ctx.stroke();
 
-    edgesByAlpha.forEach((edges, alpha) => {
-      ctx.beginPath();
-      ctx.strokeStyle = rgba(r, g, b, alpha);
-      edges.forEach(({ p1, p2 }) => {
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-      });
-      ctx.stroke();
-    });
-
-    this.contents.forEach((particle) => {
+    for (let i = 0; i < this.contents.length; i++) {
+      const particle = this.contents[i];
       const possibleX = particle.x + particle.vx;
       const x = clamp(possibleX, 0, width);
 
@@ -275,7 +285,7 @@ export class Field implements Field {
 
       particle.setPosition(x, y);
       particle.render(ctx);
-    });
+    }
   };
 
   renderFPS(fps: number): void {

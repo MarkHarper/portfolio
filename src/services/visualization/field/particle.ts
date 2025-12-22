@@ -2,6 +2,7 @@ import { renderCircle } from '../canvas/shapes/circle';
 import { MovingCircleObject } from '../canvas/types';
 
 export interface Particle extends MovingCircleObject {
+  tag: number;
   fillStyle: string;
 
   render(ctx: CanvasRenderingContext2D): void;

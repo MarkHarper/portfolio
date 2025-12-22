@@ -2,7 +2,9 @@ import React from 'react';
 import { LitElement, css, html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 
-import { Field } from '~/services/visualization/field';
+import { ThreeField } from '~/services/visualization/field/three-field';
+import { WebGPUField } from '~/services/visualization/field/webgpu-field';
+import { supportsWebGPU } from '~/services/visualization/compute/backends/capability-detector';
 
 import { AnimationController } from './AnimationController';
 
@@ -14,6 +16,18 @@ export class GraphCanvas extends LitElement {
       width: 100%;
       height: 100%;
       background-color: var(--canvas);
+      position: relative;
+    }
+
+    .fps-counter {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: monospace;
+      font-size: 16px;
+      color: var(--text-primary);
+      pointer-events: none;
+      z-index: 10;
     }
   `;
 
@@ -53,10 +67,13 @@ export class GraphCanvas extends LitElement {
   showFps: boolean = false;
 
   @state()
-  private field?: Field = undefined;
+  private field?: ThreeField | WebGPUField = undefined;
 
   @state()
   private fps: number = 0;
+
+  @state()
+  private useWebGPU: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -88,7 +105,7 @@ export class GraphCanvas extends LitElement {
     return this.fps;
   }
 
-  private init() {
+  private async init() {
     const { width, height } = this;
     const settings = {
       density: this.density,
@@ -103,7 +120,33 @@ export class GraphCanvas extends LitElement {
       return;
     }
 
-    this.field = new Field(width, height, settings, this._canvas);
+    // Detect Firefox - use Three.js for better performance
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+
+    if (isFirefox) {
+      console.log('[GraphCanvas] 🦊 Firefox detected - Using Three.js renderer for optimal performance');
+      console.log('[GraphCanvas] 💡 Firefox WebGPU is experimental. Three.js (WebGL) provides better stability and performance.');
+      this.useWebGPU = false;
+      this.field = new ThreeField(width, height, settings, this._canvas);
+    } else {
+      // Detect WebGPU support for non-Firefox browsers
+      this.useWebGPU = await supportsWebGPU();
+
+      if (this.useWebGPU) {
+        console.log('[GraphCanvas] Using WebGPU renderer');
+        try {
+          this.field = new WebGPUField(width, height, settings, this._canvas);
+        } catch (e) {
+          console.warn('[GraphCanvas] WebGPU failed, falling back to Three.js:', e);
+          this.useWebGPU = false;
+          this.field = new ThreeField(width, height, settings, this._canvas);
+        }
+      } else {
+        console.log('[GraphCanvas] Using Three.js renderer');
+        this.field = new ThreeField(width, height, settings, this._canvas);
+      }
+    }
+
     this.animation.setRender(this.createRenderFunction());
     this.animation.start();
 
@@ -113,19 +156,17 @@ export class GraphCanvas extends LitElement {
   private createRenderFunction() {
     return () => {
       this.field?.render();
-      if (this.showFps) {
-        this.field?.renderFPS(this.fps);
-      }
     };
   }
 
-  updated(changedProperties) {
+  updated(changedProperties: Map<string, any>) {
     if (!this.field) {
       this.init();
     }
 
     if (changedProperties.has('height') || changedProperties.has('width')) {
-      const { width, height } = changedProperties;
+      const width = changedProperties.get('width');
+      const height = changedProperties.get('height');
       const nextWidth = width ?? this.width;
       const nextHeight = height ?? this.height;
 
@@ -134,28 +175,27 @@ export class GraphCanvas extends LitElement {
 
       if (!this.play) {
         this.field?.draw();
-        if (this.showFps) {
-          this.field?.renderFPS(this.fps);
-        }
       } else {
         this.animation.setRender(this.createRenderFunction());
         this.animation?.start();
       }
     }
 
-    if (changedProperties.has('play') && this.play && !changedProperties.play) {
+    if (changedProperties.has('play') && this.play && !changedProperties.get('play')) {
       this.animation?.stop();
     } else if (
       changedProperties.has('play') &&
       !this.play &&
-      changedProperties.play
+      changedProperties.get('play')
     ) {
       const { width, height } = this;
 
-      this.animation?.stop();
-      this.field?.setDimensions(width, height);
-      this.animation.setRender(this.createRenderFunction());
-      this.animation?.start();
+      if (width && height) {
+        this.animation?.stop();
+        this.field?.setDimensions(width, height);
+        this.animation.setRender(this.createRenderFunction());
+        this.animation?.start();
+      }
     }
 
     if (
@@ -193,26 +233,17 @@ export class GraphCanvas extends LitElement {
       this.animation?.start();
     }
 
-    if (changedProperties.has('showFps')) {
-      if (this.play) {
-        this.animation?.stop();
-        this.animation.setRender(this.createRenderFunction());
-        this.animation?.start();
-      } else {
-        this.field?.draw();
-        if (this.showFps) {
-          this.field?.renderFPS(this.fps);
-        }
-      }
-    }
   }
 
   render() {
-    return html`<canvas
-      id="graph-canvas"
-      width="${this.width}"
-      height="${this.height}"
-    />`;
+    return html`
+      <canvas
+        id="graph-canvas"
+        width="${this.width}"
+        height="${this.height}"
+      ></canvas>
+      ${this.showFps ? html`<div class="fps-counter">FPS: ${this.fps}</div>` : ''}
+    `;
   }
 }
 

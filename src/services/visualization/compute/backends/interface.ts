@@ -49,8 +49,8 @@ export interface IComputeBackend {
   updateParticleData(particles: Particle[]): void;
 
   // Compute dispatches
-  executeSpatialHashPass(params: GridParams): Promise<void>;
-  executePhysicsPass(params: PhysicsParams): Promise<void>;
+  executeSpatialHashPass(params: GridParams): void;
+  executePhysicsPass(params: PhysicsParams): void;
 
   // Data readback
   readParticlePositions(): Promise<Float32Array>;

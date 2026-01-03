@@ -36,15 +36,11 @@ type VizContextProviderProps = {
   children: Children;
 };
 
-const DEFAULT_MIN_DISTANCE = 100;
-export const DEFAULT_MIN_DISTANCE_SQUARED =
-  DEFAULT_MIN_DISTANCE * DEFAULT_MIN_DISTANCE;
-
 const DEFAULT_VIZ_SETTINGS = {
   density: 0.00035,
-  edgeDistance: DEFAULT_MIN_DISTANCE_SQUARED,
-  maxVelocity: 10,
-  springStrength: 0.000002,
+  edgeDistance: 150,
+  maxVelocity: 2,
+  springStrength: 0.05,
   isRunning: true,
 };
 

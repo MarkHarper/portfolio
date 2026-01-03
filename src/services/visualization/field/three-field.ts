@@ -3,7 +3,6 @@ import { hexToRGB } from '../canvas/color';
 import { checkCollision, handleCollision } from '../canvas/physics/collision';
 import { clamp } from '../canvas/physics/clamp';
 import { distanceSquared } from '../canvas/physics/distance';
-import { spring } from '../canvas/physics/spring';
 import { Particle } from './particle';
 import { SpatialHashGrid } from '../canvas/spatial-hash-grid';
 import { IComputeBackend, createOptimalBackend } from '../compute';
@@ -144,9 +143,14 @@ export class ThreeField {
   }
 
   updateSettings(updates: any): void {
+    // Filter out undefined values to avoid overwriting existing settings
+    const filteredUpdates = Object.fromEntries(
+      Object.entries(updates).filter(([_, value]) => value !== undefined)
+    );
+
     this.settings = {
       ...this.settings,
-      ...updates,
+      ...filteredUpdates,
     };
 
     if (updates.lineColor) {
@@ -157,6 +161,11 @@ export class ThreeField {
 
     if (updates.edgeDistance) {
       this.spatialGrid = new SpatialHashGrid(updates.edgeDistance);
+
+      // Recreate compute backend buffers with new grid dimensions if using compute
+      if (this.computeBackend && this.contents.length > 0) {
+        this.computeBackend.createParticleBuffers(this.contents);
+      }
     }
   }
 
@@ -292,13 +301,34 @@ export class ThreeField {
       this.particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
       this.particleGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     } else {
+      // Update existing buffers
+      const colorAttr = this.particleGeometry.getAttribute('color') as THREE.BufferAttribute;
+      const sizeAttr = this.particleGeometry.getAttribute('size') as THREE.BufferAttribute;
+
       const positions = positionAttr.array as Float32Array;
+      const colors = colorAttr.array as Float32Array;
+      const sizes = sizeAttr.array as Float32Array;
+
       for (let i = 0; i < this.contents.length; i++) {
         const particle = this.contents[i];
+
+        // Update positions
         positions[i * 3] = particle.x;
         positions[i * 3 + 1] = particle.y;
+
+        // Update colors
+        const color = new THREE.Color(particle.fillStyle);
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+
+        // Update sizes
+        sizes[i] = particle.radius * 2;
       }
+
       positionAttr.needsUpdate = true;
+      colorAttr.needsUpdate = true;
+      sizeAttr.needsUpdate = true;
     }
   }
 
@@ -351,7 +381,7 @@ export class ThreeField {
 
     try {
       // Execute spatial hash grid construction
-      await this.computeBackend.executeSpatialHashPass({
+      this.computeBackend.executeSpatialHashPass({
         particleCount: this.contents.length,
         cellSize,
         gridWidth,
@@ -361,7 +391,7 @@ export class ThreeField {
       });
 
       // Execute physics simulation and line geometry generation
-      await this.computeBackend.executePhysicsPass({
+      this.computeBackend.executePhysicsPass({
         particleCount: this.contents.length,
         springStrength,
         edgeDistance,
@@ -437,6 +467,15 @@ export class ThreeField {
       this.particleIndexMap.set(particle, i);
     }
 
+    // Create buffers to accumulate changes (double-buffer like GPU)
+    const velocityUpdates = new Map<number, { vx: number; vy: number } | null>();
+    const positionDeltas = new Map<number, { dx: number; dy: number }>();
+
+    for (let i = 0; i < this.contents.length; i++) {
+      velocityUpdates.set(i, null);
+      positionDeltas.set(i, { dx: 0, dy: 0 });
+    }
+
     for (let i = 0; i < this.contents.length; i++) {
       const p1 = this.contents[i];
       const nearby = this.spatialGrid.getNearbyParticles(p1);
@@ -444,23 +483,67 @@ export class ThreeField {
       for (let j = 0; j < nearby.length; j++) {
         const p2 = nearby[j];
         const p2Index = this.particleIndexMap.get(p2)!;
-        if (p2Index <= i) continue;
+        if (p2Index <= i) continue;  // Skip already-processed pairs and self-interaction
 
         const { dx, dy, directSquared } = distanceSquared(p1, p2);
         if (checkCollision(p1, p2, directSquared)) {
           const { p1: nextP1, p2: nextP2 } = handleCollision(p1, p2, dx, dy, maxVelocity);
-          p1.setPosition(nextP1.x, nextP1.y);
-          p1.setVelocity(nextP1.vx, nextP1.vy);
-          p2.setPosition(nextP2.x, nextP2.y);
-          p2.setVelocity(nextP2.vx, nextP2.vy);
+          // Store new velocities (will be applied after all interactions)
+          velocityUpdates.set(i, { vx: nextP1.vx, vy: nextP1.vy });
+          velocityUpdates.set(p2Index, { vx: nextP2.vx, vy: nextP2.vy });
+
+          // Accumulate separation displacement
+          const dist = Math.sqrt(directSquared);
+          if (dist > 0.0001) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const combinedRadius = p1.radius + p2.radius;
+            const overlap = combinedRadius - dist;
+            const separation = overlap * 0.5;
+
+            const posDelta1 = positionDeltas.get(i)!;
+            const posDelta2 = positionDeltas.get(p2Index)!;
+            posDelta1.dx -= nx * separation;
+            posDelta1.dy -= ny * separation;
+            posDelta2.dx += nx * separation;
+            posDelta2.dy += ny * separation;
+          }
         } else if (directSquared < edgeDistanceSquared) {
-          const { p1: nextP1, p2: nextP2 } = spring(p1, p2, dx, dy, springStrength);
-          p1.setVelocity(nextP1.vx, nextP1.vy);
-          p2.setVelocity(nextP2.vx, nextP2.vy);
+          // Apply repulsive force (pushes particles apart) - matches GPU shader
+          const dist = Math.sqrt(directSquared);
+          const force = springStrength * (edgeDistance - dist) / edgeDistance;
+          const nx = dx / dist;
+          const ny = dy / dist;
+
+          // Get current velocity (or already-computed collision velocity)
+          const vel1 = velocityUpdates.get(i) || { vx: p1.vx, vy: p1.vy };
+          const vel2 = velocityUpdates.get(p2Index) || { vx: p2.vx, vy: p2.vy };
+
+          // Push away from neighbor (negative force)
+          velocityUpdates.set(i, { vx: vel1.vx - nx * force, vy: vel1.vy - ny * force });
+          velocityUpdates.set(p2Index, { vx: vel2.vx + nx * force, vy: vel2.vy + ny * force });
         }
       }
     }
 
+    // Apply all accumulated changes
+    for (let i = 0; i < this.contents.length; i++) {
+      const particle = this.contents[i];
+
+      // Apply velocity changes
+      const velUpdate = velocityUpdates.get(i);
+      if (velUpdate) {
+        particle.setVelocity(velUpdate.vx, velUpdate.vy);
+      }
+
+      // Apply position separation
+      const posDelta = positionDeltas.get(i)!;
+      if (posDelta.dx !== 0 || posDelta.dy !== 0) {
+        particle.setPosition(particle.x + posDelta.dx, particle.y + posDelta.dy);
+      }
+    }
+
+    // Update positions based on final velocities
     for (let i = 0; i < this.contents.length; i++) {
       const particle = this.contents[i];
       const possibleX = particle.x + particle.vx;

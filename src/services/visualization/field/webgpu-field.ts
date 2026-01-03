@@ -132,6 +132,7 @@ export class WebGPUField {
         const option = nodes.get(existingParticle?.tag);
 
         if (existingParticle && option) {
+          // Update particle properties from node settings
           existingParticle.setMass(option.mass);
           existingParticle.setRadius(option.radius);
           existingParticle.setFillStyle(option.color);
@@ -162,16 +163,33 @@ export class WebGPUField {
 
     this.contents = newContents;
 
+    // Re-upload ALL particle data (positions, velocities, properties, colors) to GPU
+    // This ensures mass, radius, and color changes are reflected
     if (this.computeBackend) {
       this.computeBackend.updateParticleData(this.contents);
     }
   }
 
   updateSettings(updates: any): void {
+    // Filter out undefined values to avoid overwriting existing settings
+    const filteredUpdates = Object.fromEntries(
+      Object.entries(updates).filter(([_, value]) => value !== undefined)
+    );
+
     this.settings = {
       ...this.settings,
-      ...updates,
+      ...filteredUpdates,
     };
+
+    // Update cellSize if edgeDistance changed - requires buffer reallocation
+    if (updates.edgeDistance !== undefined && updates.edgeDistance !== this.cellSize) {
+      this.cellSize = updates.edgeDistance;
+
+      // Recreate particle buffers with new grid dimensions
+      if (this.computeBackend) {
+        this.computeBackend.createParticleBuffers(this.contents, this.width, this.height, this.cellSize);
+      }
+    }
   }
 
   setDimensions(width: number, height: number): void {
@@ -187,26 +205,22 @@ export class WebGPUField {
   }
 
   render(): void {
-    if (!this.isInitialized || this.isRendering) {
+    if (!this.isInitialized) {
+      return;
+    }
+
+    if (this.isRendering) {
       return;
     }
 
     this.isRendering = true;
-    this.renderAsync()
-      .catch(e => {
-        console.error('[WebGPUField] Render error:', e);
-      })
-      .finally(() => {
-        this.isRendering = false;
-      });
-  }
 
-  private async renderAsync(): Promise<void> {
     try {
       const { width, height } = this;
       const { springStrength, edgeDistance, maxVelocity, lineColor } = this.settings;
 
       if (!this.isInitialized || this.contents.length === 0) {
+        this.isRendering = false;
         return;
       }
 
@@ -214,8 +228,8 @@ export class WebGPUField {
       const gridWidth = Math.ceil(width / this.cellSize);
       const gridHeight = Math.ceil(height / this.cellSize);
 
-      // Execute compute passes
-      await this.computeBackend.executeSpatialHashPass({
+      // Execute compute passes (GPU queues work asynchronously)
+      this.computeBackend.executeSpatialHashPass({
         particleCount: this.contents.length,
         cellSize: this.cellSize,
         gridWidth,
@@ -224,15 +238,15 @@ export class WebGPUField {
         height,
       });
 
-      await this.computeBackend.executePhysicsPass({
+      this.computeBackend.executePhysicsPass({
         particleCount: this.contents.length,
         springStrength: springStrength || 0.1,
-        edgeDistance: edgeDistance || 150,  // Use 150 as fallback to match default cellSize
+        edgeDistance: edgeDistance || 150,
         edgeDistanceSquared: (edgeDistance || 150) * (edgeDistance || 150),
         maxVelocity: maxVelocity || 2,
         width,
         height,
-        cellSize: this.cellSize,  // Use instance cellSize
+        cellSize: this.cellSize,
         gridWidth,
         gridHeight,
       });
@@ -252,7 +266,8 @@ export class WebGPUField {
       this.frameCount++;
     } catch (error) {
       console.error('[WebGPUField] Render error:', error);
-      throw error;
+    } finally {
+      this.isRendering = false;
     }
   }
 

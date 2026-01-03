@@ -4,11 +4,11 @@ import { scaleLinear } from 'd3-scale';
 
 import { useViz, useVizDispatch } from '~/services/contexts/viz';
 
-const MAX_VELOCITY = 200;
-const MIN_VELOCITY = 1;
+const MAX_VELOCITY = 10;
+const MIN_VELOCITY = 0.5;
 const VELOCITY_RANGE = [MIN_VELOCITY, MAX_VELOCITY];
 
-const MAX_SLIDER = 20;
+const MAX_SLIDER = 100;
 const MIN_SLIDER = 1;
 const SLIDER_RANGE = [MIN_SLIDER, MAX_SLIDER];
 
@@ -17,7 +17,7 @@ const toSliderVal = (maxVelocity: number) =>
   +velocityScale(maxVelocity).toFixed(1);
 
 const fromSliderVal = (maxVelocity: number) =>
-  +velocityScale.invert(maxVelocity).toFixed(5);
+  +velocityScale.invert(maxVelocity).toFixed(2);
 
 const MaxVelocitySlider = () => {
   const { maxVelocity } = useViz();
@@ -41,7 +41,7 @@ const MaxVelocitySlider = () => {
       value={sliderVal}
       min={MIN_SLIDER}
       max={MAX_SLIDER}
-      step={0.5}
+      step={1}
       onchange={onChange}
     ></wa-slider>
   );

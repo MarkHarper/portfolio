@@ -51,12 +51,12 @@ export class SpatialGridBufferManager {
     );
   }
 
-  async clearCellCounts(): Promise<void> {
+  clearCellCounts(): void {
     const zeros = new Uint32Array(this.maxCells).fill(0);
     this.cellCountsBuffer.write(zeros);
   }
 
-  async clearLineCount(): Promise<void> {
+  clearLineCount(): void {
     const zero = new Uint32Array([0]);
     this.lineCountBuffer.write(zero);
   }

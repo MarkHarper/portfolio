@@ -66,10 +66,10 @@ export function handleCollision(
   const p2Vx = p2.vx + imp * p1.mass * ncv.x;
   const p2Vy = p2.vy + imp * p1.mass * ncv.y;
 
-  const limitedVx1 = Math.abs(p1Vx) > maxVelocity ? maxVelocity : p1Vx;
-  const limitedVy1 = Math.abs(p1Vy) > maxVelocity ? maxVelocity : p1Vy;
-  const limitedVx2 = Math.abs(p2Vx) > maxVelocity ? maxVelocity : p2Vx;
-  const limitedVy2 = Math.abs(p2Vy) > maxVelocity ? maxVelocity : p2Vy;
+  const limitedVx1 = Math.abs(p1Vx) > maxVelocity ? Math.sign(p1Vx) * maxVelocity : p1Vx;
+  const limitedVy1 = Math.abs(p1Vy) > maxVelocity ? Math.sign(p1Vy) * maxVelocity : p1Vy;
+  const limitedVx2 = Math.abs(p2Vx) > maxVelocity ? Math.sign(p2Vx) * maxVelocity : p2Vx;
+  const limitedVy2 = Math.abs(p2Vy) > maxVelocity ? Math.sign(p2Vy) * maxVelocity : p2Vy;
 
   const declinedVx1 = limitedVx1 * 0.999;
   const declinedVy1 = limitedVy1 * 0.999;

@@ -171,9 +171,9 @@ export class WebGPUComputeBackend implements IComputeBackend {
     this.particleBufferManager.uploadParticles(particles);
   }
 
-  async executeSpatialHashPass(params: GridParams): Promise<void> {
+  executeSpatialHashPass(params: GridParams): void {
     // Clear cell counts
-    await this.gridBufferManager.clearCellCounts();
+    this.gridBufferManager.clearCellCounts();
 
     // Update grid params - use ArrayBuffer with proper types (u32 vs f32)
     const gridParamsBuffer = new ArrayBuffer(24); // 6 × 4 bytes
@@ -235,7 +235,7 @@ export class WebGPUComputeBackend implements IComputeBackend {
     const clearEncoder = commandEncoder.beginComputePass();
     clearEncoder.end();
     this.device.queue.submit([commandEncoder.finish()]);
-    await this.gridBufferManager.clearCellCounts();
+    this.gridBufferManager.clearCellCounts();
 
     // Pass 3: Index particles into cells
     const indexEncoder = this.device.createCommandEncoder();
@@ -261,12 +261,11 @@ export class WebGPUComputeBackend implements IComputeBackend {
     }
 
     this.device.queue.submit([indexEncoder.finish()]);
-    await this.device.queue.onSubmittedWorkDone();
   }
 
-  async executePhysicsPass(params: PhysicsParams): Promise<void> {
+  executePhysicsPass(params: PhysicsParams): void {
     // Clear line count
-    await this.gridBufferManager.clearLineCount();
+    this.gridBufferManager.clearLineCount();
 
     // Update physics params - use ArrayBuffer with proper types (u32 vs f32)
     const physicsParamsBuffer = new ArrayBuffer(40); // 10 × 4 bytes
@@ -308,7 +307,6 @@ export class WebGPUComputeBackend implements IComputeBackend {
     passEncoder.end();
 
     this.device.queue.submit([commandEncoder.finish()]);
-    await this.device.queue.onSubmittedWorkDone();
 
     // No buffer swapping needed - we're doing in-place updates now
   }

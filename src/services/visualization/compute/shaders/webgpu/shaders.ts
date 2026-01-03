@@ -188,8 +188,8 @@ fn main(@builtin(global_invocation_id) global_id: vec3<u32>) {
       for (var i = startIdx; i < endIdx; i++) {
         let neighborIdx = particleIndices[i];
 
-        // Avoid double processing and self-interaction
-        if (neighborIdx <= idx) {
+        // Avoid self-interaction
+        if (neighborIdx == idx) {
           continue;
         }
 

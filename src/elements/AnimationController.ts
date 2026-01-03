@@ -41,7 +41,9 @@ export class AnimationController implements ReactiveController {
 
   private animate = () => {
     this.fpsTracker.tick();
-    this.render?.();
+    if (this.render) {
+      this.render();
+    }
     this.control = requestAnimationFrame(this.animate);
   };
 

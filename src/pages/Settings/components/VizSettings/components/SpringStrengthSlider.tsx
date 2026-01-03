@@ -4,8 +4,8 @@ import { scaleLinear } from 'd3-scale';
 
 import { useViz, useVizDispatch } from '~/services/contexts/viz';
 
-const MAX_SPRING = 0.0002;
-const MIN_SPRING = 0.000002;
+const MAX_SPRING = 0.1;
+const MIN_SPRING = 0.01;
 const SPRING_RANGE = [MIN_SPRING, MAX_SPRING];
 
 const MAX_SLIDER = 1000;
